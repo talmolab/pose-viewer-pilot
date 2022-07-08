@@ -1,20 +1,16 @@
 [tool.poetry]
-name = "gcr-fastapi-pilot"
+name = "pose-viewer-pilot"
 version = "0.1.0"
 description = ""
 authors = ["Talmo Pereira <talmo@salk.edu>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-fastapi = "^0.75.0"
-gunicorn = "^20.1.0"
-uvicorn = "^0.17.6"
-google-cloud-firestore = "^2.4.0"
-pydantic = "^1.9.0"
+Flask = "^2.1.2"
+pyuwsgi = "^2.0.20"
 
 [tool.poetry.dev-dependencies]
 black = "a"
-mock-firestore = "^0.11.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

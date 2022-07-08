@@ -29,4 +29,5 @@ ENV PROD_MODE 1
 # For environments with multiple CPU cores, increase the number of workers
 # to be equal to the cores available.
 # Timeout is set to 0 to disable the timeouts of the workers to allow Cloud Run to handle instance scaling.
-CMD exec poetry run gunicorn --bind :$PORT --workers 1 --worker-class uvicorn.workers.UvicornWorker --timeout 0 --threads 8 app.main:app
+# CMD exec poetry run gunicorn --bind :$PORT --workers 1 --worker-class uvicorn.workers.UvicornWorker --timeout 0 --threads 8 app.main:app
+CMD exec poetry run uwsgi --http :$PORT --master --processes 1 --threads 8 -w app.main:app

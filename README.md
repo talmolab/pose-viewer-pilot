@@ -1,7 +1,22 @@
 # pose-viewer-pilot
 
-- [Cloud Run Project](https://console.cloud.google.com/run/detail/us-west1/pose-viewer-pilot/metrics?project=pose-viewer-pilot)
+- [Cloud Run Project](https://console.cloud.google.com/run/detail/us-central1/pose-viewer-pilot/metrics?organizationId=284540140746&project=pose-viewer-pilot)
 
+## Setup
+If you don't have `pipx` and `poetry` installed:
+```
+pip install pipx
+```
+```
+pipx ensurepath
+```
+```
+pipx install poetry
+```
+
+Then you can add or remove dependencies with `poetry add` and `poetry remove` respectively. To get into the environment use `poetry shell`.
+
+**Note:** This will not work on Windows if using `pyuwsgi` as the HTTP server. It will work on WSL as a workaround. It'll also work in "production" mode if using the Cloud Run method below.
 
 ## Testing
 To run locally, drop into the environment:
@@ -10,7 +25,7 @@ poetry shell
 ```
 Then:
 ```
-uvicorn app.main:app --reload
+uwsgi --http :8000 --master --processes 1 --threads 8 -w app.main:app
 ```
 This will run a server in `http://127.0.0.1:8000`.
 
@@ -35,5 +50,37 @@ This will run a server in `http://localhost:8080`.
 ## Deployment
 Deployment is currently automatically set up to rebuild the image on push to `main` from the GCP side.
 
-See: [Cloud Build Trigger](https://console.cloud.google.com/cloud-build/triggers/edit/7d372e87-7d22-41bf-8a82-de57c5e1894d?project=gcr-fastapi-pilot)
+See: [Cloud Build Trigger](https://console.cloud.google.com/cloud-build/triggers?organizationId=284540140746&project=pose-viewer-pilot)
 
+## Building pyscript
+### Setup
+
+To compile the pyscript files when not using the CDN version, follow these steps.
+
+If `npm` is not installed:
+```
+conda install nodejs
+```
+(This works on Windows as well.)
+
+Or:
+```
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+nvm install node
+```
+
+### Compilation
+```
+git clone https://github.com/pyscript/pyscript.git
+cd pyscript
+cd pyscriptjs
+npm install
+rm -rf examples/build && npm run dev
+```
+
+Then copy the `examples/build` contents to your static assets, namely:
+```
+pyscript.css
+pyscript.min.js
+pyscript.min.js.map
+```
