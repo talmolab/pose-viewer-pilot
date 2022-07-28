@@ -1,0 +1,177 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="static/style.css">
+        <div id="loadingOverlay" class="loader-overlay">
+            <div class="loader-content loader-center">
+                <img src="http://www.mysarkarinaukri.com/images/loadingBar.gif" class="loader-center" alt=""/>
+                <div id="loadtext" class="loader-center loader-text">SLEAP-IO STARTING</div>
+            </div>
+        </div>
+        <script>
+            setTimeout(() => {
+            document.getElementById("loadtext").textContent = "An Error Occurred,\nReloading the page may fix the issue.";
+            }, 15000);
+        </script>
+        <link rel="stylesheet" href="static/style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+        <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.9.3/dist/js/tabulator.js"></script>
+        <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-2.4.2.js"></script>
+        <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.4.2.min.js"></script>
+        <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.4.2.min.js"></script>
+        <script type="text/javascript" src="https://unpkg.com/@holoviz/panel@0.13.0/dist/panel.min.js"></script>
+        <script type="text/javascript">
+            Bokeh.set_log_level("info");
+        </script>
+    </head>
+    <body>
+
+        <div id="left">
+        <div id="header">
+            <h1>Sleap-IO</h1>
+            <h2>Standalone utilities for working with animal pose tracking data.</h2>
+        </div>
+        <div id="display">
+        <!-- <canvas id="canvas"></canvas> -->
+        <div id="pic" style="display: block;">
+            <canvas id="disp"></canvas>
+        </div>
+        </div>
+        <div id="scrubber">
+        </div>
+        <div id="upload_region">
+        <div class="upload">
+            <button class="btn">UPLOAD FILE</button>
+            <input id="files" type="file" name="myfile" />
+            <button class="btn" type="button" id="file_select">READ LOCAL FILE</button>
+        </div>
+        </div>
+        </div>
+        <div id="data">
+            <div id="Skeleton">
+                <div id="Nodes">
+                    <fieldset>
+                        <legend>NODES</legend>
+                        <table id="node">
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Symmetry</th>
+                            </tr>
+                            <tr>
+                                <!-- <th scope="row">1</th>
+                                <td>Lorem</td>
+                                <td>ipsum</td> -->
+                            </tr>
+                        </table>
+                    </fieldset>
+                </div>
+                <div id="Edges">
+                    <fieldset>
+                        <legend>EDGES</legend>
+                        <table id="edge">
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Source</th>
+                                <th scope="col">Destination</th>
+                            </tr>
+                            <tr>
+                                <!-- <th scope="row">1</th>
+                                <td>Lorem</td>
+                                <td>ipsum</td> -->
+                            </tr>
+                        </table>
+                    </fieldset>
+                </div>
+            </div>
+            <div id="Instances">
+                <fieldset>
+                    <legend>INSTANCES</legend>
+                    <table id="instance">
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Points</th>
+                            <th scope="col">Track</th>
+                            <th scope="col">Score</th>
+                            <th scope="col">Skeleton</th>
+                        </tr>
+                        <tr>
+                            <!-- <th scope="row">1</th>
+                            <td>Lorem</td>
+                            <td>ipsum</td>
+                            <td>dolor</td>
+                            <td>sit amet</td> -->
+                        </tr>
+                    </table>
+                </fieldset>
+            </div>
+            <div id="Videos">
+                <fieldset>
+                    <legend>VIDEOS</legend>
+                    <table id="video">
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Filename</th>
+                            <th scope="col">Frames</th>
+                            <th scope="col">Height</th>
+                            <th scope="col">Width</th>
+                            <th scope="col">Channels</th>
+                        </tr>
+                        <tr>
+                            <!-- <th scope="row">1</th>
+                            <td>Lorem</td>
+                            <td>ipsum</td>
+                            <td>dolor</td>
+                            <td>sit amet</td>
+                            <td>consectetur </td> -->
+                        </tr>
+                    </table>
+                </fieldset>
+            </div>
+            <div id="Suggestions">
+                <fieldset>
+                    <legend>SUGGESTIONS</legend>
+                    <table id="suggestion">
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Video</th>
+                            <th scope="col">Frame</th>
+                            <th scope="col">Group</th>
+                            <th scope="col">Labeled</th>
+                            <th scope="col">Mean Score</th>
+                        </tr>
+                        <tr>
+                            <!-- <th scope="row">1</th>
+                            <td>Lorem</td>
+                            <td>ipsum</td>
+                            <td>dolor</td>
+                            <td>sit amet</td>
+                            <td>consectetur </td> -->
+                        </tr>
+                    </table>
+                </fieldset>
+            </div>
+        </div>
+        <py-script defer src="/static/main.py"></py-script>
+    </body>
+    <script defer src="/static/pyscript.min.js"></script>
+    <py-config>
+        autoclose_loader: true
+        runtimes:
+        - src: "/static/pyodide.js"
+        name: pyodide-0.20
+        lang: python
+    </py-config>
+    <py-env>
+        - h5py
+        - numpy
+        - pandas
+        - Pillow
+        - /static/sleap_io-0.0.1-py3-none-any.whl
+    </py-env>
+
+    <script src="static/script.js"></script>
+
+</html>
