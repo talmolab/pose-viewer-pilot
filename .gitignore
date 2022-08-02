@@ -129,3 +129,5 @@ dmypy.json
 .pyre/
 
 .vscode/*
+
+app/static/node_modules/
