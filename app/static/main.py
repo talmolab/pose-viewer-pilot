@@ -437,7 +437,7 @@ async def arrow_event(event):
             current_frame += 1
         console.log("right")
         valid = True
-    if pkg is not None and pkg:
+    if pkg is not None and pkg and valid:
         draw_image(size, frame_array[current_frame])
     if valid:
         elems = document.querySelectorAll(".active")
