@@ -10,6 +10,9 @@ import difflib
 import json
 import time
 import math
+import numpy as np
+from pyodide import to_js, create_proxy
+from PIL import Image
 from js import (
     document,
     test,
@@ -30,16 +33,34 @@ from js import (
     requestAnimationFrame,
     setHotSpot,
 )
-from pyodide import to_js, create_proxy
-import numpy as np
-from PIL import Image
-
 
 current_frame = 0  # Current frame index displayed in canvas
 pkg = None
 
+
 def element(elem):
+    """Get element by id."""
     return document.getElementById(elem)
+
+
+def clear(w=512, h=512):
+    """Render gray canvas."""
+    canvas = element("disp")
+    ctx = canvas.getContext("2d")
+    canvas.width = w
+    canvas.height = h
+    ctx.fillStyle = "#181818"
+    ctx.fillRect(0, 0, w, h)
+
+
+def feature_check():
+    """Check if browser supports features."""
+    if hasattr(window, "showOpenFilePicker"):
+        console.log("showOpenFilePicker present")
+    else:
+        console.log("showOpenFilePicker is not present")
+        # Do something here to let the user know or
+        # fallback to the FileReader class
 
 
 def add_row(table, data):
@@ -55,7 +76,57 @@ def add_row(table, data):
         cell.innerText = data[i]
 
 
+def set_tables():
+    """Fill tables with data from uploaded file."""
+    def remove_rows(table_list):
+        for table in table_list:
+            table = element(table)
+            while table.rows.length > 1:
+                table.deleteRow(table.rows.length - 1)
+
+    remove_rows(["instance", "node", "edge", "video"])
+
+    global l_frames
+
+    def add_instance(points="", track="", score="", skeleton=""):
+        add_row("instance", [points, track, score, skeleton])
+
+    for instance in l_frames[current_frame].instances:
+        if isinstance(instance, sleap_io.PredictedInstance):
+            print(instance)
+            add_instance(
+                len(instance.points),
+                instance.track.name if hasattr(instance.track, "name") else "",
+                instance.score,
+                instance.skeleton.name,
+            )
+        elif isinstance(instance, sleap_io.Instance):
+            add_row(
+                "instance",
+                [
+                    len(instance.points),
+                    instance.track.name if hasattr(instance.track, "name") else "",
+                    "",
+                    instance.skeleton.name,
+                ],
+            )
+
+    video = l_frames[0].video
+
+    # Truncate path
+    vid_path = video.filename
+    if len(vid_path) > 15:
+        vid_path = vid_path[:15] + "..."
+    add_row("video", [vid_path])
+
+    for node in l_frames[current_frame].instances[0].points.keys():
+        add_row("node", [node.name])
+    for edge in l_frames[current_frame].instances[0].skeleton.edges:
+        add_row("edge", [edge.source.name, edge.destination.name])
+
+
 def write_nodes_edges(num):
+    """Render nodes and edges for current frame on canvas."""
     element("num").innerText = str(fname) + " | " + str(num)
     if not pkg:
         clear()
@@ -72,9 +143,12 @@ def write_nodes_edges(num):
     for instance_list in point_array[int(num)]:
         for point_list in instance_list:
             for point in point_list:
-                hotspots.append([pct * point_list[point][0], pct * point_list[point][1], point])
+                hotspots.append(
+                    [pct * point_list[point][0], pct * point_list[point][1], point]
+                )
                 create_node(pct * point_list[point][0], pct * point_list[point][1])
     setHotSpot(to_js(hotspots))
+
 
 def read_hdf5(filename, dataset="/"):
     """Read data from an HDF5 file."""
@@ -148,54 +222,6 @@ def create_frame_array(bytes):
         frame_array.append(imageData)
 
     return frame_array, images, frames
-
-
-def set_tables():
-    def remove_rows(table_list):
-        for table in table_list:
-            table = element(table)
-            while table.rows.length > 1:
-                table.deleteRow(table.rows.length - 1)
-
-    remove_rows(["instance", "node", "edge", "video"])
-
-    global l_frames
-
-    def add_instance(points="", track="", score="", skeleton=""):
-        add_row("instance", [points, track, score, skeleton])
-
-    for instance in l_frames[current_frame].instances:
-        if isinstance(instance, sleap_io.PredictedInstance):
-            print(instance)
-            add_instance(
-                len(instance.points),
-                instance.track.name if hasattr(instance.track, "name") else "",
-                instance.score,
-                instance.skeleton.name,
-            )
-        elif isinstance(instance, sleap_io.Instance):
-            add_row(
-                "instance",
-                [
-                    len(instance.points),
-                    instance.track.name if hasattr(instance.track, "name") else "",
-                    "",
-                    instance.skeleton.name,
-                ],
-            )
-
-    video = l_frames[0].video
-
-    # Truncate path
-    vid_path = video.filename
-    if len(vid_path) > 15:
-        vid_path = vid_path[:15] + "..."
-    add_row("video", [vid_path])
-
-    for node in l_frames[current_frame].instances[0].points.keys():
-        add_row("node", [node.name])
-    for edge in l_frames[current_frame].instances[0].skeleton.edges:
-        add_row("edge", [edge.source.name, edge.destination.name])
 
 
 def seek_to_frame(e):
@@ -284,6 +310,7 @@ def draw_image(size, image):
 
 
 async def upload(e):
+    """Upload file event."""
     console.log("Received Upload")
     # Get the first file from upload
     file_list = e.target.files
@@ -291,40 +318,52 @@ async def upload(e):
     await update(file)
 
 
-def setup_nodes_edges(l):
-    global l_frames
-    l_frames = l.labeled_frames
-    global point_array
-    global edge_array
-    point_array = []
-    edge_array = []
-    for frame in l_frames:
-        frame_points = []
-        frame_edges = []
-        for instance in frame.instances:
-            instance_points = []
-            instance_edges = []
-            node_points = {}
-            for node, point in instance.points.items():
-                instance_points.append({node.name: (point.x, point.y)})
-                node_points[node.name] = (point.x, point.y)
-            for edge in instance.skeleton.edges:
-                instance_edges.append(
-                    (node_points[edge.source.name], node_points[edge.destination.name])
-                )
-            frame_points.append(instance_points)
-            frame_edges.append(instance_edges)
-        point_array.append(frame_points)
-        edge_array.append(frame_edges)
+async def arrow_event(e):
+    """Handle arrow keys."""
+    global current_frame
+    console.log("Key pressed")
+
+    valid = False  # if the key is a valid arrow key
+    if e.keyCode == 37:
+        if current_frame == 0:
+            current_frame = frame_num - 1
+        else:
+            current_frame -= 1
+        console.log("left")
+        valid = True
+
+    if e.keyCode == 39:
+        if current_frame == frame_num - 1:
+            current_frame = 0
+        else:
+            current_frame += 1
+        console.log("right")
+        valid = True
+    if pkg is not None and pkg and valid:
+        draw_image(size, frame_array[current_frame])
+    if valid:
+        elems = document.querySelectorAll(".active")
+        if len(elems) > 0:
+            for elem in elems:
+                elem.classList.remove("active")
+        console.log(f"current_frame: {current_frame}")
+        element(f"seek_button{current_frame}").classList.add("active")
+        write_nodes_edges(current_frame)
+        set_tables()
+    console.log(f"current_frame: {current_frame}")
 
 
-def clear(w=512, h=512):
-    canvas = element("disp")
-    ctx = canvas.getContext("2d")
-    canvas.width = w
-    canvas.height = h
-    ctx.fillStyle = "#181818"
-    ctx.fillRect(0, 0, w, h)
+async def file_select_event(e):
+    """Handle file selection."""
+    console.log("File Select Event")
+    try:
+        fileHandles = await window.showOpenFilePicker()
+
+    except Exception as e:
+        console.log("Exception: " + str(e))
+        return
+    file = await fileHandles[0].getFile()
+    await update(file)
 
 
 async def update(file):
@@ -377,7 +416,36 @@ async def update(file):
 
 
 async def export_nwb(e):
+    """Convert and export NWB file."""
     console.log("Exporting NWB...")
+
+
+def setup_nodes_edges(l):
+    """Setup nodes and edges arrays."""
+    global l_frames
+    l_frames = l.labeled_frames
+    global point_array
+    global edge_array
+    point_array = []
+    edge_array = []
+    for frame in l_frames:
+        frame_points = []
+        frame_edges = []
+        for instance in frame.instances:
+            instance_points = []
+            instance_edges = []
+            node_points = {}
+            for node, point in instance.points.items():
+                instance_points.append({node.name: (point.x, point.y)})
+                node_points[node.name] = (point.x, point.y)
+            for edge in instance.skeleton.edges:
+                instance_edges.append(
+                    (node_points[edge.source.name], node_points[edge.destination.name])
+                )
+            frame_points.append(instance_points)
+            frame_edges.append(instance_edges)
+        point_array.append(frame_points)
+        edge_array.append(frame_edges)
 
 
 def setup_file_upload():
@@ -385,16 +453,6 @@ def setup_file_upload():
     upload_file = create_proxy(upload)
     # Set the listener to the callback
     element("files").addEventListener("change", upload_file)
-
-
-def feature_check():
-    """Check if browser supports features."""
-    if hasattr(window, "showOpenFilePicker"):
-        console.log("showOpenFilePicker present")
-    else:
-        console.log("showOpenFilePicker is not present")
-        # Do something here to let the user know or
-        # fallback to the FileReader class
 
 
 def setup_button():
@@ -410,58 +468,12 @@ def setup_arrows():
     # Set the listener to the callback
     document.body.addEventListener("keydown", arrow_proxy)
 
+
 def setup_nwb_export():
     # Create a Python proxy for the callback function
     nwb_proxy = create_proxy(export_nwb)
     # Set the listener to the callback
     element("export_nwb").addEventListener("click", nwb_proxy)
-
-async def arrow_event(event):
-    """Handle arrow keys."""
-    global current_frame
-    console.log("Key pressed")
-
-    valid = False  # if the key is a valid arrow key
-    if event.keyCode == 37:
-        if current_frame == 0:
-            current_frame = frame_num - 1
-        else:
-            current_frame -= 1
-        console.log("left")
-        valid = True
-
-    if event.keyCode == 39:
-        if current_frame == frame_num - 1:
-            current_frame = 0
-        else:
-            current_frame += 1
-        console.log("right")
-        valid = True
-    if pkg is not None and pkg and valid:
-        draw_image(size, frame_array[current_frame])
-    if valid:
-        elems = document.querySelectorAll(".active")
-        if len(elems) > 0:
-            for elem in elems:
-                elem.classList.remove("active")
-        console.log(f"current_frame: {current_frame}")
-        element(f"seek_button{current_frame}").classList.add("active")
-        write_nodes_edges(current_frame)
-        set_tables()
-    console.log(f"current_frame: {current_frame}")
-
-
-async def file_select_event(event):
-    """Handle file selection."""
-    console.log("File Select Event")
-    try:
-        fileHandles = await window.showOpenFilePicker()
-
-    except Exception as e:
-        console.log("Exception: " + str(e))
-        return
-    file = await fileHandles[0].getFile()
-    await update(file)
 
 
 setup_file_upload()
@@ -471,4 +483,5 @@ setup_nwb_export()
 test()
 clear()
 
+# Remove loading screen
 element("loadingOverlay").style.display = "none"
