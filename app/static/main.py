@@ -11,7 +11,7 @@ import json
 import time
 import math
 import numpy as np
-from pyodide import to_js, create_proxy
+from pyodide import ffi
 from PIL import Image
 from js import (
     document,
@@ -78,6 +78,7 @@ def add_row(table, data):
 
 def set_tables():
     """Fill tables with data from uploaded file."""
+
     def remove_rows(table_list):
         for table in table_list:
             table = element(table)
@@ -147,7 +148,7 @@ def write_nodes_edges(num):
                     [pct * point_list[point][0], pct * point_list[point][1], point]
                 )
                 create_node(pct * point_list[point][0], pct * point_list[point][1])
-    setHotSpot(to_js(hotspots))
+    setHotSpot(ffi.to_js(hotspots))
 
 
 def read_hdf5(filename, dataset="/"):
@@ -215,7 +216,7 @@ def create_frame_array(bytes):
     for ind in frames.index:
         img = get_frame_image(bytes, frames["video"][ind], frames["frame_idx"][ind])
         images.append(img)
-        data = Uint8ClampedArray.new(to_js(img.tobytes()))
+        data = Uint8ClampedArray.new(ffi.to_js(img.tobytes()))
         size = img.size
         imageData = ctx.createImageData(size[0], size[1])
         imageData.data.set(data)
@@ -277,7 +278,7 @@ def create_video_scrubber(size, length):
 
     # Add event handlers to buttons
     for button in buttons:
-        seek_proxy = create_proxy(seek_to_frame)
+        seek_proxy = ffi.create_proxy(seek_to_frame)
         button.size = size
         button.addEventListener("click", seek_proxy)
 
@@ -450,28 +451,28 @@ def setup_nodes_edges(l):
 
 def setup_file_upload():
     # Create a Python proxy for the callback function
-    upload_file = create_proxy(upload)
+    upload_file = ffi.create_proxy(upload)
     # Set the listener to the callback
     element("files").addEventListener("change", upload_file)
 
 
 def setup_button():
     # Create a Python proxy for the callback function
-    file_select_proxy = create_proxy(file_select_event)
+    file_select_proxy = ffi.create_proxy(file_select_event)
     # Set the listener to the callback
     element("file_select").addEventListener("click", file_select_proxy, False)
 
 
 def setup_arrows():
     # Create a Python proxy for the callback function
-    arrow_proxy = create_proxy(arrow_event)
+    arrow_proxy = ffi.create_proxy(arrow_event)
     # Set the listener to the callback
     document.body.addEventListener("keydown", arrow_proxy)
 
 
 def setup_nwb_export():
     # Create a Python proxy for the callback function
-    nwb_proxy = create_proxy(export_nwb)
+    nwb_proxy = ffi.create_proxy(export_nwb)
     # Set the listener to the callback
     element("export_nwb").addEventListener("click", nwb_proxy)
 
