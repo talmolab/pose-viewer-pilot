@@ -57,29 +57,29 @@
   }
 
   /* Very simple logger interface.
-
-       Each module is expected to create its own logger by doing e.g.:
-
-           const logger = getLogger('my-prefix');
-
-       and then use it instead of console:
-
-           logger.info('hello', 'world');
-           logger.warn('...');
-           logger.error('...');
-
-       The logger automatically adds the prefix "[my-prefix]" to all logs; so e.g., the
-       above call would print:
-
-           [my-prefix] hello world
-
-       logger.log is intentionally omitted. The idea is that PyScript should not
-       write anything to console.log, to leave it free for the user.
-
-       Currently, the logger does not to anything more than that. In the future,
-       we might want to add additional features such as the ability to
-       enable/disable logs on a global or per-module basis.
-    */
+  
+         Each module is expected to create its own logger by doing e.g.:
+  
+             const logger = getLogger('my-prefix');
+  
+         and then use it instead of console:
+  
+             logger.info('hello', 'world');
+             logger.warn('...');
+             logger.error('...');
+  
+         The logger automatically adds the prefix "[my-prefix]" to all logs; so e.g., the
+         above call would print:
+  
+             [my-prefix] hello world
+  
+         logger.log is intentionally omitted. The idea is that PyScript should not
+         write anything to console.log, to leave it free for the user.
+  
+         Currently, the logger does not to anything more than that. In the future,
+         we might want to add additional features such as the ability to
+         enable/disable logs on a global or per-module basis.
+      */
   const _cache = new Map();
   function getLogger(prefix) {
     let logger = _cache.get(prefix);
@@ -107,9 +107,9 @@
   }
 
   /*
-    A store for Runtime which can encompass any
-    runtime, but currently only has Pyodide as its offering.
-    */
+      A store for Runtime which can encompass any
+      runtime, but currently only has Pyodide as its offering.
+      */
   const runtimeLoaded = writable();
   const loadedEnvironments = writable({});
   const scriptsQueue = writable([]);
@@ -578,11 +578,11 @@
     let errorContent;
     if (e.message.includes('TypeError: Failed to fetch')) {
       errorContent = `<p>PyScript: Access to local files
-        (using "Paths:" in &lt;py-env&gt;)
-        is not available when directly opening a HTML file;
-        you must use a webserver to serve the additional files.
-        See <a style="text-decoration: underline;" href="https://github.com/pyscript/pyscript/issues/257#issuecomment-1119595062">this reference</a>
-        on starting a simple webserver with Python.</p>`;
+          (using "Paths:" in &lt;py-env&gt;)
+          is not available when directly opening a HTML file;
+          you must use a webserver to serve the additional files.
+          See <a style="text-decoration: underline;" href="https://github.com/pyscript/pyscript/issues/257#issuecomment-1119595062">this reference</a>
+          on starting a simple webserver with Python.</p>`;
     } else if (e.message.includes('404')) {
       errorContent =
         `<p>PyScript: Loading from file <u>` +
@@ -1200,9 +1200,9 @@
           'Use of pys-onClick and pys-onKeyDown attributes is deprecated in favor of py-onClick() and py-onKeyDown(). pys-on* attributes will be deprecated in a future version of PyScript.'
         );
         const source = `
-            from pyodide import ffi
-            Element("${el.id}").element.addEventListener("${event}",  ffi.create_proxy(${handlerCode}))
-            `;
+              from pyodide import ffi
+              Element("${el.id}").element.addEventListener("${event}",  ffi.create_proxy(${handlerCode}))
+              `;
         await runtime.run(source);
       } else {
         el.addEventListener(event, () => {
@@ -2554,14 +2554,14 @@
     this.documents = [];
 
     /*
-      this.version;
-      this.checkLineBreaks;
-      this.tagMap;
-      this.anchorMap;
-      this.tag;
-      this.anchor;
-      this.kind;
-      this.result;*/
+        this.version;
+        this.checkLineBreaks;
+        this.tagMap;
+        this.anchorMap;
+        this.tag;
+        this.anchor;
+        this.kind;
+        this.result;*/
   }
 
   function generateError(state, message) {
@@ -4209,14 +4209,14 @@
     }
     connectedCallback() {
       this.innerHTML = `<div id="pyscript_loading_splash" class="py-overlay">
-        <div class="py-pop-up">
-        <div class="smooth spinner"></div>
-        <div id="pyscript-loading-label" class="label">
-          <div id="pyscript-operation-details">
+          <div class="py-pop-up">
+          <div class="smooth spinner"></div>
+          <div id="pyscript-loading-label" class="label">
+            <div id="pyscript-operation-details">
+            </div>
           </div>
-        </div>
-        </div>
-      </div>`;
+          </div>
+        </div>`;
       this.mount_name = this.id.split('-').join('_');
       this.operation = document.getElementById('pyscript-operation');
       this.details = document.getElementById('pyscript-operation-details');
@@ -4255,13 +4255,13 @@
   }
   const ZWJ = 0x200d;
   /**
-    Returns a next grapheme cluster break _after_ (not equal to)
-    `pos`, if `forward` is true, or before otherwise. Returns `pos`
-    itself if no further cluster break is available in the string.
-    Moves across surrogate pairs, extending characters (when
-    `includeExtending` is true), characters joined with zero-width
-    joiners, and flag emoji.
-    */
+      Returns a next grapheme cluster break _after_ (not equal to)
+      `pos`, if `forward` is true, or before otherwise. Returns `pos`
+      itself if no further cluster break is available in the string.
+      Moves across surrogate pairs, extending characters (when
+      `includeExtending` is true), characters joined with zero-width
+      joiners, and flag emoji.
+      */
   function findClusterBreak(str, pos, forward = true, includeExtending = true) {
     return (forward ? nextClusterBreak : prevClusterBreak)(str, pos, includeExtending);
   }
@@ -4306,10 +4306,10 @@
     return ch >= 0xd800 && ch < 0xdc00;
   }
   /**
-    Find the code point at the given position in a string (like the
-    [`codePointAt`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/codePointAt)
-    string method).
-    */
+      Find the code point at the given position in a string (like the
+      [`codePointAt`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/codePointAt)
+      string method).
+      */
   function codePointAt(str, pos) {
     let code0 = str.charCodeAt(pos);
     if (!surrogateHigh(code0) || pos + 1 == str.length) return code0;
@@ -4318,29 +4318,29 @@
     return ((code0 - 0xd800) << 10) + (code1 - 0xdc00) + 0x10000;
   }
   /**
-    Given a Unicode codepoint, return the JavaScript string that
-    respresents it (like
-    [`String.fromCodePoint`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/fromCodePoint)).
-    */
+      Given a Unicode codepoint, return the JavaScript string that
+      respresents it (like
+      [`String.fromCodePoint`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/fromCodePoint)).
+      */
   function fromCodePoint(code) {
     if (code <= 0xffff) return String.fromCharCode(code);
     code -= 0x10000;
     return String.fromCharCode((code >> 10) + 0xd800, (code & 1023) + 0xdc00);
   }
   /**
-    The first character that takes up two positions in a JavaScript
-    string. It is often useful to compare with this after calling
-    `codePointAt`, to figure out whether your character takes up 1 or
-    2 index positions.
-    */
+      The first character that takes up two positions in a JavaScript
+      string. It is often useful to compare with this after calling
+      `codePointAt`, to figure out whether your character takes up 1 or
+      2 index positions.
+      */
   function codePointSize(code) {
     return code < 0x10000 ? 1 : 2;
   }
 
   /**
-    Count the column position at the given offset into the string,
-    taking extending characters and tab size into account.
-    */
+      Count the column position at the given offset into the string,
+      taking extending characters and tab size into account.
+      */
   function countColumn(string, tabSize, to = string.length) {
     let n = 0;
     for (let i = 0; i < to; ) {
@@ -4355,12 +4355,12 @@
     return n;
   }
   /**
-    Find the offset that corresponds to the given column position in a
-    string, taking extending characters and tab size into account. By
-    default, the string length is returned when it is too short to
-    reach the column. Pass `strict` true to make it return -1 in that
-    situation.
-    */
+      Find the offset that corresponds to the given column position in a
+      string, taking extending characters and tab size into account. By
+      default, the string length is returned when it is too short to
+      reach the column. Pass `strict` true to make it return -1 in that
+      situation.
+      */
   function findColumn(string, col, tabSize, strict) {
     for (let i = 0, n = 0; ; ) {
       if (n >= col) return i;
@@ -4372,31 +4372,31 @@
   }
 
   /**
-    The data structure for documents.
-    */
+      The data structure for documents.
+      */
   class Text {
     /**
-        @internal
-        */
+          @internal
+          */
     constructor() {}
     /**
-        Get the line description around the given position.
-        */
+          Get the line description around the given position.
+          */
     lineAt(pos) {
       if (pos < 0 || pos > this.length)
         throw new RangeError(`Invalid position ${pos} in document of length ${this.length}`);
       return this.lineInner(pos, false, 1, 0);
     }
     /**
-        Get the description for the given (1-based) line number.
-        */
+          Get the description for the given (1-based) line number.
+          */
     line(n) {
       if (n < 1 || n > this.lines) throw new RangeError(`Invalid line number ${n} in ${this.lines}-line document`);
       return this.lineInner(n, true, 1, 0);
     }
     /**
-        Replace a range of the text with the given content.
-        */
+          Replace a range of the text with the given content.
+          */
     replace(from, to, text) {
       let parts = [];
       this.decompose(0, from, parts, 2 /* To */);
@@ -4405,22 +4405,22 @@
       return TextNode.from(parts, this.length - (to - from) + text.length);
     }
     /**
-        Append another document to this one.
-        */
+          Append another document to this one.
+          */
     append(other) {
       return this.replace(this.length, this.length, other);
     }
     /**
-        Retrieve the text between the given points.
-        */
+          Retrieve the text between the given points.
+          */
     slice(from, to = this.length) {
       let parts = [];
       this.decompose(from, to, parts, 0);
       return TextNode.from(parts, to - from);
     }
     /**
-        Test whether this text is equal to another instance.
-        */
+          Test whether this text is equal to another instance.
+          */
     eq(other) {
       if (other == this) return true;
       if (other.length != this.length || other.lines != this.lines) return false;
@@ -4438,28 +4438,28 @@
       }
     }
     /**
-        Iterate over the text. When `dir` is `-1`, iteration happens
-        from end to start. This will return lines and the breaks between
-        them as separate strings, and for long lines, might split lines
-        themselves into multiple chunks as well.
-        */
+          Iterate over the text. When `dir` is `-1`, iteration happens
+          from end to start. This will return lines and the breaks between
+          them as separate strings, and for long lines, might split lines
+          themselves into multiple chunks as well.
+          */
     iter(dir = 1) {
       return new RawTextCursor(this, dir);
     }
     /**
-        Iterate over a range of the text. When `from` > `to`, the
-        iterator will run in reverse.
-        */
+          Iterate over a range of the text. When `from` > `to`, the
+          iterator will run in reverse.
+          */
     iterRange(from, to = this.length) {
       return new PartialTextCursor(this, from, to);
     }
     /**
-        Return a cursor that iterates over the given range of lines,
-        _without_ returning the line breaks between, and yielding empty
-        strings for empty lines.
-        
-        When `from` and `to` are given, they should be 1-based line numbers.
-        */
+          Return a cursor that iterates over the given range of lines,
+          _without_ returning the line breaks between, and yielding empty
+          strings for empty lines.
+          
+          When `from` and `to` are given, they should be 1-based line numbers.
+          */
     iterLines(from, to) {
       let inner;
       if (from == null) {
@@ -4475,23 +4475,23 @@
       return new LineCursor(inner);
     }
     /**
-        @internal
-        */
+          @internal
+          */
     toString() {
       return this.sliceString(0);
     }
     /**
-        Convert the document to an array of lines (which can be
-        deserialized again via [`Text.of`](https://codemirror.net/6/docs/ref/#text.Text^of)).
-        */
+          Convert the document to an array of lines (which can be
+          deserialized again via [`Text.of`](https://codemirror.net/6/docs/ref/#text.Text^of)).
+          */
     toJSON() {
       let lines = [];
       this.flatten(lines);
       return lines;
     }
     /**
-        Create a `Text` instance for the given array of lines.
-        */
+          Create a `Text` instance for the given array of lines.
+          */
     static of(text) {
       if (text.length == 0) throw new RangeError('A document must have at least one line');
       if (text.length == 1 && !text[0]) return Text.empty;
@@ -4884,30 +4884,30 @@
         };
   }
   /**
-    This type describes a line in the document. It is created
-    on-demand when lines are [queried](https://codemirror.net/6/docs/ref/#text.Text.lineAt).
-    */
+      This type describes a line in the document. It is created
+      on-demand when lines are [queried](https://codemirror.net/6/docs/ref/#text.Text.lineAt).
+      */
   class Line {
     /**
-        @internal
-        */
+          @internal
+          */
     constructor(
       /**
-        The position of the start of the line.
-        */
+          The position of the start of the line.
+          */
       from,
       /**
-        The position at the end of the line (_before_ the line break,
-        or at the end of document for the last line).
-        */
+          The position at the end of the line (_before_ the line break,
+          or at the end of document for the last line).
+          */
       to,
       /**
-        This line's line number (1-based).
-        */
+          This line's line number (1-based).
+          */
       number,
       /**
-        The line's content.
-        */
+          The line's content.
+          */
       text
     ) {
       this.from = from;
@@ -4916,8 +4916,8 @@
       this.text = text;
     }
     /**
-        The length of the line (not including any line break after it).
-        */
+          The length of the line (not including any line break after it).
+          */
     get length() {
       return this.to - this.from;
     }
@@ -4925,33 +4925,33 @@
 
   const DefaultSplit = /\r\n?|\n/;
   /**
-    Distinguishes different ways in which positions can be mapped.
-    */
+      Distinguishes different ways in which positions can be mapped.
+      */
   var MapMode = /*@__PURE__*/ (function (MapMode) {
     /**
-        Map a position to a valid new position, even when its context
-        was deleted.
-        */
+          Map a position to a valid new position, even when its context
+          was deleted.
+          */
     MapMode[(MapMode['Simple'] = 0)] = 'Simple';
     /**
-        Return null if deletion happens across the position.
-        */
+          Return null if deletion happens across the position.
+          */
     MapMode[(MapMode['TrackDel'] = 1)] = 'TrackDel';
     /**
-        Return null if the character _before_ the position is deleted.
-        */
+          Return null if the character _before_ the position is deleted.
+          */
     MapMode[(MapMode['TrackBefore'] = 2)] = 'TrackBefore';
     /**
-        Return null if the character _after_ the position is deleted.
-        */
+          Return null if the character _after_ the position is deleted.
+          */
     MapMode[(MapMode['TrackAfter'] = 3)] = 'TrackAfter';
     return MapMode;
   })(MapMode || (MapMode = {}));
   /**
-    A change description is a variant of [change set](https://codemirror.net/6/docs/ref/#state.ChangeSet)
-    that doesn't store the inserted text. As such, it can't be
-    applied, but is cheaper to store and manipulate.
-    */
+      A change description is a variant of [change set](https://codemirror.net/6/docs/ref/#state.ChangeSet)
+      that doesn't store the inserted text. As such, it can't be
+      applied, but is cheaper to store and manipulate.
+      */
   class ChangeDesc {
     // Sections are encoded as pairs of integers. The first is the
     // length in the current document, and the second is -1 for
@@ -4959,27 +4959,27 @@
     // otherwise. So an insertion would be (0, n>0), a deletion (n>0,
     // 0), and a replacement two positive numbers.
     /**
-        @internal
-        */
+          @internal
+          */
     constructor(
       /**
-        @internal
-        */
+          @internal
+          */
       sections
     ) {
       this.sections = sections;
     }
     /**
-        The length of the document before the change.
-        */
+          The length of the document before the change.
+          */
     get length() {
       let result = 0;
       for (let i = 0; i < this.sections.length; i += 2) result += this.sections[i];
       return result;
     }
     /**
-        The length of the document after the change.
-        */
+          The length of the document after the change.
+          */
     get newLength() {
       let result = 0;
       for (let i = 0; i < this.sections.length; i += 2) {
@@ -4989,14 +4989,14 @@
       return result;
     }
     /**
-        False when there are actual changes in this set.
-        */
+          False when there are actual changes in this set.
+          */
     get empty() {
       return this.sections.length == 0 || (this.sections.length == 2 && this.sections[1] < 0);
     }
     /**
-        Iterate over the unchanged parts left by these changes.
-        */
+          Iterate over the unchanged parts left by these changes.
+          */
     iterGaps(f) {
       for (let i = 0, posA = 0, posB = 0; i < this.sections.length; ) {
         let len = this.sections[i++],
@@ -5011,20 +5011,20 @@
       }
     }
     /**
-        Iterate over the ranges changed by these changes. (See
-        [`ChangeSet.iterChanges`](https://codemirror.net/6/docs/ref/#state.ChangeSet.iterChanges) for a
-        variant that also provides you with the inserted text.)
-        
-        When `individual` is true, adjacent changes (which are kept
-        separate for [position mapping](https://codemirror.net/6/docs/ref/#state.ChangeDesc.mapPos)) are
-        reported separately.
-        */
+          Iterate over the ranges changed by these changes. (See
+          [`ChangeSet.iterChanges`](https://codemirror.net/6/docs/ref/#state.ChangeSet.iterChanges) for a
+          variant that also provides you with the inserted text.)
+          
+          When `individual` is true, adjacent changes (which are kept
+          separate for [position mapping](https://codemirror.net/6/docs/ref/#state.ChangeDesc.mapPos)) are
+          reported separately.
+          */
     iterChangedRanges(f, individual = false) {
       iterChanges(this, f, individual);
     }
     /**
-        Get a description of the inverted form of these changes.
-        */
+          Get a description of the inverted form of these changes.
+          */
     get invertedDesc() {
       let sections = [];
       for (let i = 0; i < this.sections.length; ) {
@@ -5036,19 +5036,19 @@
       return new ChangeDesc(sections);
     }
     /**
-        Compute the combined effect of applying another set of changes
-        after this one. The length of the document after this set should
-        match the length before `other`.
-        */
+          Compute the combined effect of applying another set of changes
+          after this one. The length of the document after this set should
+          match the length before `other`.
+          */
     composeDesc(other) {
       return this.empty ? other : other.empty ? this : composeSets(this, other);
     }
     /**
-        Map this description, which should start with the same document
-        as `other`, over another set of changes, so that it can be
-        applied after it. When `before` is true, map as if the changes
-        in `other` happened before the ones in `this`.
-        */
+          Map this description, which should start with the same document
+          as `other`, over another set of changes, so that it can be
+          applied after it. When `before` is true, map as if the changes
+          in `other` happened before the ones in `this`.
+          */
     mapDesc(other, before = false) {
       return other.empty ? this : mapSet(this, other, before);
     }
@@ -5080,10 +5080,10 @@
       return posB;
     }
     /**
-        Check whether these changes touch a given range. When one of the
-        changes entirely covers the range, the string `"cover"` is
-        returned.
-        */
+          Check whether these changes touch a given range. When one of the
+          changes entirely covers the range, the string `"cover"` is
+          returned.
+          */
     touchesRange(from, to = from) {
       for (let i = 0, pos = 0; i < this.sections.length && pos <= to; ) {
         let len = this.sections[i++],
@@ -5095,8 +5095,8 @@
       return false;
     }
     /**
-        @internal
-        */
+          @internal
+          */
     toString() {
       let result = '';
       for (let i = 0; i < this.sections.length; ) {
@@ -5107,15 +5107,15 @@
       return result;
     }
     /**
-        Serialize this change desc to a JSON-representable value.
-        */
+          Serialize this change desc to a JSON-representable value.
+          */
     toJSON() {
       return this.sections;
     }
     /**
-        Create a change desc from its JSON representation (as produced
-        by [`toJSON`](https://codemirror.net/6/docs/ref/#state.ChangeDesc.toJSON).
-        */
+          Create a change desc from its JSON representation (as produced
+          by [`toJSON`](https://codemirror.net/6/docs/ref/#state.ChangeDesc.toJSON).
+          */
     static fromJSON(json) {
       if (!Array.isArray(json) || json.length % 2 || json.some(a => typeof a != 'number'))
         throw new RangeError('Invalid JSON representation of ChangeDesc');
@@ -5123,28 +5123,28 @@
     }
   }
   /**
-    A change set represents a group of modifications to a document. It
-    stores the document length, and can only be applied to documents
-    with exactly that length.
-    */
+      A change set represents a group of modifications to a document. It
+      stores the document length, and can only be applied to documents
+      with exactly that length.
+      */
   class ChangeSet extends ChangeDesc {
     /**
-        @internal
-        */
+          @internal
+          */
     constructor(
       sections,
       /**
-        @internal
-        */
+          @internal
+          */
       inserted
     ) {
       super(sections);
       this.inserted = inserted;
     }
     /**
-        Apply the changes to a document, returning the modified
-        document.
-        */
+          Apply the changes to a document, returning the modified
+          document.
+          */
     apply(doc) {
       if (this.length != doc.length) throw new RangeError('Applying change set to a document with the wrong length');
       iterChanges(
@@ -5158,11 +5158,11 @@
       return mapSet(this, other, before, true);
     }
     /**
-        Given the document as it existed _before_ the changes, return a
-        change set that represents the inverse of this set, which could
-        be used to go from the document created by the changes back to
-        the document as it existed before the changes.
-        */
+          Given the document as it existed _before_ the changes, return a
+          change set that represents the inverse of this set, which could
+          be used to go from the document created by the changes back to
+          the document as it existed before the changes.
+          */
     invert(doc) {
       let sections = this.sections.slice(),
         inserted = [];
@@ -5181,52 +5181,52 @@
       return new ChangeSet(sections, inserted);
     }
     /**
-        Combine two subsequent change sets into a single set. `other`
-        must start in the document produced by `this`. If `this` goes
-        `docA` â†’ `docB` and `other` represents `docB` â†’ `docC`, the
-        returned value will represent the change `docA` â†’ `docC`.
-        */
+          Combine two subsequent change sets into a single set. `other`
+          must start in the document produced by `this`. If `this` goes
+          `docA` â†’ `docB` and `other` represents `docB` â†’ `docC`, the
+          returned value will represent the change `docA` â†’ `docC`.
+          */
     compose(other) {
       return this.empty ? other : other.empty ? this : composeSets(this, other, true);
     }
     /**
-        Given another change set starting in the same document, maps this
-        change set over the other, producing a new change set that can be
-        applied to the document produced by applying `other`. When
-        `before` is `true`, order changes as if `this` comes before
-        `other`, otherwise (the default) treat `other` as coming first.
-        
-        Given two changes `A` and `B`, `A.compose(B.map(A))` and
-        `B.compose(A.map(B, true))` will produce the same document. This
-        provides a basic form of [operational
-        transformation](https://en.wikipedia.org/wiki/Operational_transformation),
-        and can be used for collaborative editing.
-        */
+          Given another change set starting in the same document, maps this
+          change set over the other, producing a new change set that can be
+          applied to the document produced by applying `other`. When
+          `before` is `true`, order changes as if `this` comes before
+          `other`, otherwise (the default) treat `other` as coming first.
+          
+          Given two changes `A` and `B`, `A.compose(B.map(A))` and
+          `B.compose(A.map(B, true))` will produce the same document. This
+          provides a basic form of [operational
+          transformation](https://en.wikipedia.org/wiki/Operational_transformation),
+          and can be used for collaborative editing.
+          */
     map(other, before = false) {
       return other.empty ? this : mapSet(this, other, before, true);
     }
     /**
-        Iterate over the changed ranges in the document, calling `f` for
-        each, with the range in the original document (`fromA`-`toA`)
-        and the range that replaces it in the new document
-        (`fromB`-`toB`).
-        
-        When `individual` is true, adjacent changes are reported
-        separately.
-        */
+          Iterate over the changed ranges in the document, calling `f` for
+          each, with the range in the original document (`fromA`-`toA`)
+          and the range that replaces it in the new document
+          (`fromB`-`toB`).
+          
+          When `individual` is true, adjacent changes are reported
+          separately.
+          */
     iterChanges(f, individual = false) {
       iterChanges(this, f, individual);
     }
     /**
-        Get a [change description](https://codemirror.net/6/docs/ref/#state.ChangeDesc) for this change
-        set.
-        */
+          Get a [change description](https://codemirror.net/6/docs/ref/#state.ChangeDesc) for this change
+          set.
+          */
     get desc() {
       return new ChangeDesc(this.sections);
     }
     /**
-        @internal
-        */
+          @internal
+          */
     filter(ranges) {
       let resultSections = [],
         resultInserted = [],
@@ -5260,8 +5260,8 @@
       };
     }
     /**
-        Serialize this change set to a JSON-representable value.
-        */
+          Serialize this change set to a JSON-representable value.
+          */
     toJSON() {
       let parts = [];
       for (let i = 0; i < this.sections.length; i += 2) {
@@ -5274,9 +5274,9 @@
       return parts;
     }
     /**
-        Create a change set for the given changes, for a document of the
-        given length, using `lineSep` as line separator.
-        */
+          Create a change set for the given changes, for a document of the
+          given length, using `lineSep` as line separator.
+          */
     static of(changes, length, lineSep) {
       let sections = [],
         inserted = [],
@@ -5322,15 +5322,15 @@
       return total;
     }
     /**
-        Create an empty changeset of the given length.
-        */
+          Create an empty changeset of the given length.
+          */
     static empty(length) {
       return new ChangeSet(length ? [length, -1] : [], []);
     }
     /**
-        Create a changeset from its JSON representation (as produced by
-        [`toJSON`](https://codemirror.net/6/docs/ref/#state.ChangeSet.toJSON).
-        */
+          Create a changeset from its JSON representation (as produced by
+          [`toJSON`](https://codemirror.net/6/docs/ref/#state.ChangeSet.toJSON).
+          */
     static fromJSON(json) {
       if (!Array.isArray(json)) throw new RangeError('Invalid JSON representation of ChangeSet');
       let sections = [],
@@ -5547,23 +5547,23 @@
   }
 
   /**
-    A single selection range. When
-    [`allowMultipleSelections`](https://codemirror.net/6/docs/ref/#state.EditorState^allowMultipleSelections)
-    is enabled, a [selection](https://codemirror.net/6/docs/ref/#state.EditorSelection) may hold
-    multiple ranges. By default, selections hold exactly one range.
-    */
+      A single selection range. When
+      [`allowMultipleSelections`](https://codemirror.net/6/docs/ref/#state.EditorState^allowMultipleSelections)
+      is enabled, a [selection](https://codemirror.net/6/docs/ref/#state.EditorSelection) may hold
+      multiple ranges. By default, selections hold exactly one range.
+      */
   class SelectionRange {
     /**
-        @internal
-        */
+          @internal
+          */
     constructor(
       /**
-        The lower boundary of the range.
-        */
+          The lower boundary of the range.
+          */
       from,
       /**
-        The upper boundary of the range.
-        */
+          The upper boundary of the range.
+          */
       to,
       flags
     ) {
@@ -5572,56 +5572,56 @@
       this.flags = flags;
     }
     /**
-        The anchor of the rangeâ€”the side that doesn't move when you
-        extend it.
-        */
+          The anchor of the rangeâ€”the side that doesn't move when you
+          extend it.
+          */
     get anchor() {
       return this.flags & 16 /* Inverted */ ? this.to : this.from;
     }
     /**
-        The head of the range, which is moved when the range is
-        [extended](https://codemirror.net/6/docs/ref/#state.SelectionRange.extend).
-        */
+          The head of the range, which is moved when the range is
+          [extended](https://codemirror.net/6/docs/ref/#state.SelectionRange.extend).
+          */
     get head() {
       return this.flags & 16 /* Inverted */ ? this.from : this.to;
     }
     /**
-        True when `anchor` and `head` are at the same position.
-        */
+          True when `anchor` and `head` are at the same position.
+          */
     get empty() {
       return this.from == this.to;
     }
     /**
-        If this is a cursor that is explicitly associated with the
-        character on one of its sides, this returns the side. -1 means
-        the character before its position, 1 the character after, and 0
-        means no association.
-        */
+          If this is a cursor that is explicitly associated with the
+          character on one of its sides, this returns the side. -1 means
+          the character before its position, 1 the character after, and 0
+          means no association.
+          */
     get assoc() {
       return this.flags & 4 /* AssocBefore */ ? -1 : this.flags & 8 /* AssocAfter */ ? 1 : 0;
     }
     /**
-        The bidirectional text level associated with this cursor, if
-        any.
-        */
+          The bidirectional text level associated with this cursor, if
+          any.
+          */
     get bidiLevel() {
       let level = this.flags & 3; /* BidiLevelMask */
       return level == 3 ? null : level;
     }
     /**
-        The goal column (stored vertical offset) associated with a
-        cursor. This is used to preserve the vertical position when
-        [moving](https://codemirror.net/6/docs/ref/#view.EditorView.moveVertically) across
-        lines of different length.
-        */
+          The goal column (stored vertical offset) associated with a
+          cursor. This is used to preserve the vertical position when
+          [moving](https://codemirror.net/6/docs/ref/#view.EditorView.moveVertically) across
+          lines of different length.
+          */
     get goalColumn() {
       let value = this.flags >> 5; /* GoalColumnOffset */
       return value == 33554431 /* NoGoalColumn */ ? undefined : value;
     }
     /**
-        Map this range through a change, producing a valid range in the
-        updated document.
-        */
+          Map this range through a change, producing a valid range in the
+          updated document.
+          */
     map(change, assoc = -1) {
       let from, to;
       if (this.empty) {
@@ -5633,29 +5633,29 @@
       return from == this.from && to == this.to ? this : new SelectionRange(from, to, this.flags);
     }
     /**
-        Extend this range to cover at least `from` to `to`.
-        */
+          Extend this range to cover at least `from` to `to`.
+          */
     extend(from, to = from) {
       if (from <= this.anchor && to >= this.anchor) return EditorSelection.range(from, to);
       let head = Math.abs(from - this.anchor) > Math.abs(to - this.anchor) ? from : to;
       return EditorSelection.range(this.anchor, head);
     }
     /**
-        Compare this range to another range.
-        */
+          Compare this range to another range.
+          */
     eq(other) {
       return this.anchor == other.anchor && this.head == other.head;
     }
     /**
-        Return a JSON-serializable object representing the range.
-        */
+          Return a JSON-serializable object representing the range.
+          */
     toJSON() {
       return {anchor: this.anchor, head: this.head};
     }
     /**
-        Convert a JSON representation of a range to a `SelectionRange`
-        instance.
-        */
+          Convert a JSON representation of a range to a `SelectionRange`
+          instance.
+          */
     static fromJSON(json) {
       if (!json || typeof json.anchor != 'number' || typeof json.head != 'number')
         throw new RangeError('Invalid JSON representation for SelectionRange');
@@ -5663,31 +5663,31 @@
     }
   }
   /**
-    An editor selection holds one or more selection ranges.
-    */
+      An editor selection holds one or more selection ranges.
+      */
   class EditorSelection {
     /**
-        @internal
-        */
+          @internal
+          */
     constructor(
       /**
-        The ranges in the selection, sorted by position. Ranges cannot
-        overlap (but they may touch, if they aren't empty).
-        */
+          The ranges in the selection, sorted by position. Ranges cannot
+          overlap (but they may touch, if they aren't empty).
+          */
       ranges,
       /**
-        The index of the _main_ range in the selection (which is
-        usually the range that was added last).
-        */
+          The index of the _main_ range in the selection (which is
+          usually the range that was added last).
+          */
       mainIndex = 0
     ) {
       this.ranges = ranges;
       this.mainIndex = mainIndex;
     }
     /**
-        Map a selection through a change. Used to adjust the selection
-        position for changes.
-        */
+          Map a selection through a change. Used to adjust the selection
+          position for changes.
+          */
     map(change, assoc = -1) {
       if (change.empty) return this;
       return EditorSelection.create(
@@ -5696,53 +5696,53 @@
       );
     }
     /**
-        Compare this selection to another selection.
-        */
+          Compare this selection to another selection.
+          */
     eq(other) {
       if (this.ranges.length != other.ranges.length || this.mainIndex != other.mainIndex) return false;
       for (let i = 0; i < this.ranges.length; i++) if (!this.ranges[i].eq(other.ranges[i])) return false;
       return true;
     }
     /**
-        Get the primary selection range. Usually, you should make sure
-        your code applies to _all_ ranges, by using methods like
-        [`changeByRange`](https://codemirror.net/6/docs/ref/#state.EditorState.changeByRange).
-        */
+          Get the primary selection range. Usually, you should make sure
+          your code applies to _all_ ranges, by using methods like
+          [`changeByRange`](https://codemirror.net/6/docs/ref/#state.EditorState.changeByRange).
+          */
     get main() {
       return this.ranges[this.mainIndex];
     }
     /**
-        Make sure the selection only has one range. Returns a selection
-        holding only the main range from this selection.
-        */
+          Make sure the selection only has one range. Returns a selection
+          holding only the main range from this selection.
+          */
     asSingle() {
       return this.ranges.length == 1 ? this : new EditorSelection([this.main]);
     }
     /**
-        Extend this selection with an extra range.
-        */
+          Extend this selection with an extra range.
+          */
     addRange(range, main = true) {
       return EditorSelection.create([range].concat(this.ranges), main ? 0 : this.mainIndex + 1);
     }
     /**
-        Replace a given range with another range, and then normalize the
-        selection to merge and sort ranges if necessary.
-        */
+          Replace a given range with another range, and then normalize the
+          selection to merge and sort ranges if necessary.
+          */
     replaceRange(range, which = this.mainIndex) {
       let ranges = this.ranges.slice();
       ranges[which] = range;
       return EditorSelection.create(ranges, this.mainIndex);
     }
     /**
-        Convert this selection to an object that can be serialized to
-        JSON.
-        */
+          Convert this selection to an object that can be serialized to
+          JSON.
+          */
     toJSON() {
       return {ranges: this.ranges.map(r => r.toJSON()), main: this.mainIndex};
     }
     /**
-        Create a selection from a JSON representation.
-        */
+          Create a selection from a JSON representation.
+          */
     static fromJSON(json) {
       if (!json || !Array.isArray(json.ranges) || typeof json.main != 'number' || json.main >= json.ranges.length)
         throw new RangeError('Invalid JSON representation for EditorSelection');
@@ -5752,15 +5752,15 @@
       );
     }
     /**
-        Create a selection holding a single range.
-        */
+          Create a selection holding a single range.
+          */
     static single(anchor, head = anchor) {
       return new EditorSelection([EditorSelection.range(anchor, head)], 0);
     }
     /**
-        Sort and merge the given set of ranges, creating a valid
-        selection.
-        */
+          Sort and merge the given set of ranges, creating a valid
+          selection.
+          */
     static create(ranges, mainIndex = 0) {
       if (ranges.length == 0) throw new RangeError('A selection needs at least one range');
       for (let pos = 0, i = 0; i < ranges.length; i++) {
@@ -5771,9 +5771,9 @@
       return new EditorSelection(ranges, mainIndex);
     }
     /**
-        Create a cursor selection range at the given position. You can
-        safely ignore the optional arguments in most situations.
-        */
+          Create a cursor selection range at the given position. You can
+          safely ignore the optional arguments in most situations.
+          */
     static cursor(pos, assoc = 0, bidiLevel, goalColumn) {
       return new SelectionRange(
         pos,
@@ -5785,8 +5785,8 @@
       );
     }
     /**
-        Create a selection range.
-        */
+          Create a selection range.
+          */
     static range(anchor, head, goalColumn) {
       let goal =
         (goalColumn !== null && goalColumn !== void 0 ? goalColumn : 33554431) /* NoGoalColumn */ <<
@@ -5823,33 +5823,33 @@
 
   let nextID = 0;
   /**
-    A facet is a labeled value that is associated with an editor
-    state. It takes inputs from any number of extensions, and combines
-    those into a single output value.
-
-    Examples of facets are the [theme](https://codemirror.net/6/docs/ref/#view.EditorView^theme) styles
-    associated with an editor or the [tab
-    size](https://codemirror.net/6/docs/ref/#state.EditorState^tabSize) (which is reduced to a single
-    value, using the input with the hightest precedence).
-    */
+      A facet is a labeled value that is associated with an editor
+      state. It takes inputs from any number of extensions, and combines
+      those into a single output value.
+  
+      Examples of facets are the [theme](https://codemirror.net/6/docs/ref/#view.EditorView^theme) styles
+      associated with an editor or the [tab
+      size](https://codemirror.net/6/docs/ref/#state.EditorState^tabSize) (which is reduced to a single
+      value, using the input with the hightest precedence).
+      */
   class Facet {
     constructor(
       /**
-        @internal
-        */
+          @internal
+          */
       combine,
       /**
-        @internal
-        */
+          @internal
+          */
       compareInput,
       /**
-        @internal
-        */
+          @internal
+          */
       compare,
       isStatic,
       /**
-        @internal
-        */
+          @internal
+          */
       extensions
     ) {
       this.combine = combine;
@@ -5858,14 +5858,14 @@
       this.isStatic = isStatic;
       this.extensions = extensions;
       /**
-            @internal
-            */
+              @internal
+              */
       this.id = nextID++;
       this.default = combine([]);
     }
     /**
-        Define a new facet.
-        */
+          Define a new facet.
+          */
     static define(config = {}) {
       return new Facet(
         config.combine || (a => a),
@@ -5876,29 +5876,29 @@
       );
     }
     /**
-        Returns an extension that adds the given value for this facet.
-        */
+          Returns an extension that adds the given value for this facet.
+          */
     of(value) {
       return new FacetProvider([], this, 0 /* Static */, value);
     }
     /**
-        Create an extension that computes a value for the facet from a
-        state. You must take care to declare the parts of the state that
-        this value depends on, since your function is only called again
-        for a new state when one of those parts changed.
-        
-        In most cases, you'll want to use the
-        [`provide`](https://codemirror.net/6/docs/ref/#state.StateField^define^config.provide) option when
-        defining a field instead.
-        */
+          Create an extension that computes a value for the facet from a
+          state. You must take care to declare the parts of the state that
+          this value depends on, since your function is only called again
+          for a new state when one of those parts changed.
+          
+          In most cases, you'll want to use the
+          [`provide`](https://codemirror.net/6/docs/ref/#state.StateField^define^config.provide) option when
+          defining a field instead.
+          */
     compute(deps, get) {
       if (this.isStatic) throw new Error("Can't compute a static facet");
       return new FacetProvider(deps, this, 1 /* Single */, get);
     }
     /**
-        Create an extension that computes zero or more values for this
-        facet from a state.
-        */
+          Create an extension that computes zero or more values for this
+          facet from a state.
+          */
     computeN(deps, get) {
       if (this.isStatic) throw new Error("Can't compute a static facet");
       return new FacetProvider(deps, this, 2 /* Multi */, get);
@@ -6022,21 +6022,21 @@
   }
   const initField = /*@__PURE__*/ Facet.define({static: true});
   /**
-    Fields can store additional information in an editor state, and
-    keep it in sync with the rest of the state.
-    */
+      Fields can store additional information in an editor state, and
+      keep it in sync with the rest of the state.
+      */
   class StateField {
     constructor(
       /**
-        @internal
-        */
+          @internal
+          */
       id,
       createF,
       updateF,
       compareF,
       /**
-        @internal
-        */
+          @internal
+          */
       spec
     ) {
       this.id = id;
@@ -6045,13 +6045,13 @@
       this.compareF = compareF;
       this.spec = spec;
       /**
-            @internal
-            */
+              @internal
+              */
       this.provides = undefined;
     }
     /**
-        Define a state field.
-        */
+          Define a state field.
+          */
     static define(config) {
       let field = new StateField(nextID++, config.create, config.update, config.compare || ((a, b) => a === b), config);
       if (config.provide) field.provides = config.provide(field);
@@ -6062,8 +6062,8 @@
       return ((init === null || init === void 0 ? void 0 : init.create) || this.createF)(state);
     }
     /**
-        @internal
-        */
+          @internal
+          */
     slot(addresses) {
       let idx = addresses[this.id] >> 1;
       return {
@@ -6089,18 +6089,18 @@
       };
     }
     /**
-        Returns an extension that enables this field and overrides the
-        way it is initialized. Can be useful when you need to provide a
-        non-default starting value for the field.
-        */
+          Returns an extension that enables this field and overrides the
+          way it is initialized. Can be useful when you need to provide a
+          non-default starting value for the field.
+          */
     init(create) {
       return [this, initField.of({field: this, create})];
     }
     /**
-        State field instances can be used as
-        [`Extension`](https://codemirror.net/6/docs/ref/#state.Extension) values to enable the field in a
-        given state.
-        */
+          State field instances can be used as
+          [`Extension`](https://codemirror.net/6/docs/ref/#state.Extension) values to enable the field in a
+          given state.
+          */
     get extension() {
       return this;
     }
@@ -6110,52 +6110,52 @@
     return ext => new PrecExtension(ext, value);
   }
   /**
-    By default extensions are registered in the order they are found
-    in the flattened form of nested array that was provided.
-    Individual extension values can be assigned a precedence to
-    override this. Extensions that do not have a precedence set get
-    the precedence of the nearest parent with a precedence, or
-    [`default`](https://codemirror.net/6/docs/ref/#state.Prec.default) if there is no such parent. The
-    final ordering of extensions is determined by first sorting by
-    precedence and then by order within each precedence.
-    */
+      By default extensions are registered in the order they are found
+      in the flattened form of nested array that was provided.
+      Individual extension values can be assigned a precedence to
+      override this. Extensions that do not have a precedence set get
+      the precedence of the nearest parent with a precedence, or
+      [`default`](https://codemirror.net/6/docs/ref/#state.Prec.default) if there is no such parent. The
+      final ordering of extensions is determined by first sorting by
+      precedence and then by order within each precedence.
+      */
   const Prec = {
     /**
-        The lowest precedence level. Meant for things that should end up
-        near the end of the extension order.
-        */
+          The lowest precedence level. Meant for things that should end up
+          near the end of the extension order.
+          */
     lowest: /*@__PURE__*/ prec(Prec_.lowest),
     /**
-        A lower-than-default precedence, for extensions.
-        */
+          A lower-than-default precedence, for extensions.
+          */
     low: /*@__PURE__*/ prec(Prec_.low),
     /**
-        The default precedence, which is also used for extensions
-        without an explicit precedence.
-        */
+          The default precedence, which is also used for extensions
+          without an explicit precedence.
+          */
     default: /*@__PURE__*/ prec(Prec_.default),
     /**
-        A higher-than-default precedence, for extensions that should
-        come before those with default precedence.
-        */
+          A higher-than-default precedence, for extensions that should
+          come before those with default precedence.
+          */
     high: /*@__PURE__*/ prec(Prec_.high),
     /**
-        The highest precedence level, for extensions that should end up
-        near the start of the precedence ordering.
-        */
+          The highest precedence level, for extensions that should end up
+          near the start of the precedence ordering.
+          */
     highest: /*@__PURE__*/ prec(Prec_.highest),
     // FIXME Drop these in some future breaking version
     /**
-        Backwards-compatible synonym for `Prec.lowest`.
-        */
+          Backwards-compatible synonym for `Prec.lowest`.
+          */
     fallback: /*@__PURE__*/ prec(Prec_.lowest),
     /**
-        Backwards-compatible synonym for `Prec.high`.
-        */
+          Backwards-compatible synonym for `Prec.high`.
+          */
     extend: /*@__PURE__*/ prec(Prec_.high),
     /**
-        Backwards-compatible synonym for `Prec.highest`.
-        */
+          Backwards-compatible synonym for `Prec.highest`.
+          */
     override: /*@__PURE__*/ prec(Prec_.highest),
   };
   class PrecExtension {
@@ -6165,31 +6165,31 @@
     }
   }
   /**
-    Extension compartments can be used to make a configuration
-    dynamic. By [wrapping](https://codemirror.net/6/docs/ref/#state.Compartment.of) part of your
-    configuration in a compartment, you can later
-    [replace](https://codemirror.net/6/docs/ref/#state.Compartment.reconfigure) that part through a
-    transaction.
-    */
+      Extension compartments can be used to make a configuration
+      dynamic. By [wrapping](https://codemirror.net/6/docs/ref/#state.Compartment.of) part of your
+      configuration in a compartment, you can later
+      [replace](https://codemirror.net/6/docs/ref/#state.Compartment.reconfigure) that part through a
+      transaction.
+      */
   class Compartment {
     /**
-        Create an instance of this compartment to add to your [state
-        configuration](https://codemirror.net/6/docs/ref/#state.EditorStateConfig.extensions).
-        */
+          Create an instance of this compartment to add to your [state
+          configuration](https://codemirror.net/6/docs/ref/#state.EditorStateConfig.extensions).
+          */
     of(ext) {
       return new CompartmentInstance(this, ext);
     }
     /**
-        Create an [effect](https://codemirror.net/6/docs/ref/#state.TransactionSpec.effects) that
-        reconfigures this compartment.
-        */
+          Create an [effect](https://codemirror.net/6/docs/ref/#state.TransactionSpec.effects) that
+          reconfigures this compartment.
+          */
     reconfigure(content) {
       return Compartment.reconfigure.of({compartment: this, extension: content});
     }
     /**
-        Get the current content of the compartment in the state, or
-        `undefined` if it isn't present.
-        */
+          Get the current content of the compartment in the state, or
+          `undefined` if it isn't present.
+          */
     get(state) {
       return state.config.compartments.get(this);
     }
@@ -6331,126 +6331,126 @@
   });
 
   /**
-    Annotations are tagged values that are used to add metadata to
-    transactions in an extensible way. They should be used to model
-    things that effect the entire transaction (such as its [time
-    stamp](https://codemirror.net/6/docs/ref/#state.Transaction^time) or information about its
-    [origin](https://codemirror.net/6/docs/ref/#state.Transaction^userEvent)). For effects that happen
-    _alongside_ the other changes made by the transaction, [state
-    effects](https://codemirror.net/6/docs/ref/#state.StateEffect) are more appropriate.
-    */
+      Annotations are tagged values that are used to add metadata to
+      transactions in an extensible way. They should be used to model
+      things that effect the entire transaction (such as its [time
+      stamp](https://codemirror.net/6/docs/ref/#state.Transaction^time) or information about its
+      [origin](https://codemirror.net/6/docs/ref/#state.Transaction^userEvent)). For effects that happen
+      _alongside_ the other changes made by the transaction, [state
+      effects](https://codemirror.net/6/docs/ref/#state.StateEffect) are more appropriate.
+      */
   class Annotation {
     /**
-        @internal
-        */
+          @internal
+          */
     constructor(
       /**
-        The annotation type.
-        */
+          The annotation type.
+          */
       type,
       /**
-        The value of this annotation.
-        */
+          The value of this annotation.
+          */
       value
     ) {
       this.type = type;
       this.value = value;
     }
     /**
-        Define a new type of annotation.
-        */
+          Define a new type of annotation.
+          */
     static define() {
       return new AnnotationType();
     }
   }
   /**
-    Marker that identifies a type of [annotation](https://codemirror.net/6/docs/ref/#state.Annotation).
-    */
+      Marker that identifies a type of [annotation](https://codemirror.net/6/docs/ref/#state.Annotation).
+      */
   class AnnotationType {
     /**
-        Create an instance of this annotation.
-        */
+          Create an instance of this annotation.
+          */
     of(value) {
       return new Annotation(this, value);
     }
   }
   /**
-    Representation of a type of state effect. Defined with
-    [`StateEffect.define`](https://codemirror.net/6/docs/ref/#state.StateEffect^define).
-    */
+      Representation of a type of state effect. Defined with
+      [`StateEffect.define`](https://codemirror.net/6/docs/ref/#state.StateEffect^define).
+      */
   class StateEffectType {
     /**
-        @internal
-        */
+          @internal
+          */
     constructor(
       // The `any` types in these function types are there to work
       // around TypeScript issue #37631, where the type guard on
       // `StateEffect.is` mysteriously stops working when these properly
       // have type `Value`.
       /**
-        @internal
-        */
+          @internal
+          */
       map
     ) {
       this.map = map;
     }
     /**
-        Create a [state effect](https://codemirror.net/6/docs/ref/#state.StateEffect) instance of this
-        type.
-        */
+          Create a [state effect](https://codemirror.net/6/docs/ref/#state.StateEffect) instance of this
+          type.
+          */
     of(value) {
       return new StateEffect(this, value);
     }
   }
   /**
-    State effects can be used to represent additional effects
-    associated with a [transaction](https://codemirror.net/6/docs/ref/#state.Transaction.effects). They
-    are often useful to model changes to custom [state
-    fields](https://codemirror.net/6/docs/ref/#state.StateField), when those changes aren't implicit in
-    document or selection changes.
-    */
+      State effects can be used to represent additional effects
+      associated with a [transaction](https://codemirror.net/6/docs/ref/#state.Transaction.effects). They
+      are often useful to model changes to custom [state
+      fields](https://codemirror.net/6/docs/ref/#state.StateField), when those changes aren't implicit in
+      document or selection changes.
+      */
   class StateEffect {
     /**
-        @internal
-        */
+          @internal
+          */
     constructor(
       /**
-        @internal
-        */
+          @internal
+          */
       type,
       /**
-        The value of this effect.
-        */
+          The value of this effect.
+          */
       value
     ) {
       this.type = type;
       this.value = value;
     }
     /**
-        Map this effect through a position mapping. Will return
-        `undefined` when that ends up deleting the effect.
-        */
+          Map this effect through a position mapping. Will return
+          `undefined` when that ends up deleting the effect.
+          */
     map(mapping) {
       let mapped = this.type.map(this.value, mapping);
       return mapped === undefined ? undefined : mapped == this.value ? this : new StateEffect(this.type, mapped);
     }
     /**
-        Tells you whether this effect object is of a given
-        [type](https://codemirror.net/6/docs/ref/#state.StateEffectType).
-        */
+          Tells you whether this effect object is of a given
+          [type](https://codemirror.net/6/docs/ref/#state.StateEffectType).
+          */
     is(type) {
       return this.type == type;
     }
     /**
-        Define a new effect type. The type parameter indicates the type
-        of values that his effect holds.
-        */
+          Define a new effect type. The type parameter indicates the type
+          of values that his effect holds.
+          */
     static define(spec = {}) {
       return new StateEffectType(spec.map || (v => v));
     }
     /**
-        Map an array of effects through a change set.
-        */
+          Map an array of effects through a change set.
+          */
     static mapEffects(effects, mapping) {
       if (!effects.length) return effects;
       let result = [];
@@ -6462,54 +6462,54 @@
     }
   }
   /**
-    This effect can be used to reconfigure the root extensions of
-    the editor. Doing this will discard any extensions
-    [appended](https://codemirror.net/6/docs/ref/#state.StateEffect^appendConfig), but does not reset
-    the content of [reconfigured](https://codemirror.net/6/docs/ref/#state.Compartment.reconfigure)
-    compartments.
-    */
+      This effect can be used to reconfigure the root extensions of
+      the editor. Doing this will discard any extensions
+      [appended](https://codemirror.net/6/docs/ref/#state.StateEffect^appendConfig), but does not reset
+      the content of [reconfigured](https://codemirror.net/6/docs/ref/#state.Compartment.reconfigure)
+      compartments.
+      */
   StateEffect.reconfigure = /*@__PURE__*/ StateEffect.define();
   /**
-    Append extensions to the top-level configuration of the editor.
-    */
+      Append extensions to the top-level configuration of the editor.
+      */
   StateEffect.appendConfig = /*@__PURE__*/ StateEffect.define();
   /**
-    Changes to the editor state are grouped into transactions.
-    Typically, a user action creates a single transaction, which may
-    contain any number of document changes, may change the selection,
-    or have other effects. Create a transaction by calling
-    [`EditorState.update`](https://codemirror.net/6/docs/ref/#state.EditorState.update).
-    */
+      Changes to the editor state are grouped into transactions.
+      Typically, a user action creates a single transaction, which may
+      contain any number of document changes, may change the selection,
+      or have other effects. Create a transaction by calling
+      [`EditorState.update`](https://codemirror.net/6/docs/ref/#state.EditorState.update).
+      */
   class Transaction {
     /**
-        @internal
-        */
+          @internal
+          */
     constructor(
       /**
-        The state from which the transaction starts.
-        */
+          The state from which the transaction starts.
+          */
       startState,
       /**
-        The document changes made by this transaction.
-        */
+          The document changes made by this transaction.
+          */
       changes,
       /**
-        The selection set by this transaction, or undefined if it
-        doesn't explicitly set a selection.
-        */
+          The selection set by this transaction, or undefined if it
+          doesn't explicitly set a selection.
+          */
       selection,
       /**
-        The effects added to the transaction.
-        */
+          The effects added to the transaction.
+          */
       effects,
       /**
-        @internal
-        */
+          @internal
+          */
       annotations,
       /**
-        Whether the selection should be scrolled into view after this
-        transaction is dispatched.
-        */
+          Whether the selection should be scrolled into view after this
+          transaction is dispatched.
+          */
       scrollIntoView
     ) {
       this.startState = startState;
@@ -6519,76 +6519,76 @@
       this.annotations = annotations;
       this.scrollIntoView = scrollIntoView;
       /**
-            @internal
-            */
+              @internal
+              */
       this._doc = null;
       /**
-            @internal
-            */
+              @internal
+              */
       this._state = null;
       if (selection) checkSelection(selection, changes.newLength);
       if (!annotations.some(a => a.type == Transaction.time))
         this.annotations = annotations.concat(Transaction.time.of(Date.now()));
     }
     /**
-        The new document produced by the transaction. Contrary to
-        [`.state`](https://codemirror.net/6/docs/ref/#state.Transaction.state)`.doc`, accessing this won't
-        force the entire new state to be computed right away, so it is
-        recommended that [transaction
-        filters](https://codemirror.net/6/docs/ref/#state.EditorState^transactionFilter) use this getter
-        when they need to look at the new document.
-        */
+          The new document produced by the transaction. Contrary to
+          [`.state`](https://codemirror.net/6/docs/ref/#state.Transaction.state)`.doc`, accessing this won't
+          force the entire new state to be computed right away, so it is
+          recommended that [transaction
+          filters](https://codemirror.net/6/docs/ref/#state.EditorState^transactionFilter) use this getter
+          when they need to look at the new document.
+          */
     get newDoc() {
       return this._doc || (this._doc = this.changes.apply(this.startState.doc));
     }
     /**
-        The new selection produced by the transaction. If
-        [`this.selection`](https://codemirror.net/6/docs/ref/#state.Transaction.selection) is undefined,
-        this will [map](https://codemirror.net/6/docs/ref/#state.EditorSelection.map) the start state's
-        current selection through the changes made by the transaction.
-        */
+          The new selection produced by the transaction. If
+          [`this.selection`](https://codemirror.net/6/docs/ref/#state.Transaction.selection) is undefined,
+          this will [map](https://codemirror.net/6/docs/ref/#state.EditorSelection.map) the start state's
+          current selection through the changes made by the transaction.
+          */
     get newSelection() {
       return this.selection || this.startState.selection.map(this.changes);
     }
     /**
-        The new state created by the transaction. Computed on demand
-        (but retained for subsequent access), so itis recommended not to
-        access it in [transaction
-        filters](https://codemirror.net/6/docs/ref/#state.EditorState^transactionFilter) when possible.
-        */
+          The new state created by the transaction. Computed on demand
+          (but retained for subsequent access), so itis recommended not to
+          access it in [transaction
+          filters](https://codemirror.net/6/docs/ref/#state.EditorState^transactionFilter) when possible.
+          */
     get state() {
       if (!this._state) this.startState.applyTransaction(this);
       return this._state;
     }
     /**
-        Get the value of the given annotation type, if any.
-        */
+          Get the value of the given annotation type, if any.
+          */
     annotation(type) {
       for (let ann of this.annotations) if (ann.type == type) return ann.value;
       return undefined;
     }
     /**
-        Indicates whether the transaction changed the document.
-        */
+          Indicates whether the transaction changed the document.
+          */
     get docChanged() {
       return !this.changes.empty;
     }
     /**
-        Indicates whether this transaction reconfigures the state
-        (through a [configuration compartment](https://codemirror.net/6/docs/ref/#state.Compartment) or
-        with a top-level configuration
-        [effect](https://codemirror.net/6/docs/ref/#state.StateEffect^reconfigure).
-        */
+          Indicates whether this transaction reconfigures the state
+          (through a [configuration compartment](https://codemirror.net/6/docs/ref/#state.Compartment) or
+          with a top-level configuration
+          [effect](https://codemirror.net/6/docs/ref/#state.StateEffect^reconfigure).
+          */
     get reconfigured() {
       return this.startState.config != this.state.config;
     }
     /**
-        Returns true if the transaction has a [user
-        event](https://codemirror.net/6/docs/ref/#state.Transaction^userEvent) annotation that is equal to
-        or more specific than `event`. For example, if the transaction
-        has `"select.pointer"` as user event, `"select"` and
-        `"select.pointer"` will match it.
-        */
+          Returns true if the transaction has a [user
+          event](https://codemirror.net/6/docs/ref/#state.Transaction^userEvent) annotation that is equal to
+          or more specific than `event`. For example, if the transaction
+          has `"select.pointer"` as user event, `"select"` and
+          `"select.pointer"` will match it.
+          */
     isUserEvent(event) {
       let e = this.annotation(Transaction.userEvent);
       return !!(
@@ -6598,47 +6598,47 @@
     }
   }
   /**
-    Annotation used to store transaction timestamps.
-    */
+      Annotation used to store transaction timestamps.
+      */
   Transaction.time = /*@__PURE__*/ Annotation.define();
   /**
-    Annotation used to associate a transaction with a user interface
-    event. Holds a string identifying the event, using a
-    dot-separated format to support attaching more specific
-    information. The events used by the core libraries are:
-
-     - `"input"` when content is entered
-       - `"input.type"` for typed input
-         - `"input.type.compose"` for composition
-       - `"input.paste"` for pasted input
-       - `"input.drop"` when adding content with drag-and-drop
-       - `"input.complete"` when autocompleting
-     - `"delete"` when the user deletes content
-       - `"delete.selection"` when deleting the selection
-       - `"delete.forward"` when deleting forward from the selection
-       - `"delete.backward"` when deleting backward from the selection
-       - `"delete.cut"` when cutting to the clipboard
-     - `"move"` when content is moved
-       - `"move.drop"` when content is moved within the editor through drag-and-drop
-     - `"select"` when explicitly changing the selection
-       - `"select.pointer"` when selecting with a mouse or other pointing device
-     - `"undo"` and `"redo"` for history actions
-
-    Use [`isUserEvent`](https://codemirror.net/6/docs/ref/#state.Transaction.isUserEvent) to check
-    whether the annotation matches a given event.
-    */
+      Annotation used to associate a transaction with a user interface
+      event. Holds a string identifying the event, using a
+      dot-separated format to support attaching more specific
+      information. The events used by the core libraries are:
+  
+       - `"input"` when content is entered
+         - `"input.type"` for typed input
+           - `"input.type.compose"` for composition
+         - `"input.paste"` for pasted input
+         - `"input.drop"` when adding content with drag-and-drop
+         - `"input.complete"` when autocompleting
+       - `"delete"` when the user deletes content
+         - `"delete.selection"` when deleting the selection
+         - `"delete.forward"` when deleting forward from the selection
+         - `"delete.backward"` when deleting backward from the selection
+         - `"delete.cut"` when cutting to the clipboard
+       - `"move"` when content is moved
+         - `"move.drop"` when content is moved within the editor through drag-and-drop
+       - `"select"` when explicitly changing the selection
+         - `"select.pointer"` when selecting with a mouse or other pointing device
+       - `"undo"` and `"redo"` for history actions
+  
+      Use [`isUserEvent`](https://codemirror.net/6/docs/ref/#state.Transaction.isUserEvent) to check
+      whether the annotation matches a given event.
+      */
   Transaction.userEvent = /*@__PURE__*/ Annotation.define();
   /**
-    Annotation indicating whether a transaction should be added to
-    the undo history or not.
-    */
+      Annotation indicating whether a transaction should be added to
+      the undo history or not.
+      */
   Transaction.addToHistory = /*@__PURE__*/ Annotation.define();
   /**
-    Annotation indicating (when present and true) that a transaction
-    represents a change made by some other actor, not the user. This
-    is used, for example, to tag other people's changes in
-    collaborative editing.
-    */
+      Annotation indicating (when present and true) that a transaction
+      represents a change made by some other actor, not the user. This
+      is used, for example, to tag other people's changes in
+      collaborative editing.
+      */
   Transaction.remote = /*@__PURE__*/ Annotation.define();
   function joinRanges(a, b) {
     let result = [];
@@ -6770,22 +6770,22 @@
   }
 
   /**
-    The categories produced by a [character
-    categorizer](https://codemirror.net/6/docs/ref/#state.EditorState.charCategorizer). These are used
-    do things like selecting by word.
-    */
+      The categories produced by a [character
+      categorizer](https://codemirror.net/6/docs/ref/#state.EditorState.charCategorizer). These are used
+      do things like selecting by word.
+      */
   var CharCategory = /*@__PURE__*/ (function (CharCategory) {
     /**
-        Word characters.
-        */
+          Word characters.
+          */
     CharCategory[(CharCategory['Word'] = 0)] = 'Word';
     /**
-        Whitespace.
-        */
+          Whitespace.
+          */
     CharCategory[(CharCategory['Space'] = 1)] = 'Space';
     /**
-        Anything else.
-        */
+          Anything else.
+          */
     CharCategory[(CharCategory['Other'] = 2)] = 'Other';
     return CharCategory;
   })(CharCategory || (CharCategory = {}));
@@ -6817,34 +6817,34 @@
   }
 
   /**
-    The editor state class is a persistent (immutable) data structure.
-    To update a state, you [create](https://codemirror.net/6/docs/ref/#state.EditorState.update) a
-    [transaction](https://codemirror.net/6/docs/ref/#state.Transaction), which produces a _new_ state
-    instance, without modifying the original object.
-
-    As such, _never_ mutate properties of a state directly. That'll
-    just break things.
-    */
+      The editor state class is a persistent (immutable) data structure.
+      To update a state, you [create](https://codemirror.net/6/docs/ref/#state.EditorState.update) a
+      [transaction](https://codemirror.net/6/docs/ref/#state.Transaction), which produces a _new_ state
+      instance, without modifying the original object.
+  
+      As such, _never_ mutate properties of a state directly. That'll
+      just break things.
+      */
   class EditorState {
     /**
-        @internal
-        */
+          @internal
+          */
     constructor(
       /**
-        @internal
-        */
+          @internal
+          */
       config,
       /**
-        The current document.
-        */
+          The current document.
+          */
       doc,
       /**
-        The current selection.
-        */
+          The current selection.
+          */
       selection,
       /**
-        @internal
-        */
+          @internal
+          */
       values,
       computeSlot,
       tr
@@ -6871,26 +6871,26 @@
       return getAddr(this, addr);
     }
     /**
-        Create a [transaction](https://codemirror.net/6/docs/ref/#state.Transaction) that updates this
-        state. Any number of [transaction specs](https://codemirror.net/6/docs/ref/#state.TransactionSpec)
-        can be passed. Unless
-        [`sequential`](https://codemirror.net/6/docs/ref/#state.TransactionSpec.sequential) is set, the
-        [changes](https://codemirror.net/6/docs/ref/#state.TransactionSpec.changes) (if any) of each spec
-        are assumed to start in the _current_ document (not the document
-        produced by previous specs), and its
-        [selection](https://codemirror.net/6/docs/ref/#state.TransactionSpec.selection) and
-        [effects](https://codemirror.net/6/docs/ref/#state.TransactionSpec.effects) are assumed to refer
-        to the document created by its _own_ changes. The resulting
-        transaction contains the combined effect of all the different
-        specs. For [selection](https://codemirror.net/6/docs/ref/#state.TransactionSpec.selection), later
-        specs take precedence over earlier ones.
-        */
+          Create a [transaction](https://codemirror.net/6/docs/ref/#state.Transaction) that updates this
+          state. Any number of [transaction specs](https://codemirror.net/6/docs/ref/#state.TransactionSpec)
+          can be passed. Unless
+          [`sequential`](https://codemirror.net/6/docs/ref/#state.TransactionSpec.sequential) is set, the
+          [changes](https://codemirror.net/6/docs/ref/#state.TransactionSpec.changes) (if any) of each spec
+          are assumed to start in the _current_ document (not the document
+          produced by previous specs), and its
+          [selection](https://codemirror.net/6/docs/ref/#state.TransactionSpec.selection) and
+          [effects](https://codemirror.net/6/docs/ref/#state.TransactionSpec.effects) are assumed to refer
+          to the document created by its _own_ changes. The resulting
+          transaction contains the combined effect of all the different
+          specs. For [selection](https://codemirror.net/6/docs/ref/#state.TransactionSpec.selection), later
+          specs take precedence over earlier ones.
+          */
     update(...specs) {
       return resolveTransaction(this, specs, true);
     }
     /**
-        @internal
-        */
+          @internal
+          */
     applyTransaction(tr) {
       let conf = this.config,
         {base, compartments} = conf;
@@ -6928,9 +6928,9 @@
       new EditorState(conf, tr.newDoc, tr.newSelection, startValues, (state, slot) => slot.update(state, tr), tr);
     }
     /**
-        Create a [transaction spec](https://codemirror.net/6/docs/ref/#state.TransactionSpec) that
-        replaces every selection range with the given content.
-        */
+          Create a [transaction spec](https://codemirror.net/6/docs/ref/#state.TransactionSpec) that
+          replaces every selection range with the given content.
+          */
     replaceSelection(text) {
       if (typeof text == 'string') text = this.toText(text);
       return this.changeByRange(range => ({
@@ -6939,16 +6939,16 @@
       }));
     }
     /**
-        Create a set of changes and a new selection by running the given
-        function for each range in the active selection. The function
-        can return an optional set of changes (in the coordinate space
-        of the start document), plus an updated range (in the coordinate
-        space of the document produced by the call's own changes). This
-        method will merge all the changes and ranges into a single
-        changeset and selection, and return it as a [transaction
-        spec](https://codemirror.net/6/docs/ref/#state.TransactionSpec), which can be passed to
-        [`update`](https://codemirror.net/6/docs/ref/#state.EditorState.update).
-        */
+          Create a set of changes and a new selection by running the given
+          function for each range in the active selection. The function
+          can return an optional set of changes (in the coordinate space
+          of the start document), plus an updated range (in the coordinate
+          space of the document produced by the call's own changes). This
+          method will merge all the changes and ranges into a single
+          changeset and selection, and return it as a [transaction
+          spec](https://codemirror.net/6/docs/ref/#state.TransactionSpec), which can be passed to
+          [`update`](https://codemirror.net/6/docs/ref/#state.EditorState.update).
+          */
     changeByRange(f) {
       let sel = this.selection;
       let result1 = f(sel.ranges[0]);
@@ -6974,31 +6974,31 @@
       };
     }
     /**
-        Create a [change set](https://codemirror.net/6/docs/ref/#state.ChangeSet) from the given change
-        description, taking the state's document length and line
-        separator into account.
-        */
+          Create a [change set](https://codemirror.net/6/docs/ref/#state.ChangeSet) from the given change
+          description, taking the state's document length and line
+          separator into account.
+          */
     changes(spec = []) {
       if (spec instanceof ChangeSet) return spec;
       return ChangeSet.of(spec, this.doc.length, this.facet(EditorState.lineSeparator));
     }
     /**
-        Using the state's [line
-        separator](https://codemirror.net/6/docs/ref/#state.EditorState^lineSeparator), create a
-        [`Text`](https://codemirror.net/6/docs/ref/#text.Text) instance from the given string.
-        */
+          Using the state's [line
+          separator](https://codemirror.net/6/docs/ref/#state.EditorState^lineSeparator), create a
+          [`Text`](https://codemirror.net/6/docs/ref/#text.Text) instance from the given string.
+          */
     toText(string) {
       return Text.of(string.split(this.facet(EditorState.lineSeparator) || DefaultSplit));
     }
     /**
-        Return the given range of the document as a string.
-        */
+          Return the given range of the document as a string.
+          */
     sliceDoc(from = 0, to = this.doc.length) {
       return this.doc.sliceString(from, to, this.lineBreak);
     }
     /**
-        Get the value of a state [facet](https://codemirror.net/6/docs/ref/#state.Facet).
-        */
+          Get the value of a state [facet](https://codemirror.net/6/docs/ref/#state.Facet).
+          */
     facet(facet) {
       let addr = this.config.address[facet.id];
       if (addr == null) return facet.default;
@@ -7006,11 +7006,11 @@
       return getAddr(this, addr);
     }
     /**
-        Convert this state to a JSON-serializable object. When custom
-        fields should be serialized, you can pass them in as an object
-        mapping property names (in the resulting object, which should
-        not use `doc` or `selection`) to fields.
-        */
+          Convert this state to a JSON-serializable object. When custom
+          fields should be serialized, you can pass them in as an object
+          mapping property names (in the resulting object, which should
+          not use `doc` or `selection`) to fields.
+          */
     toJSON(fields) {
       let result = {
         doc: this.sliceDoc(),
@@ -7024,11 +7024,11 @@
       return result;
     }
     /**
-        Deserialize a state from its JSON representation. When custom
-        fields should be deserialized, pass the same object you passed
-        to [`toJSON`](https://codemirror.net/6/docs/ref/#state.EditorState.toJSON) when serializing as
-        third argument.
-        */
+          Deserialize a state from its JSON representation. When custom
+          fields should be deserialized, pass the same object you passed
+          to [`toJSON`](https://codemirror.net/6/docs/ref/#state.EditorState.toJSON) when serializing as
+          third argument.
+          */
     static fromJSON(json, config = {}, fields) {
       if (!json || typeof json.doc != 'string') throw new RangeError('Invalid JSON representation for EditorState');
       let fieldInit = [];
@@ -7045,10 +7045,10 @@
       });
     }
     /**
-        Create a new state. You'll usually only need this when
-        initializing an editorâ€”updated states are created by applying
-        transactions.
-        */
+          Create a new state. You'll usually only need this when
+          initializing an editorâ€”updated states are created by applying
+          transactions.
+          */
     static create(config = {}) {
       let configuration = Configuration.resolve(config.extensions || [], new Map());
       let doc =
@@ -7072,40 +7072,40 @@
       );
     }
     /**
-        The size (in columns) of a tab in the document, determined by
-        the [`tabSize`](https://codemirror.net/6/docs/ref/#state.EditorState^tabSize) facet.
-        */
+          The size (in columns) of a tab in the document, determined by
+          the [`tabSize`](https://codemirror.net/6/docs/ref/#state.EditorState^tabSize) facet.
+          */
     get tabSize() {
       return this.facet(EditorState.tabSize);
     }
     /**
-        Get the proper [line-break](https://codemirror.net/6/docs/ref/#state.EditorState^lineSeparator)
-        string for this state.
-        */
+          Get the proper [line-break](https://codemirror.net/6/docs/ref/#state.EditorState^lineSeparator)
+          string for this state.
+          */
     get lineBreak() {
       return this.facet(EditorState.lineSeparator) || '\n';
     }
     /**
-        Returns true when the editor is
-        [configured](https://codemirror.net/6/docs/ref/#state.EditorState^readOnly) to be read-only.
-        */
+          Returns true when the editor is
+          [configured](https://codemirror.net/6/docs/ref/#state.EditorState^readOnly) to be read-only.
+          */
     get readOnly() {
       return this.facet(readOnly);
     }
     /**
-        Look up a translation for the given phrase (via the
-        [`phrases`](https://codemirror.net/6/docs/ref/#state.EditorState^phrases) facet), or return the
-        original string if no translation is found.
-        */
+          Look up a translation for the given phrase (via the
+          [`phrases`](https://codemirror.net/6/docs/ref/#state.EditorState^phrases) facet), or return the
+          original string if no translation is found.
+          */
     phrase(phrase) {
       for (let map of this.facet(EditorState.phrases))
         if (Object.prototype.hasOwnProperty.call(map, phrase)) return map[phrase];
       return phrase;
     }
     /**
-        Find the values for a given language data field, provided by the
-        the [`languageData`](https://codemirror.net/6/docs/ref/#state.EditorState^languageData) facet.
-        */
+          Find the values for a given language data field, provided by the
+          the [`languageData`](https://codemirror.net/6/docs/ref/#state.EditorState^languageData) facet.
+          */
     languageDataAt(name, pos, side = -1) {
       let values = [];
       for (let provider of this.facet(languageData)) {
@@ -7116,25 +7116,25 @@
       return values;
     }
     /**
-        Return a function that can categorize strings (expected to
-        represent a single [grapheme cluster](https://codemirror.net/6/docs/ref/#text.findClusterBreak))
-        into one of:
-        
-         - Word (contains an alphanumeric character or a character
-           explicitly listed in the local language's `"wordChars"`
-           language data, which should be a string)
-         - Space (contains only whitespace)
-         - Other (anything else)
-        */
+          Return a function that can categorize strings (expected to
+          represent a single [grapheme cluster](https://codemirror.net/6/docs/ref/#text.findClusterBreak))
+          into one of:
+          
+           - Word (contains an alphanumeric character or a character
+             explicitly listed in the local language's `"wordChars"`
+             language data, which should be a string)
+           - Space (contains only whitespace)
+           - Other (anything else)
+          */
     charCategorizer(at) {
       return makeCategorizer(this.languageDataAt('wordChars', at).join(''));
     }
     /**
-        Find the word at the given position, meaning the range
-        containing all [word](https://codemirror.net/6/docs/ref/#state.CharCategory.Word) characters
-        around it. If no word characters are adjacent to the position,
-        this returns null.
-        */
+          Find the word at the given position, meaning the range
+          containing all [word](https://codemirror.net/6/docs/ref/#state.CharCategory.Word) characters
+          around it. If no word characters are adjacent to the position,
+          this returns null.
+          */
     wordAt(pos) {
       let {text, from, length} = this.doc.lineAt(pos);
       let cat = this.charCategorizer(pos);
@@ -7154,115 +7154,115 @@
     }
   }
   /**
-    A facet that, when enabled, causes the editor to allow multiple
-    ranges to be selected. Be careful though, because by default the
-    editor relies on the native DOM selection, which cannot handle
-    multiple selections. An extension like
-    [`drawSelection`](https://codemirror.net/6/docs/ref/#view.drawSelection) can be used to make
-    secondary selections visible to the user.
-    */
+      A facet that, when enabled, causes the editor to allow multiple
+      ranges to be selected. Be careful though, because by default the
+      editor relies on the native DOM selection, which cannot handle
+      multiple selections. An extension like
+      [`drawSelection`](https://codemirror.net/6/docs/ref/#view.drawSelection) can be used to make
+      secondary selections visible to the user.
+      */
   EditorState.allowMultipleSelections = allowMultipleSelections;
   /**
-    Configures the tab size to use in this state. The first
-    (highest-precedence) value of the facet is used. If no value is
-    given, this defaults to 4.
-    */
+      Configures the tab size to use in this state. The first
+      (highest-precedence) value of the facet is used. If no value is
+      given, this defaults to 4.
+      */
   EditorState.tabSize = /*@__PURE__*/ Facet.define({
     combine: values => (values.length ? values[0] : 4),
   });
   /**
-    The line separator to use. By default, any of `"\n"`, `"\r\n"`
-    and `"\r"` is treated as a separator when splitting lines, and
-    lines are joined with `"\n"`.
-
-    When you configure a value here, only that precise separator
-    will be used, allowing you to round-trip documents through the
-    editor without normalizing line separators.
-    */
+      The line separator to use. By default, any of `"\n"`, `"\r\n"`
+      and `"\r"` is treated as a separator when splitting lines, and
+      lines are joined with `"\n"`.
+  
+      When you configure a value here, only that precise separator
+      will be used, allowing you to round-trip documents through the
+      editor without normalizing line separators.
+      */
   EditorState.lineSeparator = lineSeparator;
   /**
-    This facet controls the value of the
-    [`readOnly`](https://codemirror.net/6/docs/ref/#state.EditorState.readOnly) getter, which is
-    consulted by commands and extensions that implement editing
-    functionality to determine whether they should apply. It
-    defaults to false, but when its highest-precedence value is
-    `true`, such functionality disables itself.
-
-    Not to be confused with
-    [`EditorView.editable`](https://codemirror.net/6/docs/ref/#view.EditorView^editable), which
-    controls whether the editor's DOM is set to be editable (and
-    thus focusable).
-    */
+      This facet controls the value of the
+      [`readOnly`](https://codemirror.net/6/docs/ref/#state.EditorState.readOnly) getter, which is
+      consulted by commands and extensions that implement editing
+      functionality to determine whether they should apply. It
+      defaults to false, but when its highest-precedence value is
+      `true`, such functionality disables itself.
+  
+      Not to be confused with
+      [`EditorView.editable`](https://codemirror.net/6/docs/ref/#view.EditorView^editable), which
+      controls whether the editor's DOM is set to be editable (and
+      thus focusable).
+      */
   EditorState.readOnly = readOnly;
   /**
-    Registers translation phrases. The
-    [`phrase`](https://codemirror.net/6/docs/ref/#state.EditorState.phrase) method will look through
-    all objects registered with this facet to find translations for
-    its argument.
-    */
+      Registers translation phrases. The
+      [`phrase`](https://codemirror.net/6/docs/ref/#state.EditorState.phrase) method will look through
+      all objects registered with this facet to find translations for
+      its argument.
+      */
   EditorState.phrases = /*@__PURE__*/ Facet.define();
   /**
-    A facet used to register [language
-    data](https://codemirror.net/6/docs/ref/#state.EditorState.languageDataAt) providers.
-    */
+      A facet used to register [language
+      data](https://codemirror.net/6/docs/ref/#state.EditorState.languageDataAt) providers.
+      */
   EditorState.languageData = languageData;
   /**
-    Facet used to register change filters, which are called for each
-    transaction (unless explicitly
-    [disabled](https://codemirror.net/6/docs/ref/#state.TransactionSpec.filter)), and can suppress
-    part of the transaction's changes.
-
-    Such a function can return `true` to indicate that it doesn't
-    want to do anything, `false` to completely stop the changes in
-    the transaction, or a set of ranges in which changes should be
-    suppressed. Such ranges are represented as an array of numbers,
-    with each pair of two number indicating the start and end of a
-    range. So for example `[10, 20, 100, 110]` suppresses changes
-    between 10 and 20, and between 100 and 110.
-    */
+      Facet used to register change filters, which are called for each
+      transaction (unless explicitly
+      [disabled](https://codemirror.net/6/docs/ref/#state.TransactionSpec.filter)), and can suppress
+      part of the transaction's changes.
+  
+      Such a function can return `true` to indicate that it doesn't
+      want to do anything, `false` to completely stop the changes in
+      the transaction, or a set of ranges in which changes should be
+      suppressed. Such ranges are represented as an array of numbers,
+      with each pair of two number indicating the start and end of a
+      range. So for example `[10, 20, 100, 110]` suppresses changes
+      between 10 and 20, and between 100 and 110.
+      */
   EditorState.changeFilter = changeFilter;
   /**
-    Facet used to register a hook that gets a chance to update or
-    replace transaction specs before they are applied. This will
-    only be applied for transactions that don't have
-    [`filter`](https://codemirror.net/6/docs/ref/#state.TransactionSpec.filter) set to `false`. You
-    can either return a single transaction spec (possibly the input
-    transaction), or an array of specs (which will be combined in
-    the same way as the arguments to
-    [`EditorState.update`](https://codemirror.net/6/docs/ref/#state.EditorState.update)).
-
-    When possible, it is recommended to avoid accessing
-    [`Transaction.state`](https://codemirror.net/6/docs/ref/#state.Transaction.state) in a filter,
-    since it will force creation of a state that will then be
-    discarded again, if the transaction is actually filtered.
-
-    (This functionality should be used with care. Indiscriminately
-    modifying transaction is likely to break something or degrade
-    the user experience.)
-    */
+      Facet used to register a hook that gets a chance to update or
+      replace transaction specs before they are applied. This will
+      only be applied for transactions that don't have
+      [`filter`](https://codemirror.net/6/docs/ref/#state.TransactionSpec.filter) set to `false`. You
+      can either return a single transaction spec (possibly the input
+      transaction), or an array of specs (which will be combined in
+      the same way as the arguments to
+      [`EditorState.update`](https://codemirror.net/6/docs/ref/#state.EditorState.update)).
+  
+      When possible, it is recommended to avoid accessing
+      [`Transaction.state`](https://codemirror.net/6/docs/ref/#state.Transaction.state) in a filter,
+      since it will force creation of a state that will then be
+      discarded again, if the transaction is actually filtered.
+  
+      (This functionality should be used with care. Indiscriminately
+      modifying transaction is likely to break something or degrade
+      the user experience.)
+      */
   EditorState.transactionFilter = transactionFilter;
   /**
-    This is a more limited form of
-    [`transactionFilter`](https://codemirror.net/6/docs/ref/#state.EditorState^transactionFilter),
-    which can only add
-    [annotations](https://codemirror.net/6/docs/ref/#state.TransactionSpec.annotations) and
-    [effects](https://codemirror.net/6/docs/ref/#state.TransactionSpec.effects). _But_, this type
-    of filter runs even the transaction has disabled regular
-    [filtering](https://codemirror.net/6/docs/ref/#state.TransactionSpec.filter), making it suitable
-    for effects that don't need to touch the changes or selection,
-    but do want to process every transaction.
-
-    Extenders run _after_ filters, when both are applied.
-    */
+      This is a more limited form of
+      [`transactionFilter`](https://codemirror.net/6/docs/ref/#state.EditorState^transactionFilter),
+      which can only add
+      [annotations](https://codemirror.net/6/docs/ref/#state.TransactionSpec.annotations) and
+      [effects](https://codemirror.net/6/docs/ref/#state.TransactionSpec.effects). _But_, this type
+      of filter runs even the transaction has disabled regular
+      [filtering](https://codemirror.net/6/docs/ref/#state.TransactionSpec.filter), making it suitable
+      for effects that don't need to touch the changes or selection,
+      but do want to process every transaction.
+  
+      Extenders run _after_ filters, when both are applied.
+      */
   EditorState.transactionExtender = transactionExtender;
   Compartment.reconfigure = /*@__PURE__*/ StateEffect.define();
 
   /**
-    Utility function for combining behaviors to fill in a config
-    object from an array of provided configs. Will, by default, error
-    when a field gets two values that aren't `===`-equal, but you can
-    provide combine functions per field to do something else.
-    */
+      Utility function for combining behaviors to fill in a config
+      object from an array of provided configs. Will, by default, error
+      when a field gets two values that aren't `===`-equal, but you can
+      provide combine functions per field to do something else.
+      */
   function combineConfig(
     configs,
     defaults, // Should hold only the optional properties of Config, but I haven't managed to express that
@@ -7459,20 +7459,20 @@
   // (min-width: 400px)": {...}}`.
 
   /**
-    Each range is associated with a value, which must inherit from
-    this class.
-    */
+      Each range is associated with a value, which must inherit from
+      this class.
+      */
   class RangeValue {
     /**
-        Compare this value with another value. The default
-        implementation compares by identity.
-        */
+          Compare this value with another value. The default
+          implementation compares by identity.
+          */
     eq(other) {
       return this == other;
     }
     /**
-        Create a [range](https://codemirror.net/6/docs/ref/#rangeset.Range) with this value.
-        */
+          Create a [range](https://codemirror.net/6/docs/ref/#rangeset.Range) with this value.
+          */
     range(from, to = from) {
       return new Range$1(from, to, this);
     }
@@ -7481,24 +7481,24 @@
   RangeValue.prototype.point = false;
   RangeValue.prototype.mapMode = MapMode.TrackDel;
   /**
-    A range associates a value with a range of positions.
-    */
+      A range associates a value with a range of positions.
+      */
   class Range$1 {
     /**
-        @internal
-        */
+          @internal
+          */
     constructor(
       /**
-        The range's start position.
-        */
+          The range's start position.
+          */
       from,
       /**
-        Its end position.
-        */
+          Its end position.
+          */
       to,
       /**
-        The value associated with this range.
-        */
+          The value associated with this range.
+          */
       value
     ) {
       this.from = from;
@@ -7586,31 +7586,31 @@
     }
   }
   /**
-    A range set stores a collection of [ranges](https://codemirror.net/6/docs/ref/#rangeset.Range) in a
-    way that makes them efficient to [map](https://codemirror.net/6/docs/ref/#rangeset.RangeSet.map) and
-    [update](https://codemirror.net/6/docs/ref/#rangeset.RangeSet.update). This is an immutable data
-    structure.
-    */
+      A range set stores a collection of [ranges](https://codemirror.net/6/docs/ref/#rangeset.Range) in a
+      way that makes them efficient to [map](https://codemirror.net/6/docs/ref/#rangeset.RangeSet.map) and
+      [update](https://codemirror.net/6/docs/ref/#rangeset.RangeSet.update). This is an immutable data
+      structure.
+      */
   class RangeSet {
     /**
-        @internal
-        */
+          @internal
+          */
     constructor(
       /**
-        @internal
-        */
+          @internal
+          */
       chunkPos,
       /**
-        @internal
-        */
+          @internal
+          */
       chunk,
       /**
-        @internal
-        */
+          @internal
+          */
       nextLayer = RangeSet.empty,
       /**
-        @internal
-        */
+          @internal
+          */
       maxPoint
     ) {
       this.chunkPos = chunkPos;
@@ -7619,15 +7619,15 @@
       this.maxPoint = maxPoint;
     }
     /**
-        @internal
-        */
+          @internal
+          */
     get length() {
       let last = this.chunk.length - 1;
       return last < 0 ? 0 : Math.max(this.chunkEnd(last), this.nextLayer.length);
     }
     /**
-        The number of ranges in the set.
-        */
+          The number of ranges in the set.
+          */
     get size() {
       if (this.isEmpty) return 0;
       let size = this.nextLayer.size;
@@ -7635,20 +7635,20 @@
       return size;
     }
     /**
-        @internal
-        */
+          @internal
+          */
     chunkEnd(index) {
       return this.chunkPos[index] + this.chunk[index].length;
     }
     /**
-        Update the range set, optionally adding new ranges or filtering
-        out existing ones.
-        
-        (The extra type parameter is just there as a kludge to work
-        around TypeScript variance issues that prevented `RangeSet<X>`
-        from being a subtype of `RangeSet<Y>` when `X` is a subtype of
-        `Y`.)
-        */
+          Update the range set, optionally adding new ranges or filtering
+          out existing ones.
+          
+          (The extra type parameter is just there as a kludge to work
+          around TypeScript variance issues that prevented `RangeSet<X>`
+          from being a subtype of `RangeSet<Y>` when `X` is a subtype of
+          `Y`.)
+          */
     update(updateSpec) {
       let {add = [], sort = false, filterFrom = 0, filterTo = this.length} = updateSpec;
       let filter = updateSpec.filter;
@@ -7685,8 +7685,8 @@
       );
     }
     /**
-        Map this range set through a set of changes, return the new set.
-        */
+          Map this range set through a set of changes, return the new set.
+          */
     map(changes) {
       if (changes.empty || this.isEmpty) return this;
       let chunks = [],
@@ -7713,11 +7713,11 @@
       return chunks.length == 0 ? next : new RangeSet(chunkPos, chunks, next, maxPoint);
     }
     /**
-        Iterate over the ranges that touch the region `from` to `to`,
-        calling `f` for each. There is no guarantee that the ranges will
-        be reported in any specific order. When the callback returns
-        `false`, iteration stops.
-        */
+          Iterate over the ranges that touch the region `from` to `to`,
+          calling `f` for each. There is no guarantee that the ranges will
+          be reported in any specific order. When the callback returns
+          `false`, iteration stops.
+          */
     between(from, to, f) {
       if (this.isEmpty) return;
       for (let i = 0; i < this.chunk.length; i++) {
@@ -7729,43 +7729,43 @@
       this.nextLayer.between(from, to, f);
     }
     /**
-        Iterate over the ranges in this set, in order, including all
-        ranges that end at or after `from`.
-        */
+          Iterate over the ranges in this set, in order, including all
+          ranges that end at or after `from`.
+          */
     iter(from = 0) {
       return HeapCursor.from([this]).goto(from);
     }
     /**
-        @internal
-        */
+          @internal
+          */
     get isEmpty() {
       return this.nextLayer == this;
     }
     /**
-        Iterate over the ranges in a collection of sets, in order,
-        starting from `from`.
-        */
+          Iterate over the ranges in a collection of sets, in order,
+          starting from `from`.
+          */
     static iter(sets, from = 0) {
       return HeapCursor.from(sets).goto(from);
     }
     /**
-        Iterate over two groups of sets, calling methods on `comparator`
-        to notify it of possible differences.
-        */
+          Iterate over two groups of sets, calling methods on `comparator`
+          to notify it of possible differences.
+          */
     static compare(
       oldSets,
       newSets,
       /**
-        This indicates how the underlying data changed between these
-        ranges, and is needed to synchronize the iteration. `from` and
-        `to` are coordinates in the _new_ space, after these changes.
-        */
+          This indicates how the underlying data changed between these
+          ranges, and is needed to synchronize the iteration. `from` and
+          `to` are coordinates in the _new_ space, after these changes.
+          */
       textDiff,
       comparator,
       /**
-        Can be used to ignore all non-point ranges, and points below
-        the given size. When -1, all ranges are compared.
-        */
+          Can be used to ignore all non-point ranges, and points below
+          the given size. When -1, all ranges are compared.
+          */
       minPointSize = -1
     ) {
       let a = oldSets.filter(set => set.maxPoint > 0 || (!set.isEmpty && set.maxPoint >= minPointSize));
@@ -7777,9 +7777,9 @@
       if (textDiff.empty && textDiff.length == 0) compare(sideA, 0, sideB, 0, 0, comparator);
     }
     /**
-        Compare the contents of two groups of range sets, returning true
-        if they are equivalent in the given range.
-        */
+          Compare the contents of two groups of range sets, returning true
+          if they are equivalent in the given range.
+          */
     static eq(oldSets, newSets, from = 0, to) {
       if (to == null) to = 1000000000 /* Far */;
       let a = oldSets.filter(set => !set.isEmpty && newSets.indexOf(set) < 0);
@@ -7802,21 +7802,21 @@
       }
     }
     /**
-        Iterate over a group of range sets at the same time, notifying
-        the iterator about the ranges covering every given piece of
-        content. Returns the open count (see
-        [`SpanIterator.span`](https://codemirror.net/6/docs/ref/#rangeset.SpanIterator.span)) at the end
-        of the iteration.
-        */
+          Iterate over a group of range sets at the same time, notifying
+          the iterator about the ranges covering every given piece of
+          content. Returns the open count (see
+          [`SpanIterator.span`](https://codemirror.net/6/docs/ref/#rangeset.SpanIterator.span)) at the end
+          of the iteration.
+          */
     static spans(
       sets,
       from,
       to,
       iterator,
       /**
-        When given and greater than -1, only points of at least this
-        size are taken into account.
-        */
+          When given and greater than -1, only points of at least this
+          size are taken into account.
+          */
       minPointSize = -1
     ) {
       var _a;
@@ -7844,12 +7844,12 @@
       return open;
     }
     /**
-        Create a range set for the given range or array of ranges. By
-        default, this expects the ranges to be _sorted_ (by start
-        position and, if two start at the same position,
-        `value.startSide`). You can pass `true` as second argument to
-        cause the method to sort them.
-        */
+          Create a range set for the given range or array of ranges. By
+          default, this expects the ranges to be _sorted_ (by start
+          position and, if two start at the same position,
+          `value.startSide`). You can pass `true` as second argument to
+          cause the method to sort them.
+          */
     static of(ranges, sort = false) {
       let build = new RangeSetBuilder();
       for (let range of ranges instanceof Range$1 ? [ranges] : sort ? lazySort(ranges) : ranges)
@@ -7858,8 +7858,8 @@
     }
   }
   /**
-    The empty set of ranges.
-    */
+      The empty set of ranges.
+      */
   RangeSet.empty = /*@__PURE__*/ new RangeSet([], [], null, -1);
   function lazySort(ranges) {
     if (ranges.length > 1)
@@ -7872,14 +7872,14 @@
   }
   RangeSet.empty.nextLayer = RangeSet.empty;
   /**
-    A range set builder is a data structure that helps build up a
-    [range set](https://codemirror.net/6/docs/ref/#rangeset.RangeSet) directly, without first allocating
-    an array of [`Range`](https://codemirror.net/6/docs/ref/#rangeset.Range) objects.
-    */
+      A range set builder is a data structure that helps build up a
+      [range set](https://codemirror.net/6/docs/ref/#rangeset.RangeSet) directly, without first allocating
+      an array of [`Range`](https://codemirror.net/6/docs/ref/#rangeset.Range) objects.
+      */
   class RangeSetBuilder {
     /**
-        Create an empty builder.
-        */
+          Create an empty builder.
+          */
     constructor() {
       this.chunks = [];
       this.chunkPos = [];
@@ -7907,16 +7907,16 @@
       }
     }
     /**
-        Add a range. Ranges should be added in sorted (by `from` and
-        `value.startSide`) order.
-        */
+          Add a range. Ranges should be added in sorted (by `from` and
+          `value.startSide`) order.
+          */
     add(from, to, value) {
       if (!this.addInner(from, to, value))
         (this.nextLayer || (this.nextLayer = new RangeSetBuilder())).add(from, to, value);
     }
     /**
-        @internal
-        */
+          @internal
+          */
     addInner(from, to, value) {
       let diff = from - this.lastTo || value.startSide - this.last.endSide;
       if (diff <= 0 && (from - this.lastFrom || value.startSide - this.last.startSide) < 0)
@@ -7934,8 +7934,8 @@
       return true;
     }
     /**
-        @internal
-        */
+          @internal
+          */
     addChunk(from, chunk) {
       if ((from - this.lastTo || chunk.value[0].startSide - this.last.endSide) < 0) return false;
       if (this.from.length) this.finishChunk(true);
@@ -7949,15 +7949,15 @@
       return true;
     }
     /**
-        Finish the range set. Returns the new set. The builder can't be
-        used anymore after this has been called.
-        */
+          Finish the range set. Returns the new set. The builder can't be
+          used anymore after this has been called.
+          */
     finish() {
       return this.finishInner(RangeSet.empty);
     }
     /**
-        @internal
-        */
+          @internal
+          */
     finishInner(next) {
       if (this.from.length) this.finishChunk(false);
       if (this.chunks.length == 0) return next;
@@ -9546,119 +9546,119 @@
   }
 
   /**
-    Widgets added to the content are described by subclasses of this
-    class. Using a description object like that makes it possible to
-    delay creating of the DOM structure for a widget until it is
-    needed, and to avoid redrawing widgets even when the decorations
-    that define them are recreated.
-    */
+      Widgets added to the content are described by subclasses of this
+      class. Using a description object like that makes it possible to
+      delay creating of the DOM structure for a widget until it is
+      needed, and to avoid redrawing widgets even when the decorations
+      that define them are recreated.
+      */
   class WidgetType {
     /**
-        Compare this instance to another instance of the same type.
-        (TypeScript can't express this, but only instances of the same
-        specific class will be passed to this method.) This is used to
-        avoid redrawing widgets when they are replaced by a new
-        decoration of the same type. The default implementation just
-        returns `false`, which will cause new instances of the widget to
-        always be redrawn.
-        */
+          Compare this instance to another instance of the same type.
+          (TypeScript can't express this, but only instances of the same
+          specific class will be passed to this method.) This is used to
+          avoid redrawing widgets when they are replaced by a new
+          decoration of the same type. The default implementation just
+          returns `false`, which will cause new instances of the widget to
+          always be redrawn.
+          */
     eq(_widget) {
       return false;
     }
     /**
-        Update a DOM element created by a widget of the same type (but
-        different, non-`eq` content) to reflect this widget. May return
-        true to indicate that it could update, false to indicate it
-        couldn't (in which case the widget will be redrawn). The default
-        implementation just returns false.
-        */
+          Update a DOM element created by a widget of the same type (but
+          different, non-`eq` content) to reflect this widget. May return
+          true to indicate that it could update, false to indicate it
+          couldn't (in which case the widget will be redrawn). The default
+          implementation just returns false.
+          */
     updateDOM(_dom) {
       return false;
     }
     /**
-        @internal
-        */
+          @internal
+          */
     compare(other) {
       return this == other || (this.constructor == other.constructor && this.eq(other));
     }
     /**
-        The estimated height this widget will have, to be used when
-        estimating the height of content that hasn't been drawn. May
-        return -1 to indicate you don't know. The default implementation
-        returns -1.
-        */
+          The estimated height this widget will have, to be used when
+          estimating the height of content that hasn't been drawn. May
+          return -1 to indicate you don't know. The default implementation
+          returns -1.
+          */
     get estimatedHeight() {
       return -1;
     }
     /**
-        Can be used to configure which kinds of events inside the widget
-        should be ignored by the editor. The default is to ignore all
-        events.
-        */
+          Can be used to configure which kinds of events inside the widget
+          should be ignored by the editor. The default is to ignore all
+          events.
+          */
     ignoreEvent(_event) {
       return true;
     }
     /**
-        @internal
-        */
+          @internal
+          */
     get customView() {
       return null;
     }
     /**
-        This is called when the an instance of the widget is removed
-        from the editor view.
-        */
+          This is called when the an instance of the widget is removed
+          from the editor view.
+          */
     destroy(_dom) {}
   }
   /**
-    The different types of blocks that can occur in an editor view.
-    */
+      The different types of blocks that can occur in an editor view.
+      */
   var BlockType = /*@__PURE__*/ (function (BlockType) {
     /**
-        A line of text.
-        */
+          A line of text.
+          */
     BlockType[(BlockType['Text'] = 0)] = 'Text';
     /**
-        A block widget associated with the position after it.
-        */
+          A block widget associated with the position after it.
+          */
     BlockType[(BlockType['WidgetBefore'] = 1)] = 'WidgetBefore';
     /**
-        A block widget associated with the position before it.
-        */
+          A block widget associated with the position before it.
+          */
     BlockType[(BlockType['WidgetAfter'] = 2)] = 'WidgetAfter';
     /**
-        A block widget [replacing](https://codemirror.net/6/docs/ref/#view.Decoration^replace) a range of content.
-        */
+          A block widget [replacing](https://codemirror.net/6/docs/ref/#view.Decoration^replace) a range of content.
+          */
     BlockType[(BlockType['WidgetRange'] = 3)] = 'WidgetRange';
     return BlockType;
   })(BlockType || (BlockType = {}));
   /**
-    A decoration provides information on how to draw or style a piece
-    of content. You'll usually use it wrapped in a
-    [`Range`](https://codemirror.net/6/docs/ref/#rangeset.Range), which adds a start and end position.
-    */
+      A decoration provides information on how to draw or style a piece
+      of content. You'll usually use it wrapped in a
+      [`Range`](https://codemirror.net/6/docs/ref/#rangeset.Range), which adds a start and end position.
+      */
   class Decoration extends RangeValue {
     /**
-        @internal
-        */
+          @internal
+          */
     constructor(
       /**
-        @internal
-        */
+          @internal
+          */
       startSide,
       /**
-        @internal
-        */
+          @internal
+          */
       endSide,
       /**
-        @internal
-        */
+          @internal
+          */
       widget,
       /**
-        The config object used to create this decoration. You can
-        include additional properties in there to store metadata about
-        your decoration.
-        */
+          The config object used to create this decoration. You can
+          include additional properties in there to store metadata about
+          your decoration.
+          */
       spec
     ) {
       super();
@@ -9668,28 +9668,28 @@
       this.spec = spec;
     }
     /**
-        @internal
-        */
+          @internal
+          */
     get heightRelevant() {
       return false;
     }
     /**
-        Create a mark decoration, which influences the styling of the
-        content in its range. Nested mark decorations will cause nested
-        DOM elements to be created. Nesting order is determined by
-        precedence of the [facet](https://codemirror.net/6/docs/ref/#view.EditorView^decorations) or
-        (below the facet-provided decorations) [view
-        plugin](https://codemirror.net/6/docs/ref/#view.PluginSpec.decorations). Such elements are split
-        on line boundaries and on the boundaries of higher-precedence
-        decorations.
-        */
+          Create a mark decoration, which influences the styling of the
+          content in its range. Nested mark decorations will cause nested
+          DOM elements to be created. Nesting order is determined by
+          precedence of the [facet](https://codemirror.net/6/docs/ref/#view.EditorView^decorations) or
+          (below the facet-provided decorations) [view
+          plugin](https://codemirror.net/6/docs/ref/#view.PluginSpec.decorations). Such elements are split
+          on line boundaries and on the boundaries of higher-precedence
+          decorations.
+          */
     static mark(spec) {
       return new MarkDecoration(spec);
     }
     /**
-        Create a widget decoration, which adds an element at the given
-        position.
-        */
+          Create a widget decoration, which adds an element at the given
+          position.
+          */
     static widget(spec) {
       let side = spec.side || 0,
         block = !!spec.block;
@@ -9703,9 +9703,9 @@
       return new PointDecoration(spec, side, side, block, spec.widget || null, false);
     }
     /**
-        Create a replace decoration which replaces the given range with
-        a widget, or simply hides it.
-        */
+          Create a replace decoration which replaces the given range with
+          a widget, or simply hides it.
+          */
     static replace(spec) {
       let block = !!spec.block,
         startSide,
@@ -9723,30 +9723,30 @@
       return new PointDecoration(spec, startSide, endSide, block, spec.widget || null, true);
     }
     /**
-        Create a line decoration, which can add DOM attributes to the
-        line starting at the given position.
-        */
+          Create a line decoration, which can add DOM attributes to the
+          line starting at the given position.
+          */
     static line(spec) {
       return new LineDecoration(spec);
     }
     /**
-        Build a [`DecorationSet`](https://codemirror.net/6/docs/ref/#view.DecorationSet) from the given
-        decorated range or ranges. If the ranges aren't already sorted,
-        pass `true` for `sort` to make the library sort them for you.
-        */
+          Build a [`DecorationSet`](https://codemirror.net/6/docs/ref/#view.DecorationSet) from the given
+          decorated range or ranges. If the ranges aren't already sorted,
+          pass `true` for `sort` to make the library sort them for you.
+          */
     static set(of, sort = false) {
       return RangeSet.of(of, sort);
     }
     /**
-        @internal
-        */
+          @internal
+          */
     hasHeight() {
       return this.widget ? this.widget.estimatedHeight > -1 : false;
     }
   }
   /**
-    The empty set of decorations.
-    */
+      The empty set of decorations.
+      */
   Decoration.none = RangeSet.empty;
   class MarkDecoration extends Decoration {
     constructor(spec) {
@@ -10243,17 +10243,17 @@
   }
   const scrollIntoView$1 = /*@__PURE__*/ StateEffect.define({map: (t, ch) => t.map(ch)});
   /**
-    Log or report an unhandled exception in client code. Should
-    probably only be used by extension code that allows client code to
-    provide functions, and calls those functions in a context where an
-    exception can't be propagated to calling code in a reasonable way
-    (for example when in an event handler).
-
-    Either calls a handler registered with
-    [`EditorView.exceptionSink`](https://codemirror.net/6/docs/ref/#view.EditorView^exceptionSink),
-    `window.onerror`, if defined, or `console.error` (in which case
-    it'll pass `context`, when given, as first argument).
-    */
+      Log or report an unhandled exception in client code. Should
+      probably only be used by extension code that allows client code to
+      provide functions, and calls those functions in a context where an
+      exception can't be propagated to calling code in a reasonable way
+      (for example when in an event handler).
+  
+      Either calls a handler registered with
+      [`EditorView.exceptionSink`](https://codemirror.net/6/docs/ref/#view.EditorView^exceptionSink),
+      `window.onerror`, if defined, or `console.error` (in which case
+      it'll pass `context`, when given, as first argument).
+      */
   function logException(state, exception, context) {
     let handler = state.facet(exceptionSink);
     if (handler.length) handler[0](exception);
@@ -10263,22 +10263,22 @@
   }
   const editable = /*@__PURE__*/ Facet.define({combine: values => (values.length ? values[0] : true)});
   /**
-    Used to [declare](https://codemirror.net/6/docs/ref/#view.PluginSpec.provide) which
-    [fields](https://codemirror.net/6/docs/ref/#view.PluginValue) a [view plugin](https://codemirror.net/6/docs/ref/#view.ViewPlugin)
-    provides.
-    */
+      Used to [declare](https://codemirror.net/6/docs/ref/#view.PluginSpec.provide) which
+      [fields](https://codemirror.net/6/docs/ref/#view.PluginValue) a [view plugin](https://codemirror.net/6/docs/ref/#view.ViewPlugin)
+      provides.
+      */
   class PluginFieldProvider {
     /**
-        @internal
-        */
+          @internal
+          */
     constructor(
       /**
-        @internal
-        */
+          @internal
+          */
       field,
       /**
-        @internal
-        */
+          @internal
+          */
       get
     ) {
       this.field = field;
@@ -10286,82 +10286,82 @@
     }
   }
   /**
-    Plugin fields are a mechanism for allowing plugins to provide
-    values that can be retrieved through the
-    [`pluginField`](https://codemirror.net/6/docs/ref/#view.EditorView.pluginField) view method.
-    */
+      Plugin fields are a mechanism for allowing plugins to provide
+      values that can be retrieved through the
+      [`pluginField`](https://codemirror.net/6/docs/ref/#view.EditorView.pluginField) view method.
+      */
   class PluginField {
     /**
-        Create a [provider](https://codemirror.net/6/docs/ref/#view.PluginFieldProvider) for this field,
-        to use with a plugin's [provide](https://codemirror.net/6/docs/ref/#view.PluginSpec.provide)
-        option.
-        */
+          Create a [provider](https://codemirror.net/6/docs/ref/#view.PluginFieldProvider) for this field,
+          to use with a plugin's [provide](https://codemirror.net/6/docs/ref/#view.PluginSpec.provide)
+          option.
+          */
     from(get) {
       return new PluginFieldProvider(this, get);
     }
     /**
-        Define a new plugin field.
-        */
+          Define a new plugin field.
+          */
     static define() {
       return new PluginField();
     }
   }
   /**
-    This field can be used by plugins to provide
-    [decorations](https://codemirror.net/6/docs/ref/#view.Decoration).
-
-    **Note**: For reasons of data flow (plugins are only updated
-    after the viewport is computed), decorations produced by plugins
-    are _not_ taken into account when predicting the vertical layout
-    structure of the editor. They **must not** introduce block
-    widgets (that will raise an error) or replacing decorations that
-    cover line breaks (these will be ignored if they occur). Such
-    decorations, or others that cause a large amount of vertical
-    size shift compared to the undecorated content, should be
-    provided through the state-level [`decorations`
-    facet](https://codemirror.net/6/docs/ref/#view.EditorView^decorations) instead.
-    */
+      This field can be used by plugins to provide
+      [decorations](https://codemirror.net/6/docs/ref/#view.Decoration).
+  
+      **Note**: For reasons of data flow (plugins are only updated
+      after the viewport is computed), decorations produced by plugins
+      are _not_ taken into account when predicting the vertical layout
+      structure of the editor. They **must not** introduce block
+      widgets (that will raise an error) or replacing decorations that
+      cover line breaks (these will be ignored if they occur). Such
+      decorations, or others that cause a large amount of vertical
+      size shift compared to the undecorated content, should be
+      provided through the state-level [`decorations`
+      facet](https://codemirror.net/6/docs/ref/#view.EditorView^decorations) instead.
+      */
   PluginField.decorations = /*@__PURE__*/ PluginField.define();
   /**
-    Used to provide ranges that should be treated as atoms as far as
-    cursor motion is concerned. This causes methods like
-    [`moveByChar`](https://codemirror.net/6/docs/ref/#view.EditorView.moveByChar) and
-    [`moveVertically`](https://codemirror.net/6/docs/ref/#view.EditorView.moveVertically) (and the
-    commands built on top of them) to skip across such regions when
-    a selection endpoint would enter them. This does _not_ prevent
-    direct programmatic [selection
-    updates](https://codemirror.net/6/docs/ref/#state.TransactionSpec.selection) from moving into such
-    regions.
-    */
+      Used to provide ranges that should be treated as atoms as far as
+      cursor motion is concerned. This causes methods like
+      [`moveByChar`](https://codemirror.net/6/docs/ref/#view.EditorView.moveByChar) and
+      [`moveVertically`](https://codemirror.net/6/docs/ref/#view.EditorView.moveVertically) (and the
+      commands built on top of them) to skip across such regions when
+      a selection endpoint would enter them. This does _not_ prevent
+      direct programmatic [selection
+      updates](https://codemirror.net/6/docs/ref/#state.TransactionSpec.selection) from moving into such
+      regions.
+      */
   PluginField.atomicRanges = /*@__PURE__*/ PluginField.define();
   /**
-    Plugins can provide additional scroll margins (space around the
-    sides of the scrolling element that should be considered
-    invisible) through this field. This can be useful when the
-    plugin introduces elements that cover part of that element (for
-    example a horizontally fixed gutter).
-    */
+      Plugins can provide additional scroll margins (space around the
+      sides of the scrolling element that should be considered
+      invisible) through this field. This can be useful when the
+      plugin introduces elements that cover part of that element (for
+      example a horizontally fixed gutter).
+      */
   PluginField.scrollMargins = /*@__PURE__*/ PluginField.define();
   let nextPluginID = 0;
   const viewPlugin = /*@__PURE__*/ Facet.define();
   /**
-    View plugins associate stateful values with a view. They can
-    influence the way the content is drawn, and are notified of things
-    that happen in the view.
-    */
+      View plugins associate stateful values with a view. They can
+      influence the way the content is drawn, and are notified of things
+      that happen in the view.
+      */
   class ViewPlugin {
     constructor(
       /**
-        @internal
-        */
+          @internal
+          */
       id,
       /**
-        @internal
-        */
+          @internal
+          */
       create,
       /**
-        @internal
-        */
+          @internal
+          */
       fields
     ) {
       this.id = id;
@@ -10370,9 +10370,9 @@
       this.extension = viewPlugin.of(this);
     }
     /**
-        Define a plugin from a constructor function that creates the
-        plugin's value, given an editor view.
-        */
+          Define a plugin from a constructor function that creates the
+          plugin's value, given an editor view.
+          */
     static define(create, spec) {
       let {eventHandlers, provide, decorations} = spec || {};
       let fields = [];
@@ -10382,9 +10382,9 @@
       return new ViewPlugin(nextPluginID++, create, fields);
     }
     /**
-        Create a plugin for a class whose constructor takes a single
-        editor view as argument.
-        */
+          Create a plugin for a class whose constructor takes a single
+          editor view as argument.
+          */
     static fromClass(cls, spec) {
       return ViewPlugin.define(view => new cls(view), spec);
     }
@@ -10504,33 +10504,33 @@
     }
   }
   /**
-    View [plugins](https://codemirror.net/6/docs/ref/#view.ViewPlugin) are given instances of this
-    class, which describe what happened, whenever the view is updated.
-    */
+      View [plugins](https://codemirror.net/6/docs/ref/#view.ViewPlugin) are given instances of this
+      class, which describe what happened, whenever the view is updated.
+      */
   class ViewUpdate {
     /**
-        @internal
-        */
+          @internal
+          */
     constructor(
       /**
-        The editor view that the update is associated with.
-        */
+          The editor view that the update is associated with.
+          */
       view,
       /**
-        The new editor state.
-        */
+          The new editor state.
+          */
       state,
       /**
-        The transactions involved in the update. May be empty.
-        */
+          The transactions involved in the update. May be empty.
+          */
       transactions = none$2
     ) {
       this.view = view;
       this.state = state;
       this.transactions = transactions;
       /**
-            @internal
-            */
+              @internal
+              */
       this.flags = 0;
       this.startState = view.state;
       this.changes = ChangeSet.empty(this.startState.doc.length);
@@ -10547,66 +10547,66 @@
       }
     }
     /**
-        Tells you whether the [viewport](https://codemirror.net/6/docs/ref/#view.EditorView.viewport) or
-        [visible ranges](https://codemirror.net/6/docs/ref/#view.EditorView.visibleRanges) changed in this
-        update.
-        */
+          Tells you whether the [viewport](https://codemirror.net/6/docs/ref/#view.EditorView.viewport) or
+          [visible ranges](https://codemirror.net/6/docs/ref/#view.EditorView.visibleRanges) changed in this
+          update.
+          */
     get viewportChanged() {
       return (this.flags & 4) /* Viewport */ > 0;
     }
     /**
-        Indicates whether the height of an element in the editor changed
-        in this update.
-        */
+          Indicates whether the height of an element in the editor changed
+          in this update.
+          */
     get heightChanged() {
       return (this.flags & 2) /* Height */ > 0;
     }
     /**
-        Returns true when the document was modified or the size of the
-        editor, or elements within the editor, changed.
-        */
+          Returns true when the document was modified or the size of the
+          editor, or elements within the editor, changed.
+          */
     get geometryChanged() {
       return this.docChanged || (this.flags & (8 /* Geometry */ | 2)) /* Height */ > 0;
     }
     /**
-        True when this update indicates a focus change.
-        */
+          True when this update indicates a focus change.
+          */
     get focusChanged() {
       return (this.flags & 1) /* Focus */ > 0;
     }
     /**
-        Whether the document changed in this update.
-        */
+          Whether the document changed in this update.
+          */
     get docChanged() {
       return !this.changes.empty;
     }
     /**
-        Whether the selection was explicitly set in this update.
-        */
+          Whether the selection was explicitly set in this update.
+          */
     get selectionSet() {
       return this.transactions.some(tr => tr.selection);
     }
     /**
-        @internal
-        */
+          @internal
+          */
     get empty() {
       return this.flags == 0 && this.transactions.length == 0;
     }
   }
 
   /**
-    Used to indicate [text direction](https://codemirror.net/6/docs/ref/#view.EditorView.textDirection).
-    */
+      Used to indicate [text direction](https://codemirror.net/6/docs/ref/#view.EditorView.textDirection).
+      */
   var Direction = /*@__PURE__*/ (function (Direction) {
     // (These are chosen to match the base levels, in bidi algorithm
     // terms, of spans in that direction.)
     /**
-        Left-to-right.
-        */
+          Left-to-right.
+          */
     Direction[(Direction['LTR'] = 0)] = 'LTR';
     /**
-        Right-to-left.
-        */
+          Right-to-left.
+          */
     Direction[(Direction['RTL'] = 1)] = 'RTL';
     return Direction;
   })(Direction || (Direction = {}));
@@ -10654,29 +10654,29 @@
   }
   const BidiRE = /[\u0590-\u05f4\u0600-\u06ff\u0700-\u08ac]/;
   /**
-    Represents a contiguous range of text that has a single direction
-    (as in left-to-right or right-to-left).
-    */
+      Represents a contiguous range of text that has a single direction
+      (as in left-to-right or right-to-left).
+      */
   class BidiSpan {
     /**
-        @internal
-        */
+          @internal
+          */
     constructor(
       /**
-        The start of the span (relative to the start of the line).
-        */
+          The start of the span (relative to the start of the line).
+          */
       from,
       /**
-        The end of the span.
-        */
+          The end of the span.
+          */
       to,
       /**
-        The ["bidi
-        level"](https://unicode.org/reports/tr9/#Basic_Display_Algorithm)
-        of the span (in this context, 0 means
-        left-to-right, 1 means right-to-left, 2 means left-to-right
-        number inside right-to-left text).
-        */
+          The ["bidi
+          level"](https://unicode.org/reports/tr9/#Basic_Display_Algorithm)
+          of the span (in this context, 0 means
+          left-to-right, 1 means right-to-left, 2 means left-to-right
+          number inside right-to-left text).
+          */
       level
     ) {
       this.from = from;
@@ -10684,20 +10684,20 @@
       this.level = level;
     }
     /**
-        The direction of this span.
-        */
+          The direction of this span.
+          */
     get dir() {
       return this.level % 2 ? RTL : LTR;
     }
     /**
-        @internal
-        */
+          @internal
+          */
     side(end, dir) {
       return (this.dir == dir) == end ? this.to : this.from;
     }
     /**
-        @internal
-        */
+          @internal
+          */
     static find(order, index, level, assoc) {
       let maybe = -1;
       for (let i = 0; i < order.length; i++) {
@@ -12564,35 +12564,35 @@
     }
   }
   /**
-    Record used to represent information about a block-level element
-    in the editor view.
-    */
+      Record used to represent information about a block-level element
+      in the editor view.
+      */
   class BlockInfo {
     /**
-        @internal
-        */
+          @internal
+          */
     constructor(
       /**
-        The start of the element in the document.
-        */
+          The start of the element in the document.
+          */
       from,
       /**
-        The length of the element.
-        */
+          The length of the element.
+          */
       length,
       /**
-        The top position of the element (relative to the top of the
-        document).
-        */
+          The top position of the element (relative to the top of the
+          document).
+          */
       top,
       /**
-        Its height.
-        */
+          Its height.
+          */
       height,
       /**
-        The type of element this is. When querying lines, this may be
-        an array of all the blocks that make up the line.
-        */
+          The type of element this is. When querying lines, this may be
+          an array of all the blocks that make up the line.
+          */
       type
     ) {
       this.from = from;
@@ -12602,20 +12602,20 @@
       this.type = type;
     }
     /**
-        The end of the element as a document position.
-        */
+          The end of the element as a document position.
+          */
     get to() {
       return this.from + this.length;
     }
     /**
-        The bottom position of the element.
-        */
+          The bottom position of the element.
+          */
     get bottom() {
       return this.top + this.height;
     }
     /**
-        @internal
-        */
+          @internal
+          */
     join(other) {
       let detail = (Array.isArray(this.type) ? this.type : [this]).concat(
         Array.isArray(other.type) ? other.type : [other]
@@ -12623,8 +12623,8 @@
       return new BlockInfo(this.from, this.length + other.length, this.top, this.height + other.height, detail);
     }
     /**
-        FIXME remove on next breaking release @internal
-        */
+          FIXME remove on next breaking release @internal
+          */
     moveY(offset) {
       return !offset
         ? this
@@ -14535,21 +14535,21 @@
   // visible code. That check continues to measure and then optionally
   // update until it reaches a coherent state.
   /**
-    An editor view represents the editor's user interface. It holds
-    the editable DOM surface, and possibly other elements such as the
-    line number gutter. It handles events and dispatches state
-    transactions for editing actions.
-    */
+      An editor view represents the editor's user interface. It holds
+      the editable DOM surface, and possibly other elements such as the
+      line number gutter. It handles events and dispatches state
+      transactions for editing actions.
+      */
   class EditorView {
     /**
-        Construct a new view. You'll usually want to put `view.dom` into
-        your document after creating a view, so that the user can see
-        it.
-        */
+          Construct a new view. You'll usually want to put `view.dom` into
+          your document after creating a view, so that the user can see
+          it.
+          */
     constructor(
       /**
-        Initialization options.
-        */
+          Initialization options.
+          */
       config = {}
     ) {
       this.plugins = [];
@@ -14559,16 +14559,16 @@
       this.bidiCache = [];
       this.destroyed = false;
       /**
-            @internal
-            */
+              @internal
+              */
       this.updateState = 2 /* Updating */;
       /**
-            @internal
-            */
+              @internal
+              */
       this.measureScheduled = -1;
       /**
-            @internal
-            */
+              @internal
+              */
       this.measureRequests = [];
       this.contentDOM = document.createElement('div');
       this.scrollDOM = document.createElement('div');
@@ -14606,53 +14606,53 @@
       if (config.parent) config.parent.appendChild(this.dom);
     }
     /**
-        The current editor state.
-        */
+          The current editor state.
+          */
     get state() {
       return this.viewState.state;
     }
     /**
-        To be able to display large documents without consuming too much
-        memory or overloading the browser, CodeMirror only draws the
-        code that is visible (plus a margin around it) to the DOM. This
-        property tells you the extent of the current drawn viewport, in
-        document positions.
-        */
+          To be able to display large documents without consuming too much
+          memory or overloading the browser, CodeMirror only draws the
+          code that is visible (plus a margin around it) to the DOM. This
+          property tells you the extent of the current drawn viewport, in
+          document positions.
+          */
     get viewport() {
       return this.viewState.viewport;
     }
     /**
-        When there are, for example, large collapsed ranges in the
-        viewport, its size can be a lot bigger than the actual visible
-        content. Thus, if you are doing something like styling the
-        content in the viewport, it is preferable to only do so for
-        these ranges, which are the subset of the viewport that is
-        actually drawn.
-        */
+          When there are, for example, large collapsed ranges in the
+          viewport, its size can be a lot bigger than the actual visible
+          content. Thus, if you are doing something like styling the
+          content in the viewport, it is preferable to only do so for
+          these ranges, which are the subset of the viewport that is
+          actually drawn.
+          */
     get visibleRanges() {
       return this.viewState.visibleRanges;
     }
     /**
-        Returns false when the editor is entirely scrolled out of view
-        or otherwise hidden.
-        */
+          Returns false when the editor is entirely scrolled out of view
+          or otherwise hidden.
+          */
     get inView() {
       return this.viewState.inView;
     }
     /**
-        Indicates whether the user is currently composing text via
-        [IME](https://en.wikipedia.org/wiki/Input_method), and at least
-        one change has been made in the current composition.
-        */
+          Indicates whether the user is currently composing text via
+          [IME](https://en.wikipedia.org/wiki/Input_method), and at least
+          one change has been made in the current composition.
+          */
     get composing() {
       return this.inputState.composing > 0;
     }
     /**
-        Indicates whether the user is currently in composing state. Note
-        that on some platforms, like Android, this will be the case a
-        lot, since just putting the cursor on a word starts a
-        composition there.
-        */
+          Indicates whether the user is currently in composing state. Note
+          that on some platforms, like Android, this will be the case a
+          lot, since just putting the cursor on a word starts a
+          composition there.
+          */
     get compositionStarted() {
       return this.inputState.composing >= 0;
     }
@@ -14660,13 +14660,13 @@
       this._dispatch(input.length == 1 && input[0] instanceof Transaction ? input[0] : this.state.update(...input));
     }
     /**
-        Update the view for the given array of transactions. This will
-        update the visible document and selection to match the state
-        produced by the transactions, and notify view plugins of the
-        change. You should usually call
-        [`dispatch`](https://codemirror.net/6/docs/ref/#view.EditorView.dispatch) instead, which uses this
-        as a primitive.
-        */
+          Update the view for the given array of transactions. This will
+          update the visible document and selection to match the state
+          produced by the transactions, and notify view plugins of the
+          change. You should usually call
+          [`dispatch`](https://codemirror.net/6/docs/ref/#view.EditorView.dispatch) instead, which uses this
+          as a primitive.
+          */
     update(transactions) {
       if (this.updateState != 0 /* Idle */)
         throw new Error('Calls to EditorView.update are not allowed while an update is in progress');
@@ -14725,12 +14725,12 @@
       if (!update.empty) for (let listener of this.state.facet(updateListener)) listener(update);
     }
     /**
-        Reset the view to the given state. (This will cause the entire
-        document to be redrawn and all view plugins to be reinitialized,
-        so you should probably only use it when the new state isn't
-        derived from the old state. Otherwise, use
-        [`dispatch`](https://codemirror.net/6/docs/ref/#view.EditorView.dispatch) instead.)
-        */
+          Reset the view to the given state. (This will cause the entire
+          document to be redrawn and all view plugins to be reinitialized,
+          so you should probably only use it when the new state isn't
+          derived from the old state. Otherwise, use
+          [`dispatch`](https://codemirror.net/6/docs/ref/#view.EditorView.dispatch) instead.)
+          */
     setState(newState) {
       if (this.updateState != 0 /* Idle */)
         throw new Error('Calls to EditorView.setState are not allowed while an update is in progress');
@@ -14782,8 +14782,8 @@
       for (let i = 0; i < this.plugins.length; i++) this.plugins[i].update(this);
     }
     /**
-        @internal
-        */
+          @internal
+          */
     measure(flush = true) {
       if (this.destroyed) return;
       if (this.measureScheduled > -1) cancelAnimationFrame(this.measureScheduled);
@@ -14856,8 +14856,8 @@
       if (updated && !updated.empty) for (let listener of this.state.facet(updateListener)) listener(updated);
     }
     /**
-        Get the CSS classes for the currently active editor themes.
-        */
+          Get the CSS classes for the currently active editor themes.
+          */
     get themeClasses() {
       return (
         baseThemeID + ' ' + (this.state.facet(darkTheme) ? baseDarkID : baseLightID) + ' ' + this.state.facet(theme)
@@ -14908,13 +14908,13 @@
       if (this.updateState == 0 /* Idle */ && this.measureScheduled > -1) this.measure(false);
     }
     /**
-        Schedule a layout measurement, optionally providing callbacks to
-        do custom DOM measuring followed by a DOM write phase. Using
-        this is preferable reading DOM layout directly from, for
-        example, an event handler, because it'll make sure measuring and
-        drawing done by other components is synchronized, avoiding
-        unnecessary DOM layout computations.
-        */
+          Schedule a layout measurement, optionally providing callbacks to
+          do custom DOM measuring followed by a DOM write phase. Using
+          this is preferable reading DOM layout directly from, for
+          example, an event handler, because it'll make sure measuring and
+          drawing done by other components is synchronized, avoiding
+          unnecessary DOM layout computations.
+          */
     requestMeasure(request) {
       if (this.measureScheduled < 0) this.measureScheduled = requestAnimationFrame(() => this.measure());
       if (request) {
@@ -14929,20 +14929,20 @@
       }
     }
     /**
-        Collect all values provided by the active plugins for a given
-        field.
-        */
+          Collect all values provided by the active plugins for a given
+          field.
+          */
     pluginField(field) {
       let result = [];
       for (let plugin of this.plugins) plugin.update(this).takeField(field, result);
       return result;
     }
     /**
-        Get the value of a specific plugin, if present. Note that
-        plugins that crash can be dropped from a view, so even when you
-        know you registered a given plugin, it is recommended to check
-        the return value of this method.
-        */
+          Get the value of a specific plugin, if present. Note that
+          plugins that crash can be dropped from a view, so even when you
+          know you registered a given plugin, it is recommended to check
+          the return value of this method.
+          */
     plugin(plugin) {
       let known = this.pluginMap.get(plugin);
       if (known === undefined || (known && known.spec != plugin))
@@ -14950,148 +14950,148 @@
       return known && known.update(this).value;
     }
     /**
-        The top position of the document, in screen coordinates. This
-        may be negative when the editor is scrolled down. Points
-        directly to the top of the first line, not above the padding.
-        */
+          The top position of the document, in screen coordinates. This
+          may be negative when the editor is scrolled down. Points
+          directly to the top of the first line, not above the padding.
+          */
     get documentTop() {
       return this.contentDOM.getBoundingClientRect().top + this.viewState.paddingTop;
     }
     /**
-        Reports the padding above and below the document.
-        */
+          Reports the padding above and below the document.
+          */
     get documentPadding() {
       return {top: this.viewState.paddingTop, bottom: this.viewState.paddingBottom};
     }
     /**
-        Find the line or block widget at the given vertical position.
-        
-        By default, this position is interpreted as a screen position,
-        meaning `docTop` is set to the DOM top position of the editor
-        content (forcing a layout). You can pass a different `docTop`
-        valueâ€”for example 0 to interpret `height` as a document-relative
-        position, or a precomputed document top
-        (`view.contentDOM.getBoundingClientRect().top`) to limit layout
-        queries.
-        
-        *Deprecated: use `elementAtHeight` instead.*
-        */
+          Find the line or block widget at the given vertical position.
+          
+          By default, this position is interpreted as a screen position,
+          meaning `docTop` is set to the DOM top position of the editor
+          content (forcing a layout). You can pass a different `docTop`
+          valueâ€”for example 0 to interpret `height` as a document-relative
+          position, or a precomputed document top
+          (`view.contentDOM.getBoundingClientRect().top`) to limit layout
+          queries.
+          
+          *Deprecated: use `elementAtHeight` instead.*
+          */
     blockAtHeight(height, docTop) {
       let top = ensureTop(docTop, this);
       return this.elementAtHeight(height - top).moveY(top);
     }
     /**
-        Find the text line or block widget at the given vertical
-        position (which is interpreted as relative to the [top of the
-        document](https://codemirror.net/6/docs/ref/#view.EditorView.documentTop)
-        */
+          Find the text line or block widget at the given vertical
+          position (which is interpreted as relative to the [top of the
+          document](https://codemirror.net/6/docs/ref/#view.EditorView.documentTop)
+          */
     elementAtHeight(height) {
       this.readMeasured();
       return this.viewState.elementAtHeight(height);
     }
     /**
-        Find information for the visual line (see
-        [`visualLineAt`](https://codemirror.net/6/docs/ref/#view.EditorView.visualLineAt)) at the given
-        vertical position. The resulting block info might hold another
-        array of block info structs in its `type` field if this line
-        consists of more than one block.
-        
-        Defaults to treating `height` as a screen position. See
-        [`blockAtHeight`](https://codemirror.net/6/docs/ref/#view.EditorView.blockAtHeight) for the
-        interpretation of the `docTop` parameter.
-        
-        *Deprecated: use `lineBlockAtHeight` instead.*
-        */
+          Find information for the visual line (see
+          [`visualLineAt`](https://codemirror.net/6/docs/ref/#view.EditorView.visualLineAt)) at the given
+          vertical position. The resulting block info might hold another
+          array of block info structs in its `type` field if this line
+          consists of more than one block.
+          
+          Defaults to treating `height` as a screen position. See
+          [`blockAtHeight`](https://codemirror.net/6/docs/ref/#view.EditorView.blockAtHeight) for the
+          interpretation of the `docTop` parameter.
+          
+          *Deprecated: use `lineBlockAtHeight` instead.*
+          */
     visualLineAtHeight(height, docTop) {
       let top = ensureTop(docTop, this);
       return this.lineBlockAtHeight(height - top).moveY(top);
     }
     /**
-        Find the line block (see
-        [`lineBlockAt`](https://codemirror.net/6/docs/ref/#view.EditorView.lineBlockAt) at the given
-        height.
-        */
+          Find the line block (see
+          [`lineBlockAt`](https://codemirror.net/6/docs/ref/#view.EditorView.lineBlockAt) at the given
+          height.
+          */
     lineBlockAtHeight(height) {
       this.readMeasured();
       return this.viewState.lineBlockAtHeight(height);
     }
     /**
-        Iterate over the height information of the visual lines in the
-        viewport. The heights of lines are reported relative to the
-        given document top, which defaults to the screen position of the
-        document (forcing a layout).
-        
-        *Deprecated: use `viewportLineBlocks` instead.*
-        */
+          Iterate over the height information of the visual lines in the
+          viewport. The heights of lines are reported relative to the
+          given document top, which defaults to the screen position of the
+          document (forcing a layout).
+          
+          *Deprecated: use `viewportLineBlocks` instead.*
+          */
     viewportLines(f, docTop) {
       let top = ensureTop(docTop, this);
       for (let line of this.viewportLineBlocks) f(line.moveY(top));
     }
     /**
-        Get the extent and vertical position of all [line
-        blocks](https://codemirror.net/6/docs/ref/#view.EditorView.lineBlockAt) in the viewport. Positions
-        are relative to the [top of the
-        document](https://codemirror.net/6/docs/ref/#view.EditorView.documentTop);
-        */
+          Get the extent and vertical position of all [line
+          blocks](https://codemirror.net/6/docs/ref/#view.EditorView.lineBlockAt) in the viewport. Positions
+          are relative to the [top of the
+          document](https://codemirror.net/6/docs/ref/#view.EditorView.documentTop);
+          */
     get viewportLineBlocks() {
       return this.viewState.viewportLines;
     }
     /**
-        Find the extent and height of the visual line (a range delimited
-        on both sides by either non-[hidden](https://codemirror.net/6/docs/ref/#view.Decoration^range)
-        line breaks, or the start/end of the document) at the given position.
-        
-        Vertical positions are computed relative to the `docTop`
-        argument, which defaults to 0 for this method. You can pass
-        `view.contentDOM.getBoundingClientRect().top` here to get screen
-        coordinates.
-        
-        *Deprecated: use `lineBlockAt` instead.*
-        */
+          Find the extent and height of the visual line (a range delimited
+          on both sides by either non-[hidden](https://codemirror.net/6/docs/ref/#view.Decoration^range)
+          line breaks, or the start/end of the document) at the given position.
+          
+          Vertical positions are computed relative to the `docTop`
+          argument, which defaults to 0 for this method. You can pass
+          `view.contentDOM.getBoundingClientRect().top` here to get screen
+          coordinates.
+          
+          *Deprecated: use `lineBlockAt` instead.*
+          */
     visualLineAt(pos, docTop = 0) {
       return this.lineBlockAt(pos).moveY(docTop + this.viewState.paddingTop);
     }
     /**
-        Find the line block around the given document position. A line
-        block is a range delimited on both sides by either a
-        non-[hidden](https://codemirror.net/6/docs/ref/#view.Decoration^range) line breaks, or the
-        start/end of the document. It will usually just hold a line of
-        text, but may be broken into multiple textblocks by block
-        widgets.
-        */
+          Find the line block around the given document position. A line
+          block is a range delimited on both sides by either a
+          non-[hidden](https://codemirror.net/6/docs/ref/#view.Decoration^range) line breaks, or the
+          start/end of the document. It will usually just hold a line of
+          text, but may be broken into multiple textblocks by block
+          widgets.
+          */
     lineBlockAt(pos) {
       return this.viewState.lineBlockAt(pos);
     }
     /**
-        The editor's total content height.
-        */
+          The editor's total content height.
+          */
     get contentHeight() {
       return this.viewState.contentHeight;
     }
     /**
-        Move a cursor position by [grapheme
-        cluster](https://codemirror.net/6/docs/ref/#text.findClusterBreak). `forward` determines whether
-        the motion is away from the line start, or towards it. Motion in
-        bidirectional text is in visual order, in the editor's [text
-        direction](https://codemirror.net/6/docs/ref/#view.EditorView.textDirection). When the start
-        position was the last one on the line, the returned position
-        will be across the line break. If there is no further line, the
-        original position is returned.
-        
-        By default, this method moves over a single cluster. The
-        optional `by` argument can be used to move across more. It will
-        be called with the first cluster as argument, and should return
-        a predicate that determines, for each subsequent cluster,
-        whether it should also be moved over.
-        */
+          Move a cursor position by [grapheme
+          cluster](https://codemirror.net/6/docs/ref/#text.findClusterBreak). `forward` determines whether
+          the motion is away from the line start, or towards it. Motion in
+          bidirectional text is in visual order, in the editor's [text
+          direction](https://codemirror.net/6/docs/ref/#view.EditorView.textDirection). When the start
+          position was the last one on the line, the returned position
+          will be across the line break. If there is no further line, the
+          original position is returned.
+          
+          By default, this method moves over a single cluster. The
+          optional `by` argument can be used to move across more. It will
+          be called with the first cluster as argument, and should return
+          a predicate that determines, for each subsequent cluster,
+          whether it should also be moved over.
+          */
     moveByChar(start, forward, by) {
       return skipAtoms(this, start, moveByChar(this, start, forward, by));
     }
     /**
-        Move a cursor position across the next group of either
-        [letters](https://codemirror.net/6/docs/ref/#state.EditorState.charCategorizer) or non-letter
-        non-whitespace characters.
-        */
+          Move a cursor position across the next group of either
+          [letters](https://codemirror.net/6/docs/ref/#state.EditorState.charCategorizer) or non-letter
+          non-whitespace characters.
+          */
     moveByGroup(start, forward) {
       return skipAtoms(
         this,
@@ -15100,28 +15100,28 @@
       );
     }
     /**
-        Move to the next line boundary in the given direction. If
-        `includeWrap` is true, line wrapping is on, and there is a
-        further wrap point on the current line, the wrap point will be
-        returned. Otherwise this function will return the start or end
-        of the line.
-        */
+          Move to the next line boundary in the given direction. If
+          `includeWrap` is true, line wrapping is on, and there is a
+          further wrap point on the current line, the wrap point will be
+          returned. Otherwise this function will return the start or end
+          of the line.
+          */
     moveToLineBoundary(start, forward, includeWrap = true) {
       return moveToLineBoundary(this, start, forward, includeWrap);
     }
     /**
-        Move a cursor position vertically. When `distance` isn't given,
-        it defaults to moving to the next line (including wrapped
-        lines). Otherwise, `distance` should provide a positive distance
-        in pixels.
-        
-        When `start` has a
-        [`goalColumn`](https://codemirror.net/6/docs/ref/#state.SelectionRange.goalColumn), the vertical
-        motion will use that as a target horizontal position. Otherwise,
-        the cursor's own horizontal position is used. The returned
-        cursor will have its goal column set to whichever column was
-        used.
-        */
+          Move a cursor position vertically. When `distance` isn't given,
+          it defaults to moving to the next line (including wrapped
+          lines). Otherwise, `distance` should provide a positive distance
+          in pixels.
+          
+          When `start` has a
+          [`goalColumn`](https://codemirror.net/6/docs/ref/#state.SelectionRange.goalColumn), the vertical
+          motion will use that as a target horizontal position. Otherwise,
+          the cursor's own horizontal position is used. The returned
+          cursor will have its goal column set to whichever column was
+          used.
+          */
     moveVertically(start, forward, distance) {
       return skipAtoms(this, start, moveVertically(this, start, forward, distance));
     }
@@ -15130,23 +15130,23 @@
       this.dispatch({effects: scrollTo.of(EditorSelection.cursor(pos))});
     }
     /**
-        Find the DOM parent node and offset (child offset if `node` is
-        an element, character offset when it is a text node) at the
-        given document position.
-        
-        Note that for positions that aren't currently in
-        `visibleRanges`, the resulting DOM position isn't necessarily
-        meaningful (it may just point before or after a placeholder
-        element).
-        */
+          Find the DOM parent node and offset (child offset if `node` is
+          an element, character offset when it is a text node) at the
+          given document position.
+          
+          Note that for positions that aren't currently in
+          `visibleRanges`, the resulting DOM position isn't necessarily
+          meaningful (it may just point before or after a placeholder
+          element).
+          */
     domAtPos(pos) {
       return this.docView.domAtPos(pos);
     }
     /**
-        Find the document position at the given DOM node. Can be useful
-        for associating positions with DOM events. Will raise an error
-        when `node` isn't part of the editor content.
-        */
+          Find the document position at the given DOM node. Can be useful
+          for associating positions with DOM events. Will raise an error
+          when `node` isn't part of the editor content.
+          */
     posAtDOM(node, offset = 0) {
       return this.docView.posFromDOM(node, offset);
     }
@@ -15155,12 +15155,12 @@
       return posAtCoords(this, coords, precise);
     }
     /**
-        Get the screen coordinates at the given document position.
-        `side` determines whether the coordinates are based on the
-        element before (-1) or after (1) the position (if no element is
-        available on the given side, the method will transparently use
-        another strategy to get reasonable coordinates).
-        */
+          Get the screen coordinates at the given document position.
+          `side` determines whether the coordinates are based on the
+          element before (-1) or after (1) the position (if no element is
+          available on the given side, the method will transparently use
+          another strategy to get reasonable coordinates).
+          */
     coordsAtPos(pos, side = 1) {
       this.readMeasured();
       let rect = this.docView.coordsAt(pos, side);
@@ -15171,45 +15171,45 @@
       return flattenRect(rect, (span.dir == Direction.LTR) == side > 0);
     }
     /**
-        The default width of a character in the editor. May not
-        accurately reflect the width of all characters (given variable
-        width fonts or styling of invididual ranges).
-        */
+          The default width of a character in the editor. May not
+          accurately reflect the width of all characters (given variable
+          width fonts or styling of invididual ranges).
+          */
     get defaultCharacterWidth() {
       return this.viewState.heightOracle.charWidth;
     }
     /**
-        The default height of a line in the editor. May not be accurate
-        for all lines.
-        */
+          The default height of a line in the editor. May not be accurate
+          for all lines.
+          */
     get defaultLineHeight() {
       return this.viewState.heightOracle.lineHeight;
     }
     /**
-        The text direction
-        ([`direction`](https://developer.mozilla.org/en-US/docs/Web/CSS/direction)
-        CSS property) of the editor.
-        */
+          The text direction
+          ([`direction`](https://developer.mozilla.org/en-US/docs/Web/CSS/direction)
+          CSS property) of the editor.
+          */
     get textDirection() {
       return this.viewState.heightOracle.direction;
     }
     /**
-        Whether this editor [wraps lines](https://codemirror.net/6/docs/ref/#view.EditorView.lineWrapping)
-        (as determined by the
-        [`white-space`](https://developer.mozilla.org/en-US/docs/Web/CSS/white-space)
-        CSS property of its content element).
-        */
+          Whether this editor [wraps lines](https://codemirror.net/6/docs/ref/#view.EditorView.lineWrapping)
+          (as determined by the
+          [`white-space`](https://developer.mozilla.org/en-US/docs/Web/CSS/white-space)
+          CSS property of its content element).
+          */
     get lineWrapping() {
       return this.viewState.heightOracle.lineWrapping;
     }
     /**
-        Returns the bidirectional text structure of the given line
-        (which should be in the current document) as an array of span
-        objects. The order of these spans matches the [text
-        direction](https://codemirror.net/6/docs/ref/#view.EditorView.textDirection)â€”if that is
-        left-to-right, the leftmost spans come first, otherwise the
-        rightmost spans come first.
-        */
+          Returns the bidirectional text structure of the given line
+          (which should be in the current document) as an array of span
+          objects. The order of these spans matches the [text
+          direction](https://codemirror.net/6/docs/ref/#view.EditorView.textDirection)â€”if that is
+          left-to-right, the leftmost spans come first, otherwise the
+          rightmost spans come first.
+          */
     bidiSpans(line) {
       if (line.length > MaxBidiLine) return trivialOrder(line.length);
       let dir = this.textDirection;
@@ -15219,8 +15219,8 @@
       return order;
     }
     /**
-        Check whether the editor has focus.
-        */
+          Check whether the editor has focus.
+          */
     get hasFocus() {
       var _a;
       // Safari return false for hasFocus when the context menu is open
@@ -15235,8 +15235,8 @@
       );
     }
     /**
-        Put focus on the editor.
-        */
+          Put focus on the editor.
+          */
     focus() {
       this.observer.ignore(() => {
         focusPreventScroll(this.contentDOM);
@@ -15244,11 +15244,11 @@
       });
     }
     /**
-        Clean up this editor view, removing its element from the
-        document, unregistering event handlers, and notifying
-        plugins. The view instance can no longer be used after
-        calling this.
-        */
+          Clean up this editor view, removing its element from the
+          document, unregistering event handlers, and notifying
+          plugins. The view instance can no longer be used after
+          calling this.
+          */
     destroy() {
       for (let plugin of this.plugins) plugin.destroy(this);
       this.plugins = [];
@@ -15259,10 +15259,10 @@
       this.destroyed = true;
     }
     /**
-        Returns an effect that can be
-        [added](https://codemirror.net/6/docs/ref/#state.TransactionSpec.effects) to a transaction to
-        cause it to scroll the given position or range into view.
-        */
+          Returns an effect that can be
+          [added](https://codemirror.net/6/docs/ref/#state.TransactionSpec.effects) to a transaction to
+          cause it to scroll the given position or range into view.
+          */
     static scrollIntoView(pos, options = {}) {
       return scrollIntoView$1.of(
         new ScrollTarget(
@@ -15275,38 +15275,38 @@
       );
     }
     /**
-        Facet that can be used to add DOM event handlers. The value
-        should be an object mapping event names to handler functions. The
-        first such function to return true will be assumed to have handled
-        that event, and no other handlers or built-in behavior will be
-        activated for it.
-        These are registered on the [content
-        element](https://codemirror.net/6/docs/ref/#view.EditorView.contentDOM), except for `scroll`
-        handlers, which will be called any time the editor's [scroll
-        element](https://codemirror.net/6/docs/ref/#view.EditorView.scrollDOM) or one of its parent nodes
-        is scrolled.
-        */
+          Facet that can be used to add DOM event handlers. The value
+          should be an object mapping event names to handler functions. The
+          first such function to return true will be assumed to have handled
+          that event, and no other handlers or built-in behavior will be
+          activated for it.
+          These are registered on the [content
+          element](https://codemirror.net/6/docs/ref/#view.EditorView.contentDOM), except for `scroll`
+          handlers, which will be called any time the editor's [scroll
+          element](https://codemirror.net/6/docs/ref/#view.EditorView.scrollDOM) or one of its parent nodes
+          is scrolled.
+          */
     static domEventHandlers(handlers) {
       return ViewPlugin.define(() => ({}), {eventHandlers: handlers});
     }
     /**
-        Create a theme extension. The first argument can be a
-        [`style-mod`](https://github.com/marijnh/style-mod#documentation)
-        style spec providing the styles for the theme. These will be
-        prefixed with a generated class for the style.
-        
-        Because the selectors will be prefixed with a scope class, rule
-        that directly match the editor's [wrapper
-        element](https://codemirror.net/6/docs/ref/#view.EditorView.dom)â€”to which the scope class will be
-        addedâ€”need to be explicitly differentiated by adding an `&` to
-        the selector for that elementâ€”for example
-        `&.cm-focused`.
-        
-        When `dark` is set to true, the theme will be marked as dark,
-        which will cause the `&dark` rules from [base
-        themes](https://codemirror.net/6/docs/ref/#view.EditorView^baseTheme) to be used (as opposed to
-        `&light` when a light theme is active).
-        */
+          Create a theme extension. The first argument can be a
+          [`style-mod`](https://github.com/marijnh/style-mod#documentation)
+          style spec providing the styles for the theme. These will be
+          prefixed with a generated class for the style.
+          
+          Because the selectors will be prefixed with a scope class, rule
+          that directly match the editor's [wrapper
+          element](https://codemirror.net/6/docs/ref/#view.EditorView.dom)â€”to which the scope class will be
+          addedâ€”need to be explicitly differentiated by adding an `&` to
+          the selector for that elementâ€”for example
+          `&.cm-focused`.
+          
+          When `dark` is set to true, the theme will be marked as dark,
+          which will cause the `&dark` rules from [base
+          themes](https://codemirror.net/6/docs/ref/#view.EditorView^baseTheme) to be used (as opposed to
+          `&light` when a light theme is active).
+          */
     static theme(spec, options) {
       let prefix = StyleModule.newName();
       let result = [theme.of(prefix), styleModule.of(buildTheme(`.${prefix}`, spec))];
@@ -15314,124 +15314,124 @@
       return result;
     }
     /**
-        Create an extension that adds styles to the base theme. Like
-        with [`theme`](https://codemirror.net/6/docs/ref/#view.EditorView^theme), use `&` to indicate the
-        place of the editor wrapper element when directly targeting
-        that. You can also use `&dark` or `&light` instead to only
-        target editors with a dark or light theme.
-        */
+          Create an extension that adds styles to the base theme. Like
+          with [`theme`](https://codemirror.net/6/docs/ref/#view.EditorView^theme), use `&` to indicate the
+          place of the editor wrapper element when directly targeting
+          that. You can also use `&dark` or `&light` instead to only
+          target editors with a dark or light theme.
+          */
     static baseTheme(spec) {
       return Prec.lowest(styleModule.of(buildTheme('.' + baseThemeID, spec, lightDarkIDs)));
     }
   }
   /**
-    Effect that can be [added](https://codemirror.net/6/docs/ref/#state.TransactionSpec.effects) to a
-    transaction to make it scroll the given range into view.
-
-    *Deprecated*. Use [`scrollIntoView`](https://codemirror.net/6/docs/ref/#view.EditorView^scrollIntoView) instead.
-    */
+      Effect that can be [added](https://codemirror.net/6/docs/ref/#state.TransactionSpec.effects) to a
+      transaction to make it scroll the given range into view.
+  
+      *Deprecated*. Use [`scrollIntoView`](https://codemirror.net/6/docs/ref/#view.EditorView^scrollIntoView) instead.
+      */
   EditorView.scrollTo = scrollTo;
   /**
-    Effect that makes the editor scroll the given range to the
-    center of the visible view.
-
-    *Deprecated*. Use [`scrollIntoView`](https://codemirror.net/6/docs/ref/#view.EditorView^scrollIntoView) instead.
-    */
+      Effect that makes the editor scroll the given range to the
+      center of the visible view.
+  
+      *Deprecated*. Use [`scrollIntoView`](https://codemirror.net/6/docs/ref/#view.EditorView^scrollIntoView) instead.
+      */
   EditorView.centerOn = centerOn;
   /**
-    Facet to add a [style
-    module](https://github.com/marijnh/style-mod#documentation) to
-    an editor view. The view will ensure that the module is
-    mounted in its [document
-    root](https://codemirror.net/6/docs/ref/#view.EditorView.constructor^config.root).
-    */
+      Facet to add a [style
+      module](https://github.com/marijnh/style-mod#documentation) to
+      an editor view. The view will ensure that the module is
+      mounted in its [document
+      root](https://codemirror.net/6/docs/ref/#view.EditorView.constructor^config.root).
+      */
   EditorView.styleModule = styleModule;
   /**
-    An input handler can override the way changes to the editable
-    DOM content are handled. Handlers are passed the document
-    positions between which the change was found, and the new
-    content. When one returns true, no further input handlers are
-    called and the default behavior is prevented.
-    */
+      An input handler can override the way changes to the editable
+      DOM content are handled. Handlers are passed the document
+      positions between which the change was found, and the new
+      content. When one returns true, no further input handlers are
+      called and the default behavior is prevented.
+      */
   EditorView.inputHandler = inputHandler$1;
   /**
-    Allows you to provide a function that should be called when the
-    library catches an exception from an extension (mostly from view
-    plugins, but may be used by other extensions to route exceptions
-    from user-code-provided callbacks). This is mostly useful for
-    debugging and logging. See [`logException`](https://codemirror.net/6/docs/ref/#view.logException).
-    */
+      Allows you to provide a function that should be called when the
+      library catches an exception from an extension (mostly from view
+      plugins, but may be used by other extensions to route exceptions
+      from user-code-provided callbacks). This is mostly useful for
+      debugging and logging. See [`logException`](https://codemirror.net/6/docs/ref/#view.logException).
+      */
   EditorView.exceptionSink = exceptionSink;
   /**
-    A facet that can be used to register a function to be called
-    every time the view updates.
-    */
+      A facet that can be used to register a function to be called
+      every time the view updates.
+      */
   EditorView.updateListener = updateListener;
   /**
-    Facet that controls whether the editor content DOM is editable.
-    When its highest-precedence value is `false`, the element will
-    not longer have its `contenteditable` attribute set. (Note that
-    this doesn't affect API calls that change the editor content,
-    even when those are bound to keys or buttons. See the
-    [`readOnly`](https://codemirror.net/6/docs/ref/#state.EditorState.readOnly) facet for that.)
-    */
+      Facet that controls whether the editor content DOM is editable.
+      When its highest-precedence value is `false`, the element will
+      not longer have its `contenteditable` attribute set. (Note that
+      this doesn't affect API calls that change the editor content,
+      even when those are bound to keys or buttons. See the
+      [`readOnly`](https://codemirror.net/6/docs/ref/#state.EditorState.readOnly) facet for that.)
+      */
   EditorView.editable = editable;
   /**
-    Allows you to influence the way mouse selection happens. The
-    functions in this facet will be called for a `mousedown` event
-    on the editor, and can return an object that overrides the way a
-    selection is computed from that mouse click or drag.
-    */
+      Allows you to influence the way mouse selection happens. The
+      functions in this facet will be called for a `mousedown` event
+      on the editor, and can return an object that overrides the way a
+      selection is computed from that mouse click or drag.
+      */
   EditorView.mouseSelectionStyle = mouseSelectionStyle;
   /**
-    Facet used to configure whether a given selection drag event
-    should move or copy the selection. The given predicate will be
-    called with the `mousedown` event, and can return `true` when
-    the drag should move the content.
-    */
+      Facet used to configure whether a given selection drag event
+      should move or copy the selection. The given predicate will be
+      called with the `mousedown` event, and can return `true` when
+      the drag should move the content.
+      */
   EditorView.dragMovesSelection = dragMovesSelection$1;
   /**
-    Facet used to configure whether a given selecting click adds
-    a new range to the existing selection or replaces it entirely.
-    */
+      Facet used to configure whether a given selecting click adds
+      a new range to the existing selection or replaces it entirely.
+      */
   EditorView.clickAddsSelectionRange = clickAddsSelectionRange;
   /**
-    A facet that determines which [decorations](https://codemirror.net/6/docs/ref/#view.Decoration)
-    are shown in the view. See also [view
-    plugins](https://codemirror.net/6/docs/ref/#view.EditorView^decorations), which have a separate
-    mechanism for providing decorations.
-    */
+      A facet that determines which [decorations](https://codemirror.net/6/docs/ref/#view.Decoration)
+      are shown in the view. See also [view
+      plugins](https://codemirror.net/6/docs/ref/#view.EditorView^decorations), which have a separate
+      mechanism for providing decorations.
+      */
   EditorView.decorations = decorations;
   /**
-    This facet records whether a dark theme is active. The extension
-    returned by [`theme`](https://codemirror.net/6/docs/ref/#view.EditorView^theme) automatically
-    includes an instance of this when the `dark` option is set to
-    true.
-    */
+      This facet records whether a dark theme is active. The extension
+      returned by [`theme`](https://codemirror.net/6/docs/ref/#view.EditorView^theme) automatically
+      includes an instance of this when the `dark` option is set to
+      true.
+      */
   EditorView.darkTheme = darkTheme;
   /**
-    Facet that provides additional DOM attributes for the editor's
-    editable DOM element.
-    */
+      Facet that provides additional DOM attributes for the editor's
+      editable DOM element.
+      */
   EditorView.contentAttributes = contentAttributes;
   /**
-    Facet that provides DOM attributes for the editor's outer
-    element.
-    */
+      Facet that provides DOM attributes for the editor's outer
+      element.
+      */
   EditorView.editorAttributes = editorAttributes;
   /**
-    An extension that enables line wrapping in the editor (by
-    setting CSS `white-space` to `pre-wrap` in the content).
-    */
+      An extension that enables line wrapping in the editor (by
+      setting CSS `white-space` to `pre-wrap` in the content).
+      */
   EditorView.lineWrapping = /*@__PURE__*/ EditorView.contentAttributes.of({class: 'cm-lineWrapping'});
   /**
-    State effect used to include screen reader announcements in a
-    transaction. These will be added to the DOM in a visually hidden
-    element with `aria-live="polite"` set, and should be used to
-    describe effects that are visually obvious but may not be
-    noticed by screen reader users (such as moving to the next
-    search match).
-    */
+      State effect used to include screen reader announcements in a
+      transaction. These will be added to the DOM in a visually hidden
+      element with `aria-live="polite"` set, and should be used to
+      describe effects that are visually obvious but may not be
+      noticed by screen reader users (such as moving to the next
+      search match).
+      */
   EditorView.announce = /*@__PURE__*/ StateEffect.define();
   // Maximum line length for which we compute accurate bidi info
   const MaxBidiLine = 4096;
@@ -15506,13 +15506,13 @@
     },
   });
   /**
-    Facet used for registering keymaps.
-
-    You can add multiple keymaps to an editor. Their priorities
-    determine their precedence (the ones specified early or with high
-    priority get checked first). When a handler has returned `true`
-    for a given key, no further handlers are called.
-    */
+      Facet used for registering keymaps.
+  
+      You can add multiple keymaps to an editor. Their priorities
+      determine their precedence (the ones specified early or with high
+      priority get checked first). When a handler has returned `true`
+      for a given key, no further handlers are called.
+      */
   const keymap = /*@__PURE__*/ Facet.define({enables: handleKeyEvents});
   const Keymaps = /*@__PURE__*/ new WeakMap();
   // This is hidden behind an indirection, rather than directly computed
@@ -15524,10 +15524,10 @@
     return map;
   }
   /**
-    Run the key handlers registered for a given scope. The event
-    object should be `"keydown"` event. Returns true if any of the
-    handlers handled it.
-    */
+      Run the key handlers registered for a given scope. The event
+      object should be `"keydown"` event. Returns true if any of the
+      handlers handled it.
+      */
   function runScopeHandlers(view, event, scope) {
     return runHandlers(getKeymap(view.state), event, view, scope);
   }
@@ -15629,23 +15629,23 @@
     },
   });
   /**
-    Returns an extension that hides the browser's native selection and
-    cursor, replacing the selection with a background behind the text
-    (with the `cm-selectionBackground` class), and the
-    cursors with elements overlaid over the code (using
-    `cm-cursor-primary` and `cm-cursor-secondary`).
-
-    This allows the editor to display secondary selection ranges, and
-    tends to produce a type of selection more in line with that users
-    expect in a text editor (the native selection styling will often
-    leave gaps between lines and won't fill the horizontal space after
-    a line when the selection continues past it).
-
-    It does have a performance cost, in that it requires an extra DOM
-    layout cycle for many updates (the selection is drawn based on DOM
-    layout information that's only available after laying out the
-    content).
-    */
+      Returns an extension that hides the browser's native selection and
+      cursor, replacing the selection with a background behind the text
+      (with the `cm-selectionBackground` class), and the
+      cursors with elements overlaid over the code (using
+      `cm-cursor-primary` and `cm-cursor-secondary`).
+  
+      This allows the editor to display secondary selection ranges, and
+      tends to produce a type of selection more in line with that users
+      expect in a text editor (the native selection styling will often
+      leave gaps between lines and won't fill the horizontal space after
+      a line when the selection continues past it).
+  
+      It does have a performance cost, in that it requires an extra DOM
+      layout cycle for many updates (the selection is drawn based on DOM
+      layout information that's only available after laying out the
+      content).
+      */
   function drawSelection(config = {}) {
     return [selectionConfig.of(config), drawSelectionPlugin, hideNativeSelection];
   }
@@ -15970,9 +15970,9 @@
     }
   );
   /**
-    Draws a cursor at the current drop position when something is
-    dragged over the editor.
-    */
+      Draws a cursor at the current drop position when something is
+      dragged over the editor.
+      */
   function dropCursor() {
     return [dropCursorPos, drawDropCursor];
   }
@@ -15997,15 +15997,15 @@
     return result;
   }
   /**
-    Helper class used to make it easier to maintain decorations on
-    visible code that matches a given regular expression. To be used
-    in a [view plugin](https://codemirror.net/6/docs/ref/#view.ViewPlugin). Instances of this object
-    represent a matching configuration.
-    */
+      Helper class used to make it easier to maintain decorations on
+      visible code that matches a given regular expression. To be used
+      in a [view plugin](https://codemirror.net/6/docs/ref/#view.ViewPlugin). Instances of this object
+      represent a matching configuration.
+      */
   class MatchDecorator {
     /**
-        Create a decorator.
-        */
+          Create a decorator.
+          */
     constructor(config) {
       let {regexp, decoration, boundary, maxLength = 1000} = config;
       if (!regexp.global)
@@ -16016,10 +16016,10 @@
       this.maxLength = maxLength;
     }
     /**
-        Compute the full set of decorations for matches in the given
-        view's viewport. You'll want to call this when initializing your
-        plugin.
-        */
+          Compute the full set of decorations for matches in the given
+          view's viewport. You'll want to call this when initializing your
+          plugin.
+          */
     createDeco(view) {
       let build = new RangeSetBuilder();
       for (let {from, to} of matchRanges(view, this.maxLength))
@@ -16027,10 +16027,10 @@
       return build.finish();
     }
     /**
-        Update a set of decorations for a view update. `deco` _must_ be
-        the set of decorations produced by _this_ `MatchDecorator` for
-        the view state before the update.
-        */
+          Update a set of decorations for a view update. `deco` _must_ be
+          the set of decorations produced by _this_ `MatchDecorator` for
+          the view state before the update.
+          */
     updateDeco(update, deco) {
       let changeFrom = 1e9,
         changeTo = -1;
@@ -16143,13 +16143,13 @@
     },
   });
   /**
-    Returns an extension that installs highlighting of special
-    characters.
-    */
+      Returns an extension that installs highlighting of special
+      characters.
+      */
   function highlightSpecialChars(
     /**
-    Configuration options.
-    */
+      Configuration options.
+      */
     config = {}
   ) {
     return [specialCharConfig.of(config), specialCharPlugin()];
@@ -16261,9 +16261,9 @@
   }
 
   /**
-    Mark lines that have a cursor on them with the `"cm-activeLine"`
-    DOM class.
-    */
+      Mark lines that have a cursor on them with the `"cm-activeLine"`
+      DOM class.
+      */
   function highlightActiveLine() {
     return activeLineHighlighter;
   }
@@ -16297,20 +16297,20 @@
 
   const fromHistory = /*@__PURE__*/ Annotation.define();
   /**
-    Transaction annotation that will prevent that transaction from
-    being combined with other transactions in the undo history. Given
-    `"before"`, it'll prevent merging with previous transactions. With
-    `"after"`, subsequent transactions won't be combined with this
-    one. With `"full"`, the transaction is isolated on both sides.
-    */
+      Transaction annotation that will prevent that transaction from
+      being combined with other transactions in the undo history. Given
+      `"before"`, it'll prevent merging with previous transactions. With
+      `"after"`, subsequent transactions won't be combined with this
+      one. With `"full"`, the transaction is isolated on both sides.
+      */
   const isolateHistory = /*@__PURE__*/ Annotation.define();
   /**
-    This facet provides a way to register functions that, given a
-    transaction, provide a set of effects that the history should
-    store when inverting the transaction. This can be used to
-    integrate some kinds of effects in the history, so that they can
-    be undone (and redone again).
-    */
+      This facet provides a way to register functions that, given a
+      transaction, provide a set of effects that the history should
+      store when inverting the transaction. This can be used to
+      integrate some kinds of effects in the history, so that they can
+      be undone (and redone again).
+      */
   const invertedEffects = /*@__PURE__*/ Facet.define();
   const historyConfig = /*@__PURE__*/ Facet.define({
     combine(configs) {
@@ -16368,8 +16368,8 @@
     },
   });
   /**
-    Create a history extension with the given configuration.
-    */
+      Create a history extension with the given configuration.
+      */
   function history(config = {}) {
     return [
       historyField_,
@@ -16396,22 +16396,22 @@
     };
   }
   /**
-    Undo a single group of history events. Returns false if no group
-    was available.
-    */
+      Undo a single group of history events. Returns false if no group
+      was available.
+      */
   const undo = /*@__PURE__*/ cmd(0 /* Done */, false);
   /**
-    Redo a group of history events. Returns false if no group was
-    available.
-    */
+      Redo a group of history events. Returns false if no group was
+      available.
+      */
   const redo = /*@__PURE__*/ cmd(1 /* Undone */, false);
   /**
-    Undo a selection change.
-    */
+      Undo a selection change.
+      */
   const undoSelection = /*@__PURE__*/ cmd(0 /* Done */, true);
   /**
-    Redo a selection change.
-    */
+      Redo a selection change.
+      */
   const redoSelection = /*@__PURE__*/ cmd(1 /* Undone */, true);
   // History events store groups of changes or effects that need to be
   // undone/redone together.
@@ -16661,13 +16661,13 @@
   }
   HistoryState.empty = /*@__PURE__*/ new HistoryState(none$1, none$1);
   /**
-    Default key bindings for the undo history.
-
-    - Mod-z: [`undo`](https://codemirror.net/6/docs/ref/#history.undo).
-    - Mod-y (Mod-Shift-z on macOS): [`redo`](https://codemirror.net/6/docs/ref/#history.redo).
-    - Mod-u: [`undoSelection`](https://codemirror.net/6/docs/ref/#history.undoSelection).
-    - Alt-u (Mod-Shift-u on macOS): [`redoSelection`](https://codemirror.net/6/docs/ref/#history.redoSelection).
-    */
+      Default key bindings for the undo history.
+  
+      - Mod-z: [`undo`](https://codemirror.net/6/docs/ref/#history.undo).
+      - Mod-y (Mod-Shift-z on macOS): [`redo`](https://codemirror.net/6/docs/ref/#history.redo).
+      - Mod-u: [`undoSelection`](https://codemirror.net/6/docs/ref/#history.undoSelection).
+      - Alt-u (Mod-Shift-u on macOS): [`redoSelection`](https://codemirror.net/6/docs/ref/#history.redoSelection).
+      */
   const historyKeymap = [
     {key: 'Mod-z', run: undo, preventDefault: true},
     {key: 'Mod-y', mac: 'Mod-Shift-z', run: redo, preventDefault: true},
@@ -18087,49 +18087,49 @@
 
   var _a;
   /**
-    Node prop stored in a grammar's top syntax node to provide the
-    facet that stores language data for that language.
-    */
+      Node prop stored in a grammar's top syntax node to provide the
+      facet that stores language data for that language.
+      */
   const languageDataProp = /*@__PURE__*/ new NodeProp();
   /**
-    Helper function to define a facet (to be added to the top syntax
-    node(s) for a language via
-    [`languageDataProp`](https://codemirror.net/6/docs/ref/#language.languageDataProp)), that will be
-    used to associate language data with the language. You
-    probably only need this when subclassing
-    [`Language`](https://codemirror.net/6/docs/ref/#language.Language).
-    */
+      Helper function to define a facet (to be added to the top syntax
+      node(s) for a language via
+      [`languageDataProp`](https://codemirror.net/6/docs/ref/#language.languageDataProp)), that will be
+      used to associate language data with the language. You
+      probably only need this when subclassing
+      [`Language`](https://codemirror.net/6/docs/ref/#language.Language).
+      */
   function defineLanguageFacet(baseData) {
     return Facet.define({
       combine: baseData ? values => values.concat(baseData) : undefined,
     });
   }
   /**
-    A language object manages parsing and per-language
-    [metadata](https://codemirror.net/6/docs/ref/#state.EditorState.languageDataAt). Parse data is
-    managed as a [Lezer](https://lezer.codemirror.net) tree. You'll
-    want to subclass this class for custom parsers, or use the
-    [`LRLanguage`](https://codemirror.net/6/docs/ref/#language.LRLanguage) or
-    [`StreamLanguage`](https://codemirror.net/6/docs/ref/#stream-parser.StreamLanguage) abstractions for
-    [Lezer](https://lezer.codemirror.net/) or stream parsers.
-    */
+      A language object manages parsing and per-language
+      [metadata](https://codemirror.net/6/docs/ref/#state.EditorState.languageDataAt). Parse data is
+      managed as a [Lezer](https://lezer.codemirror.net) tree. You'll
+      want to subclass this class for custom parsers, or use the
+      [`LRLanguage`](https://codemirror.net/6/docs/ref/#language.LRLanguage) or
+      [`StreamLanguage`](https://codemirror.net/6/docs/ref/#stream-parser.StreamLanguage) abstractions for
+      [Lezer](https://lezer.codemirror.net/) or stream parsers.
+      */
   class Language {
     /**
-        Construct a language object. You usually don't need to invoke
-        this directly. But when you do, make sure you use
-        [`defineLanguageFacet`](https://codemirror.net/6/docs/ref/#language.defineLanguageFacet) to create
-        the first argument.
-        */
+          Construct a language object. You usually don't need to invoke
+          this directly. But when you do, make sure you use
+          [`defineLanguageFacet`](https://codemirror.net/6/docs/ref/#language.defineLanguageFacet) to create
+          the first argument.
+          */
     constructor(
       /**
-        The [language data](https://codemirror.net/6/docs/ref/#state.EditorState.languageDataAt) data
-        facet used for this language.
-        */
+          The [language data](https://codemirror.net/6/docs/ref/#state.EditorState.languageDataAt) data
+          facet used for this language.
+          */
       data,
       parser,
       /**
-        The node type of the top node of trees produced by this parser.
-        */
+          The node type of the top node of trees produced by this parser.
+          */
       topNode,
       extraExtensions = []
     ) {
@@ -18151,16 +18151,16 @@
       ].concat(extraExtensions);
     }
     /**
-        Query whether this language is active at the given position.
-        */
+          Query whether this language is active at the given position.
+          */
     isActiveAt(state, pos, side = -1) {
       return languageDataFacetAt(state, pos, side) == this.data;
     }
     /**
-        Find the document regions that were parsed using this language.
-        The returned regions will _include_ any nested languages rooted
-        in this language, when those exist.
-        */
+          Find the document regions that were parsed using this language.
+          The returned regions will _include_ any nested languages rooted
+          in this language, when those exist.
+          */
     findRegions(state) {
       let lang = state.facet(language);
       if ((lang === null || lang === void 0 ? void 0 : lang.data) == this.data)
@@ -18193,16 +18193,16 @@
       return result;
     }
     /**
-        Indicates whether this language allows nested languages. The
-        default implementation returns true.
-        */
+          Indicates whether this language allows nested languages. The
+          default implementation returns true.
+          */
     get allowsNesting() {
       return true;
     }
   }
   /**
-    @internal
-    */
+      @internal
+      */
   Language.setState = /*@__PURE__*/ StateEffect.define();
   function languageDataFacetAt(state, pos, side) {
     let topLang = state.facet(language);
@@ -18215,18 +18215,18 @@
     return facet;
   }
   /**
-    A subclass of [`Language`](https://codemirror.net/6/docs/ref/#language.Language) for use with Lezer
-    [LR parsers](https://lezer.codemirror.net/docs/ref#lr.LRParser)
-    parsers.
-    */
+      A subclass of [`Language`](https://codemirror.net/6/docs/ref/#language.Language) for use with Lezer
+      [LR parsers](https://lezer.codemirror.net/docs/ref#lr.LRParser)
+      parsers.
+      */
   class LRLanguage extends Language {
     constructor(data, parser) {
       super(data, parser, parser.topNode);
       this.parser = parser;
     }
     /**
-        Define a language from a parser.
-        */
+          Define a language from a parser.
+          */
     static define(spec) {
       let data = defineLanguageFacet(spec.languageData);
       return new LRLanguage(
@@ -18237,9 +18237,9 @@
       );
     }
     /**
-        Create a new instance of this language with a reconfigured
-        version of its parser.
-        */
+          Create a new instance of this language with a reconfigured
+          version of its parser.
+          */
     configure(options) {
       return new LRLanguage(this.data, this.parser.configure(options));
     }
@@ -18248,10 +18248,10 @@
     } // FIXME
   }
   /**
-    Get the syntax tree for a state, which is the current (possibly
-    incomplete) parse tree of active [language](https://codemirror.net/6/docs/ref/#language.Language),
-    or the empty tree if there is no language available.
-    */
+      Get the syntax tree for a state, which is the current (possibly
+      incomplete) parse tree of active [language](https://codemirror.net/6/docs/ref/#language.Language),
+      or the empty tree if there is no language available.
+      */
   function syntaxTree(state) {
     let field = state.field(Language.state, false);
     return field ? field.tree : Tree.empty;
@@ -18285,45 +18285,45 @@
   }
   let currentContext = null;
   /**
-    A parse context provided to parsers working on the editor content.
-    */
+      A parse context provided to parsers working on the editor content.
+      */
   class ParseContext {
     /**
-        @internal
-        */
+          @internal
+          */
     constructor(
       parser,
       /**
-        The current editor state.
-        */
+          The current editor state.
+          */
       state,
       /**
-        Tree fragments that can be reused by incremental re-parses.
-        */
+          Tree fragments that can be reused by incremental re-parses.
+          */
       fragments = [],
       /**
-        @internal
-        */
+          @internal
+          */
       tree,
       treeLen,
       /**
-        The current editor viewport (or some overapproximation
-        thereof). Intended to be used for opportunistically avoiding
-        work (in which case
-        [`skipUntilInView`](https://codemirror.net/6/docs/ref/#language.ParseContext.skipUntilInView)
-        should be called to make sure the parser is restarted when the
-        skipped region becomes visible).
-        */
+          The current editor viewport (or some overapproximation
+          thereof). Intended to be used for opportunistically avoiding
+          work (in which case
+          [`skipUntilInView`](https://codemirror.net/6/docs/ref/#language.ParseContext.skipUntilInView)
+          should be called to make sure the parser is restarted when the
+          skipped region becomes visible).
+          */
       viewport,
       /**
-        @internal
-        */
+          @internal
+          */
       skipped,
       /**
-        This is where skipping parsers can register a promise that,
-        when resolved, will schedule a new parse. It is cleared when
-        the parse worker picks up the promise. @internal
-        */
+          This is where skipping parsers can register a promise that,
+          when resolved, will schedule a new parse. It is cleared when
+          the parse worker picks up the promise. @internal
+          */
       scheduleOn
     ) {
       this.parser = parser;
@@ -18336,16 +18336,16 @@
       this.scheduleOn = scheduleOn;
       this.parse = null;
       /**
-            @internal
-            */
+              @internal
+              */
       this.tempSkipped = [];
     }
     startParse() {
       return this.parser.startParse(new DocInput(this.state.doc), this.fragments);
     }
     /**
-        @internal
-        */
+          @internal
+          */
     work(until, upto) {
       if (upto != null && upto >= this.state.doc.length) upto = undefined;
       if (this.tree != Tree.empty && this.isDone(upto !== null && upto !== void 0 ? upto : this.state.doc.length)) {
@@ -18383,8 +18383,8 @@
       });
     }
     /**
-        @internal
-        */
+          @internal
+          */
     takeTree() {
       let pos, tree;
       if (this.parse && (pos = this.parse.parsedPos) >= this.treeLen) {
@@ -18412,8 +18412,8 @@
       return fragments;
     }
     /**
-        @internal
-        */
+          @internal
+          */
     changes(changes, newState) {
       let {fragments, tree, treeLen, viewport, skipped} = this;
       this.takeTree();
@@ -18436,8 +18436,8 @@
       return new ParseContext(this.parser, newState, fragments, tree, treeLen, viewport, skipped, this.scheduleOn);
     }
     /**
-        @internal
-        */
+          @internal
+          */
     updateViewport(viewport) {
       if (this.viewport.from == viewport.from && this.viewport.to == viewport.to) return false;
       this.viewport = viewport;
@@ -18454,8 +18454,8 @@
       return true;
     }
     /**
-        @internal
-        */
+          @internal
+          */
     reset() {
       if (this.parse) {
         this.takeTree();
@@ -18463,22 +18463,22 @@
       }
     }
     /**
-        Notify the parse scheduler that the given region was skipped
-        because it wasn't in view, and the parse should be restarted
-        when it comes into view.
-        */
+          Notify the parse scheduler that the given region was skipped
+          because it wasn't in view, and the parse should be restarted
+          when it comes into view.
+          */
     skipUntilInView(from, to) {
       this.skipped.push({from, to});
     }
     /**
-        Returns a parser intended to be used as placeholder when
-        asynchronously loading a nested parser. It'll skip its input and
-        mark it as not-really-parsed, so that the next update will parse
-        it again.
-        
-        When `until` is given, a reparse will be scheduled when that
-        promise resolves.
-        */
+          Returns a parser intended to be used as placeholder when
+          asynchronously loading a nested parser. It'll skip its input and
+          mark it as not-really-parsed, so that the next update will parse
+          it again.
+          
+          When `until` is given, a reparse will be scheduled when that
+          promise resolves.
+          */
     static getSkippingParser(until) {
       return new (class extends Parser {
         createParse(input, fragments, ranges) {
@@ -18503,17 +18503,17 @@
       })();
     }
     /**
-        @internal
-        */
+          @internal
+          */
     isDone(upto) {
       upto = Math.min(upto, this.state.doc.length);
       let frags = this.fragments;
       return this.treeLen >= upto && frags.length && frags[0].from == 0 && frags[0].to >= upto;
     }
     /**
-        Get the context for the current parse, or `null` if no editor
-        parse is in progress.
-        */
+          Get the context for the current parse, or `null` if no editor
+          parse is in progress.
+          */
     static get() {
       return currentContext;
     }
@@ -18673,8 +18673,8 @@
     }
   );
   /**
-    The facet used to associate a language with an editor state.
-    */
+      The facet used to associate a language with an editor state.
+      */
   const language = /*@__PURE__*/ Facet.define({
     combine(languages) {
       return languages.length ? languages[0] : null;
@@ -18682,27 +18682,27 @@
     enables: [Language.state, parseWorker],
   });
   /**
-    This class bundles a [language object](https://codemirror.net/6/docs/ref/#language.Language) with an
-    optional set of supporting extensions. Language packages are
-    encouraged to export a function that optionally takes a
-    configuration object and returns a `LanguageSupport` instance, as
-    the main way for client code to use the package.
-    */
+      This class bundles a [language object](https://codemirror.net/6/docs/ref/#language.Language) with an
+      optional set of supporting extensions. Language packages are
+      encouraged to export a function that optionally takes a
+      configuration object and returns a `LanguageSupport` instance, as
+      the main way for client code to use the package.
+      */
   class LanguageSupport {
     /**
-        Create a support object.
-        */
+          Create a support object.
+          */
     constructor(
       /**
-        The language object.
-        */
+          The language object.
+          */
       language,
       /**
-        An optional set of supporting extensions. When nesting a
-        language in another language, the outer language is encouraged
-        to include the supporting extensions for its inner languages
-        in its own set of support extensions.
-        */
+          An optional set of supporting extensions. When nesting a
+          language in another language, the outer language is encouraged
+          to include the supporting extensions for its inner languages
+          in its own set of support extensions.
+          */
       support = []
     ) {
       this.language = language;
@@ -18712,16 +18712,16 @@
   }
 
   /**
-    Facet that defines a way to provide a function that computes the
-    appropriate indentation depth at the start of a given line, or
-    `null` to indicate no appropriate indentation could be determined.
-    */
+      Facet that defines a way to provide a function that computes the
+      appropriate indentation depth at the start of a given line, or
+      `null` to indicate no appropriate indentation could be determined.
+      */
   const indentService = /*@__PURE__*/ Facet.define();
   /**
-    Facet for overriding the unit by which indentation happens.
-    Should be a string consisting either entirely of spaces or
-    entirely of tabs. When not set, this defaults to 2 spaces.
-    */
+      Facet for overriding the unit by which indentation happens.
+      Should be a string consisting either entirely of spaces or
+      entirely of tabs. When not set, this defaults to 2 spaces.
+      */
   const indentUnit = /*@__PURE__*/ Facet.define({
     combine: values => {
       if (!values.length) return '  ';
@@ -18730,21 +18730,21 @@
     },
   });
   /**
-    Return the _column width_ of an indent unit in the state.
-    Determined by the [`indentUnit`](https://codemirror.net/6/docs/ref/#language.indentUnit)
-    facet, and [`tabSize`](https://codemirror.net/6/docs/ref/#state.EditorState^tabSize) when that
-    contains tabs.
-    */
+      Return the _column width_ of an indent unit in the state.
+      Determined by the [`indentUnit`](https://codemirror.net/6/docs/ref/#language.indentUnit)
+      facet, and [`tabSize`](https://codemirror.net/6/docs/ref/#state.EditorState^tabSize) when that
+      contains tabs.
+      */
   function getIndentUnit(state) {
     let unit = state.facet(indentUnit);
     return unit.charCodeAt(0) == 9 ? state.tabSize * unit.length : unit.length;
   }
   /**
-    Create an indentation string that covers columns 0 to `cols`.
-    Will use tabs for as much of the columns as possible when the
-    [`indentUnit`](https://codemirror.net/6/docs/ref/#language.indentUnit) facet contains
-    tabs.
-    */
+      Create an indentation string that covers columns 0 to `cols`.
+      Will use tabs for as much of the columns as possible when the
+      [`indentUnit`](https://codemirror.net/6/docs/ref/#language.indentUnit) facet contains
+      tabs.
+      */
   function indentString(state, cols) {
     let result = '',
       ts = state.tabSize;
@@ -18757,13 +18757,13 @@
     return result;
   }
   /**
-    Get the indentation at the given position. Will first consult any
-    [indent services](https://codemirror.net/6/docs/ref/#language.indentService) that are registered,
-    and if none of those return an indentation, this will check the
-    syntax tree for the [indent node prop](https://codemirror.net/6/docs/ref/#language.indentNodeProp)
-    and use that if found. Returns a number when an indentation could
-    be determined, and null otherwise.
-    */
+      Get the indentation at the given position. Will first consult any
+      [indent services](https://codemirror.net/6/docs/ref/#language.indentService) that are registered,
+      and if none of those return an indentation, this will check the
+      syntax tree for the [indent node prop](https://codemirror.net/6/docs/ref/#language.indentNodeProp)
+      and use that if found. Returns a number when an indentation could
+      be determined, and null otherwise.
+      */
   function getIndentation(context, pos) {
     if (context instanceof EditorState) context = new IndentContext(context);
     for (let service of context.state.facet(indentService)) {
@@ -18774,23 +18774,23 @@
     return tree ? syntaxIndentation(context, tree, pos) : null;
   }
   /**
-    Indentation contexts are used when calling [indentation
-    services](https://codemirror.net/6/docs/ref/#language.indentService). They provide helper utilities
-    useful in indentation logic, and can selectively override the
-    indentation reported for some lines.
-    */
+      Indentation contexts are used when calling [indentation
+      services](https://codemirror.net/6/docs/ref/#language.indentService). They provide helper utilities
+      useful in indentation logic, and can selectively override the
+      indentation reported for some lines.
+      */
   class IndentContext {
     /**
-        Create an indent context.
-        */
+          Create an indent context.
+          */
     constructor(
       /**
-        The editor state.
-        */
+          The editor state.
+          */
       state,
       /**
-        @internal
-        */
+          @internal
+          */
       options = {}
     ) {
       this.state = state;
@@ -18798,13 +18798,13 @@
       this.unit = getIndentUnit(state);
     }
     /**
-        Get a description of the line at the given position, taking
-        [simulated line
-        breaks](https://codemirror.net/6/docs/ref/#language.IndentContext.constructor^options.simulateBreak)
-        into account. If there is such a break at `pos`, the `bias`
-        argument determines whether the part of the line line before or
-        after the break is used.
-        */
+          Get a description of the line at the given position, taking
+          [simulated line
+          breaks](https://codemirror.net/6/docs/ref/#language.IndentContext.constructor^options.simulateBreak)
+          into account. If there is such a break at `pos`, the `bias`
+          argument determines whether the part of the line line before or
+          after the break is used.
+          */
     lineAt(pos, bias = 1) {
       let line = this.state.doc.lineAt(pos);
       let {simulateBreak, simulateDoubleBreak} = this.options;
@@ -18817,17 +18817,17 @@
       return line;
     }
     /**
-        Get the text directly after `pos`, either the entire line
-        or the next 100 characters, whichever is shorter.
-        */
+          Get the text directly after `pos`, either the entire line
+          or the next 100 characters, whichever is shorter.
+          */
     textAfterPos(pos, bias = 1) {
       if (this.options.simulateDoubleBreak && pos == this.options.simulateBreak) return '';
       let {text, from} = this.lineAt(pos, bias);
       return text.slice(pos - from, Math.min(text.length, pos + 100 - from));
     }
     /**
-        Find the column for the given position.
-        */
+          Find the column for the given position.
+          */
     column(pos, bias = 1) {
       let {text, from} = this.lineAt(pos, bias);
       let result = this.countColumn(text, pos - from);
@@ -18836,15 +18836,15 @@
       return result;
     }
     /**
-        Find the column position (taking tabs into account) of the given
-        position in the given string.
-        */
+          Find the column position (taking tabs into account) of the given
+          position in the given string.
+          */
     countColumn(line, pos = line.length) {
       return countColumn(line, this.state.tabSize, pos);
     }
     /**
-        Find the indentation column of the line at the given point.
-        */
+          Find the indentation column of the line at the given point.
+          */
     lineIndent(pos, bias = 1) {
       let {text, from} = this.lineAt(pos, bias);
       let override = this.options.overrideIndentation;
@@ -18855,20 +18855,20 @@
       return this.countColumn(text, text.search(/\S|$/));
     }
     /**
-        Returns the [simulated line
-        break](https://codemirror.net/6/docs/ref/#language.IndentContext.constructor^options.simulateBreak)
-        for this context, if any.
-        */
+          Returns the [simulated line
+          break](https://codemirror.net/6/docs/ref/#language.IndentContext.constructor^options.simulateBreak)
+          for this context, if any.
+          */
     get simulatedBreak() {
       return this.options.simulateBreak || null;
     }
   }
   /**
-    A syntax tree node prop used to associate indentation strategies
-    with node types. Such a strategy is a function from an indentation
-    context to a column number or null, where null indicates that no
-    definitive indentation can be determined.
-    */
+      A syntax tree node prop used to associate indentation strategies
+      with node types. Such a strategy is a function from an indentation
+      context to a column number or null, where null indicates that no
+      definitive indentation can be determined.
+      */
   const indentNodeProp = /*@__PURE__*/ new NodeProp();
   // Compute the indentation for a given position from the syntax tree.
   function syntaxIndentation(cx, ast, pos) {
@@ -18900,23 +18900,23 @@
     return 0;
   }
   /**
-    Objects of this type provide context information and helper
-    methods to indentation functions.
-    */
+      Objects of this type provide context information and helper
+      methods to indentation functions.
+      */
   class TreeIndentContext extends IndentContext {
     /**
-        @internal
-        */
+          @internal
+          */
     constructor(
       base,
       /**
-        The position at which indentation is being computed.
-        */
+          The position at which indentation is being computed.
+          */
       pos,
       /**
-        The syntax tree node to which the indentation strategy
-        applies.
-        */
+          The syntax tree node to which the indentation strategy
+          applies.
+          */
       node
     ) {
       super(base.state, base.options);
@@ -18925,19 +18925,19 @@
       this.node = node;
     }
     /**
-        Get the text directly after `this.pos`, either the entire line
-        or the next 100 characters, whichever is shorter.
-        */
+          Get the text directly after `this.pos`, either the entire line
+          or the next 100 characters, whichever is shorter.
+          */
     get textAfter() {
       return this.textAfterPos(this.pos);
     }
     /**
-        Get the indentation at the reference line for `this.node`, which
-        is the line on which it starts, unless there is a node that is
-        _not_ a parent of this node covering the start of that line. If
-        so, the line at the start of that node is tried, again skipping
-        on if it is covered by another such node.
-        */
+          Get the indentation at the reference line for `this.node`, which
+          is the line on which it starts, unless there is a node that is
+          _not_ a parent of this node covering the start of that line. If
+          so, the line at the start of that node is tried, again skipping
+          on if it is covered by another such node.
+          */
     get baseIndent() {
       let line = this.state.doc.lineAt(this.node.from);
       // Skip line starts that are covered by a sibling (or cousin, etc)
@@ -18950,9 +18950,9 @@
       return this.lineIndent(line.from);
     }
     /**
-        Continue looking for indentations in the node's parent nodes,
-        and return the result of that.
-        */
+          Continue looking for indentations in the node's parent nodes,
+          and return the result of that.
+          */
     continue() {
       let parent = this.node.parent;
       return parent ? indentFrom(parent, this.pos, this.base) : 0;
@@ -18981,16 +18981,16 @@
     }
   }
   /**
-    An indentation strategy for delimited (usually bracketed) nodes.
-    Will, by default, indent one unit more than the parent's base
-    indent unless the line starts with a closing token. When `align`
-    is true and there are non-skipped nodes on the node's opening
-    line, the content of the node will be aligned with the end of the
-    opening node, like this:
-
-        foo(bar,
-            baz)
-    */
+      An indentation strategy for delimited (usually bracketed) nodes.
+      Will, by default, indent one unit more than the parent's base
+      indent unless the line starts with a closing token. When `align`
+      is true and there are non-skipped nodes on the node's opening
+      line, the content of the node will be aligned with the end of the
+      opening node, like this:
+  
+          foo(bar,
+              baz)
+      */
   function delimitedIndent({closing, align = true, units = 1}) {
     return context => delimitedStrategy(context, align, units, closing);
   }
@@ -19004,18 +19004,18 @@
   }
   const DontIndentBeyond = 200;
   /**
-    Enables reindentation on input. When a language defines an
-    `indentOnInput` field in its [language
-    data](https://codemirror.net/6/docs/ref/#state.EditorState.languageDataAt), which must hold a regular
-    expression, the line at the cursor will be reindented whenever new
-    text is typed and the input from the start of the line up to the
-    cursor matches that regexp.
-
-    To avoid unneccesary reindents, it is recommended to start the
-    regexp with `^` (usually followed by `\s*`), and end it with `$`.
-    For example, `/^\s*\}$/` will reindent when a closing brace is
-    added at the start of a line.
-    */
+      Enables reindentation on input. When a language defines an
+      `indentOnInput` field in its [language
+      data](https://codemirror.net/6/docs/ref/#state.EditorState.languageDataAt), which must hold a regular
+      expression, the line at the cursor will be reindented whenever new
+      text is typed and the input from the start of the line up to the
+      cursor matches that regexp.
+  
+      To avoid unneccesary reindents, it is recommended to start the
+      regexp with `^` (usually followed by `\s*`), and end it with `$`.
+      For example, `/^\s*\}$/` will reindent when a closing brace is
+      added at the start of a line.
+      */
   function indentOnInput() {
     return EditorState.transactionFilter.of(tr => {
       if (!tr.docChanged || (!tr.isUserEvent('input.type') && !tr.isUserEvent('input.complete'))) return tr;
@@ -19045,24 +19045,24 @@
   }
 
   /**
-    A facet that registers a code folding service. When called with
-    the extent of a line, such a function should return a foldable
-    range that starts on that line (but continues beyond it), if one
-    can be found.
-    */
+      A facet that registers a code folding service. When called with
+      the extent of a line, such a function should return a foldable
+      range that starts on that line (but continues beyond it), if one
+      can be found.
+      */
   const foldService = /*@__PURE__*/ Facet.define();
   /**
-    This node prop is used to associate folding information with
-    syntax node types. Given a syntax node, it should check whether
-    that tree is foldable and return the range that can be collapsed
-    when it is.
-    */
+      This node prop is used to associate folding information with
+      syntax node types. Given a syntax node, it should check whether
+      that tree is foldable and return the range that can be collapsed
+      when it is.
+      */
   const foldNodeProp = /*@__PURE__*/ new NodeProp();
   /**
-    [Fold](https://codemirror.net/6/docs/ref/#language.foldNodeProp) function that folds everything but
-    the first and the last child of a syntax node. Useful for nodes
-    that start and end with delimiters.
-    */
+      [Fold](https://codemirror.net/6/docs/ref/#language.foldNodeProp) function that folds everything but
+      the first and the last child of a syntax node. Useful for nodes
+      that start and end with delimiters.
+      */
   function foldInside$1(node) {
     let first = node.firstChild,
       last = node.lastChild;
@@ -19089,13 +19089,13 @@
     return ch && ch.to == node.to && ch.type.isError;
   }
   /**
-    Check whether the given line is foldable. First asks any fold
-    services registered through
-    [`foldService`](https://codemirror.net/6/docs/ref/#language.foldService), and if none of them return
-    a result, tries to query the [fold node
-    prop](https://codemirror.net/6/docs/ref/#language.foldNodeProp) of syntax nodes that cover the end
-    of the line.
-    */
+      Check whether the given line is foldable. First asks any fold
+      services registered through
+      [`foldService`](https://codemirror.net/6/docs/ref/#language.foldService), and if none of them return
+      a result, tries to query the [fold node
+      prop](https://codemirror.net/6/docs/ref/#language.foldNodeProp) of syntax nodes that cover the end
+      of the line.
+      */
   function foldable(state, lineStart, lineEnd) {
     for (let service of state.facet(foldService)) {
       let result = service(state, lineStart, lineEnd);
@@ -19105,27 +19105,27 @@
   }
 
   /**
-    A gutter marker represents a bit of information attached to a line
-    in a specific gutter. Your own custom markers have to extend this
-    class.
-    */
+      A gutter marker represents a bit of information attached to a line
+      in a specific gutter. Your own custom markers have to extend this
+      class.
+      */
   class GutterMarker extends RangeValue {
     /**
-        @internal
-        */
+          @internal
+          */
     compare(other) {
       return this == other || (this.constructor == other.constructor && this.eq(other));
     }
     /**
-        Compare this marker to another marker of the same type.
-        */
+          Compare this marker to another marker of the same type.
+          */
     eq(other) {
       return false;
     }
     /**
-        Called if the marker has a `toDOM` method and its representation
-        was removed from a gutter.
-        */
+          Called if the marker has a `toDOM` method and its representation
+          was removed from a gutter.
+          */
     destroy(dom) {}
   }
   GutterMarker.prototype.elementClass = '';
@@ -19134,12 +19134,12 @@
   GutterMarker.prototype.startSide = GutterMarker.prototype.endSide = -1;
   GutterMarker.prototype.point = true;
   /**
-    Facet used to add a class to all gutter elements for a given line.
-    Markers given to this facet should _only_ define an
-    [`elementclass`](https://codemirror.net/6/docs/ref/#gutter.GutterMarker.elementClass), not a
-    [`toDOM`](https://codemirror.net/6/docs/ref/#gutter.GutterMarker.toDOM) (or the marker will appear
-    in all gutters for the line).
-    */
+      Facet used to add a class to all gutter elements for a given line.
+      Markers given to this facet should _only_ define an
+      [`elementclass`](https://codemirror.net/6/docs/ref/#gutter.GutterMarker.elementClass), not a
+      [`toDOM`](https://codemirror.net/6/docs/ref/#gutter.GutterMarker.toDOM) (or the marker will appear
+      in all gutters for the line).
+      */
   const gutterLineClass = /*@__PURE__*/ Facet.define();
   const defaults$1 = {
     class: '',
@@ -19154,9 +19154,9 @@
   };
   const activeGutters = /*@__PURE__*/ Facet.define();
   /**
-    Define an editor gutter. The order in which the gutters appear is
-    determined by their extension priority.
-    */
+      Define an editor gutter. The order in which the gutters appear is
+      determined by their extension priority.
+      */
   function gutter(config) {
     return [gutters(), activeGutters.of(Object.assign(Object.assign({}, defaults$1), config))];
   }
@@ -19205,15 +19205,15 @@
     combine: values => values.some(x => x),
   });
   /**
-    The gutter-drawing plugin is automatically enabled when you add a
-    gutter, but you can use this function to explicitly configure it.
-
-    Unless `fixed` is explicitly set to `false`, the gutters are
-    fixed, meaning they don't scroll along with the content
-    horizontally (except on Internet Explorer, which doesn't support
-    CSS [`position:
-    sticky`](https://developer.mozilla.org/en-US/docs/Web/CSS/position#sticky)).
-    */
+      The gutter-drawing plugin is automatically enabled when you add a
+      gutter, but you can use this function to explicitly configure it.
+  
+      Unless `fixed` is explicitly set to `false`, the gutters are
+      fixed, meaning they don't scroll along with the content
+      horizontally (except on Internet Explorer, which doesn't support
+      CSS [`position:
+      sticky`](https://developer.mozilla.org/en-US/docs/Web/CSS/position#sticky)).
+      */
   function gutters(config) {
     let result = [gutterView, baseTheme$7];
     if (config && config.fixed === false) result.push(unfixGutters.of(true));
@@ -19478,8 +19478,8 @@
     return true;
   }
   /**
-    Facet used to provide markers to the line number gutter.
-    */
+      Facet used to provide markers to the line number gutter.
+      */
   const lineNumberMarkers = /*@__PURE__*/ Facet.define();
   const lineNumberConfig = /*@__PURE__*/ Facet.define({
     combine(values) {
@@ -19536,8 +19536,8 @@
     domEventHandlers: state.facet(lineNumberConfig).domEventHandlers,
   }));
   /**
-    Create a line number gutter extension.
-    */
+      Create a line number gutter extension.
+      */
   function lineNumbers(config = {}) {
     return [lineNumberConfig.of(config), gutters(), lineNumberGutter];
   }
@@ -19566,10 +19566,10 @@
     return RangeSet.of(marks);
   });
   /**
-    Returns an extension that adds a `cm-activeLineGutter` class to
-    all gutter elements on the [active
-    line](https://codemirror.net/6/docs/ref/#view.highlightActiveLine).
-    */
+      Returns an extension that adds a `cm-activeLineGutter` class to
+      all gutter elements on the [active
+      line](https://codemirror.net/6/docs/ref/#view.highlightActiveLine).
+      */
   function highlightActiveLineGutter() {
     return activeLineGutterHighlighter;
   }
@@ -19580,16 +19580,16 @@
     return from >= to ? undefined : {from, to};
   }
   /**
-    State effect that can be attached to a transaction to fold the
-    given range. (You probably only need this in exceptional
-    circumstancesâ€”usually you'll just want to let
-    [`foldCode`](https://codemirror.net/6/docs/ref/#fold.foldCode) and the [fold
-    gutter](https://codemirror.net/6/docs/ref/#fold.foldGutter) create the transactions.)
-    */
+      State effect that can be attached to a transaction to fold the
+      given range. (You probably only need this in exceptional
+      circumstancesâ€”usually you'll just want to let
+      [`foldCode`](https://codemirror.net/6/docs/ref/#fold.foldCode) and the [fold
+      gutter](https://codemirror.net/6/docs/ref/#fold.foldGutter) create the transactions.)
+      */
   const foldEffect = /*@__PURE__*/ StateEffect.define({map: mapRange});
   /**
-    State effect that unfolds the given range (if it was folded).
-    */
+      State effect that unfolds the given range (if it was folded).
+      */
   const unfoldEffect = /*@__PURE__*/ StateEffect.define({map: mapRange});
   function selectedLines(view) {
     let lines = [];
@@ -19654,8 +19654,8 @@
     return state.field(foldState, false) ? other : other.concat(StateEffect.appendConfig.of(codeFolding()));
   }
   /**
-    Fold the lines that are selected, if possible.
-    */
+      Fold the lines that are selected, if possible.
+      */
   const foldCode = view => {
     for (let line of selectedLines(view)) {
       let range = foldable(view.state, line.from, line.to);
@@ -19667,8 +19667,8 @@
     return false;
   };
   /**
-    Unfold folded ranges on selected lines.
-    */
+      Unfold folded ranges on selected lines.
+      */
   const unfoldCode = view => {
     if (!view.state.field(foldState, false)) return false;
     let effects = [];
@@ -19687,8 +19687,8 @@
     );
   }
   /**
-    Fold all top-level foldable ranges.
-    */
+      Fold all top-level foldable ranges.
+      */
   const foldAll = view => {
     let {state} = view,
       effects = [];
@@ -19702,8 +19702,8 @@
     return !!effects.length;
   };
   /**
-    Unfold all folded code.
-    */
+      Unfold all folded code.
+      */
   const unfoldAll = view => {
     let field = view.state.field(foldState, false);
     if (!field || !field.size) return false;
@@ -19715,13 +19715,13 @@
     return true;
   };
   /**
-    Default fold-related key bindings.
-
-     - Ctrl-Shift-[ (Cmd-Alt-[ on macOS): [`foldCode`](https://codemirror.net/6/docs/ref/#fold.foldCode).
-     - Ctrl-Shift-] (Cmd-Alt-] on macOS): [`unfoldCode`](https://codemirror.net/6/docs/ref/#fold.unfoldCode).
-     - Ctrl-Alt-[: [`foldAll`](https://codemirror.net/6/docs/ref/#fold.foldAll).
-     - Ctrl-Alt-]: [`unfoldAll`](https://codemirror.net/6/docs/ref/#fold.unfoldAll).
-    */
+      Default fold-related key bindings.
+  
+       - Ctrl-Shift-[ (Cmd-Alt-[ on macOS): [`foldCode`](https://codemirror.net/6/docs/ref/#fold.foldCode).
+       - Ctrl-Shift-] (Cmd-Alt-] on macOS): [`unfoldCode`](https://codemirror.net/6/docs/ref/#fold.unfoldCode).
+       - Ctrl-Alt-[: [`foldAll`](https://codemirror.net/6/docs/ref/#fold.foldAll).
+       - Ctrl-Alt-]: [`unfoldAll`](https://codemirror.net/6/docs/ref/#fold.unfoldAll).
+      */
   const foldKeymap = [
     {key: 'Ctrl-Shift-[', mac: 'Cmd-Alt-[', run: foldCode},
     {key: 'Ctrl-Shift-]', mac: 'Cmd-Alt-]', run: unfoldCode},
@@ -19738,8 +19738,8 @@
     },
   });
   /**
-    Create an extension that configures code folding.
-    */
+      Create an extension that configures code folding.
+      */
   function codeFolding(config) {
     let result = [foldState, baseTheme$6];
     if (config) result.push(foldConfig.of(config));
@@ -19791,10 +19791,10 @@
     }
   }
   /**
-    Create an extension that registers a fold gutter, which shows a
-    fold status indicator before foldable lines (which can be clicked
-    to fold or unfold the line).
-    */
+      Create an extension that registers a fold gutter, which shows a
+      fold status indicator before foldable lines (which can be clicked
+      to fold or unfold the line).
+      */
   function foldGutter(config = {}) {
     let fullConfig = Object.assign(Object.assign({}, foldGutterDefaults), config);
     let canFold = new FoldMarker(fullConfig, true),
@@ -19921,11 +19921,11 @@
   });
   const bracketMatchingUnique = [bracketMatchingState, baseTheme$5];
   /**
-    Create an extension that enables bracket matching. Whenever the
-    cursor is next to a bracket, that bracket and the one it matches
-    are highlighted. Or, when no matching bracket is found, another
-    highlighting style is used to indicate this.
-    */
+      Create an extension that enables bracket matching. Whenever the
+      cursor is next to a bracket, that bracket and the one it matches
+      are highlighted. Or, when no matching bracket is found, another
+      highlighting style is used to indicate this.
+      */
   function bracketMatching(config = {}) {
     return [bracketMatchingConfig.of(config), bracketMatchingUnique];
   }
@@ -19939,11 +19939,11 @@
     return null;
   }
   /**
-    Find the matching bracket for the token at `pos`, scanning
-    direction `dir`. Only the `brackets` and `maxScanDistance`
-    properties are used from `config`, if given. Returns null if no
-    bracket was found at `pos`, or a match result otherwise.
-    */
+      Find the matching bracket for the token at `pos`, scanning
+      direction `dir`. Only the `brackets` and `maxScanDistance`
+      properties are used from `config`, if given. Returns null if no
+      bracket was found at `pos`, or a match result otherwise.
+      */
   function matchBrackets(state, pos, dir, config = {}) {
     let maxScanDistance = config.maxScanDistance || DefaultScanDist,
       brackets = config.brackets || DefaultBrackets;
@@ -20031,25 +20031,25 @@
     return moveSel(view, range => (range.empty ? view.moveByChar(range, forward) : rangeEnd(range, forward)));
   }
   /**
-    Move the selection one character to the left (which is backward in
-    left-to-right text, forward in right-to-left text).
-    */
+      Move the selection one character to the left (which is backward in
+      left-to-right text, forward in right-to-left text).
+      */
   const cursorCharLeft = view => cursorByChar(view, view.textDirection != Direction.LTR);
   /**
-    Move the selection one character to the right.
-    */
+      Move the selection one character to the right.
+      */
   const cursorCharRight = view => cursorByChar(view, view.textDirection == Direction.LTR);
   function cursorByGroup(view, forward) {
     return moveSel(view, range => (range.empty ? view.moveByGroup(range, forward) : rangeEnd(range, forward)));
   }
   /**
-    Move the selection to the left across one group of word or
-    non-word (but also non-space) characters.
-    */
+      Move the selection to the left across one group of word or
+      non-word (but also non-space) characters.
+      */
   const cursorGroupLeft = view => cursorByGroup(view, view.textDirection != Direction.LTR);
   /**
-    Move the selection one group to the right.
-    */
+      Move the selection one group to the right.
+      */
   const cursorGroupRight = view => cursorByGroup(view, view.textDirection == Direction.LTR);
   function interestingNode(state, node, bracketProp) {
     if (node.type.prop(bracketProp)) return true;
@@ -20080,13 +20080,13 @@
     return EditorSelection.cursor(newPos, forward ? -1 : 1);
   }
   /**
-    Move the cursor over the next syntactic element to the left.
-    */
+      Move the cursor over the next syntactic element to the left.
+      */
   const cursorSyntaxLeft = view =>
     moveSel(view, range => moveBySyntax(view.state, range, view.textDirection != Direction.LTR));
   /**
-    Move the cursor over the next syntactic element to the right.
-    */
+      Move the cursor over the next syntactic element to the right.
+      */
   const cursorSyntaxRight = view =>
     moveSel(view, range => moveBySyntax(view.state, range, view.textDirection == Direction.LTR));
   function cursorByLine(view, forward) {
@@ -20097,12 +20097,12 @@
     });
   }
   /**
-    Move the selection one line up.
-    */
+      Move the selection one line up.
+      */
   const cursorLineUp = view => cursorByLine(view, false);
   /**
-    Move the selection one line down.
-    */
+      Move the selection one line down.
+      */
   const cursorLineDown = view => cursorByLine(view, true);
   function cursorByPage(view, forward) {
     let {state} = view,
@@ -20124,12 +20124,12 @@
     return true;
   }
   /**
-    Move the selection one page up.
-    */
+      Move the selection one page up.
+      */
   const cursorPageUp = view => cursorByPage(view, false);
   /**
-    Move the selection one page down.
-    */
+      Move the selection one page down.
+      */
   const cursorPageDown = view => cursorByPage(view, true);
   function moveByLineBoundary(view, start, forward) {
     let line = view.lineBlockAt(start.head),
@@ -20143,24 +20143,24 @@
     return moved;
   }
   /**
-    Move the selection to the next line wrap point, or to the end of
-    the line if there isn't one left on this line.
-    */
+      Move the selection to the next line wrap point, or to the end of
+      the line if there isn't one left on this line.
+      */
   const cursorLineBoundaryForward = view => moveSel(view, range => moveByLineBoundary(view, range, true));
   /**
-    Move the selection to previous line wrap point, or failing that to
-    the start of the line. If the line is indented, and the cursor
-    isn't already at the end of the indentation, this will move to the
-    end of the indentation instead of the start of the line.
-    */
+      Move the selection to previous line wrap point, or failing that to
+      the start of the line. If the line is indented, and the cursor
+      isn't already at the end of the indentation, this will move to the
+      end of the indentation instead of the start of the line.
+      */
   const cursorLineBoundaryBackward = view => moveSel(view, range => moveByLineBoundary(view, range, false));
   /**
-    Move the selection to the start of the line.
-    */
+      Move the selection to the start of the line.
+      */
   const cursorLineStart = view => moveSel(view, range => EditorSelection.cursor(view.lineBlockAt(range.head).from, 1));
   /**
-    Move the selection to the end of the line.
-    */
+      Move the selection to the end of the line.
+      */
   const cursorLineEnd = view => moveSel(view, range => EditorSelection.cursor(view.lineBlockAt(range.head).to, -1));
   function toMatchingBracket(state, dispatch, extend) {
     let found = false,
@@ -20180,9 +20180,9 @@
     return true;
   }
   /**
-    Move the selection to the bracket matching the one it is currently
-    on, if any.
-    */
+      Move the selection to the bracket matching the one it is currently
+      on, if any.
+      */
   const cursorMatchingBracket = ({state, dispatch}) => toMatchingBracket(state, dispatch, false);
   function extendSel(view, how) {
     let selection = updateSel(view.state.selection, range => {
@@ -20197,112 +20197,112 @@
     return extendSel(view, range => view.moveByChar(range, forward));
   }
   /**
-    Move the selection head one character to the left, while leaving
-    the anchor in place.
-    */
+      Move the selection head one character to the left, while leaving
+      the anchor in place.
+      */
   const selectCharLeft = view => selectByChar(view, view.textDirection != Direction.LTR);
   /**
-    Move the selection head one character to the right.
-    */
+      Move the selection head one character to the right.
+      */
   const selectCharRight = view => selectByChar(view, view.textDirection == Direction.LTR);
   function selectByGroup(view, forward) {
     return extendSel(view, range => view.moveByGroup(range, forward));
   }
   /**
-    Move the selection head one [group](https://codemirror.net/6/docs/ref/#commands.cursorGroupLeft) to
-    the left.
-    */
+      Move the selection head one [group](https://codemirror.net/6/docs/ref/#commands.cursorGroupLeft) to
+      the left.
+      */
   const selectGroupLeft = view => selectByGroup(view, view.textDirection != Direction.LTR);
   /**
-    Move the selection head one group to the right.
-    */
+      Move the selection head one group to the right.
+      */
   const selectGroupRight = view => selectByGroup(view, view.textDirection == Direction.LTR);
   /**
-    Move the selection head over the next syntactic element to the left.
-    */
+      Move the selection head over the next syntactic element to the left.
+      */
   const selectSyntaxLeft = view =>
     extendSel(view, range => moveBySyntax(view.state, range, view.textDirection != Direction.LTR));
   /**
-    Move the selection head over the next syntactic element to the right.
-    */
+      Move the selection head over the next syntactic element to the right.
+      */
   const selectSyntaxRight = view =>
     extendSel(view, range => moveBySyntax(view.state, range, view.textDirection == Direction.LTR));
   function selectByLine(view, forward) {
     return extendSel(view, range => view.moveVertically(range, forward));
   }
   /**
-    Move the selection head one line up.
-    */
+      Move the selection head one line up.
+      */
   const selectLineUp = view => selectByLine(view, false);
   /**
-    Move the selection head one line down.
-    */
+      Move the selection head one line down.
+      */
   const selectLineDown = view => selectByLine(view, true);
   function selectByPage(view, forward) {
     return extendSel(view, range => view.moveVertically(range, forward, view.dom.clientHeight));
   }
   /**
-    Move the selection head one page up.
-    */
+      Move the selection head one page up.
+      */
   const selectPageUp = view => selectByPage(view, false);
   /**
-    Move the selection head one page down.
-    */
+      Move the selection head one page down.
+      */
   const selectPageDown = view => selectByPage(view, true);
   /**
-    Move the selection head to the next line boundary.
-    */
+      Move the selection head to the next line boundary.
+      */
   const selectLineBoundaryForward = view => extendSel(view, range => moveByLineBoundary(view, range, true));
   /**
-    Move the selection head to the previous line boundary.
-    */
+      Move the selection head to the previous line boundary.
+      */
   const selectLineBoundaryBackward = view => extendSel(view, range => moveByLineBoundary(view, range, false));
   /**
-    Move the selection head to the start of the line.
-    */
+      Move the selection head to the start of the line.
+      */
   const selectLineStart = view => extendSel(view, range => EditorSelection.cursor(view.lineBlockAt(range.head).from));
   /**
-    Move the selection head to the end of the line.
-    */
+      Move the selection head to the end of the line.
+      */
   const selectLineEnd = view => extendSel(view, range => EditorSelection.cursor(view.lineBlockAt(range.head).to));
   /**
-    Move the selection to the start of the document.
-    */
+      Move the selection to the start of the document.
+      */
   const cursorDocStart = ({state, dispatch}) => {
     dispatch(setSel(state, {anchor: 0}));
     return true;
   };
   /**
-    Move the selection to the end of the document.
-    */
+      Move the selection to the end of the document.
+      */
   const cursorDocEnd = ({state, dispatch}) => {
     dispatch(setSel(state, {anchor: state.doc.length}));
     return true;
   };
   /**
-    Move the selection head to the start of the document.
-    */
+      Move the selection head to the start of the document.
+      */
   const selectDocStart = ({state, dispatch}) => {
     dispatch(setSel(state, {anchor: state.selection.main.anchor, head: 0}));
     return true;
   };
   /**
-    Move the selection head to the end of the document.
-    */
+      Move the selection head to the end of the document.
+      */
   const selectDocEnd = ({state, dispatch}) => {
     dispatch(setSel(state, {anchor: state.selection.main.anchor, head: state.doc.length}));
     return true;
   };
   /**
-    Select the entire document.
-    */
+      Select the entire document.
+      */
   const selectAll = ({state, dispatch}) => {
     dispatch(state.update({selection: {anchor: 0, head: state.doc.length}, userEvent: 'select'}));
     return true;
   };
   /**
-    Expand the selection to cover entire lines.
-    */
+      Expand the selection to cover entire lines.
+      */
   const selectLine = ({state, dispatch}) => {
     let ranges = selectedLineBlocks(state).map(({from, to}) =>
       EditorSelection.range(from, Math.min(to + 1, state.doc.length))
@@ -20311,11 +20311,11 @@
     return true;
   };
   /**
-    Select the next syntactic construct that is larger than the
-    selection. Note that this will only work insofar as the language
-    [provider](https://codemirror.net/6/docs/ref/#language.language) you use builds up a full
-    syntax tree.
-    */
+      Select the next syntactic construct that is larger than the
+      selection. Note that this will only work insofar as the language
+      [provider](https://codemirror.net/6/docs/ref/#language.language) you use builds up a full
+      syntax tree.
+      */
   const selectParentSyntax = ({state, dispatch}) => {
     let selection = updateSel(state.selection, range => {
       var _a;
@@ -20334,10 +20334,10 @@
     return true;
   };
   /**
-    Simplify the current selection. When multiple ranges are selected,
-    reduce it to its main range. Otherwise, if the selection is
-    non-empty, convert it to a cursor selection.
-    */
+      Simplify the current selection. When multiple ranges are selected,
+      reduce it to its main range. Otherwise, if the selection is
+      non-empty, convert it to a cursor selection.
+      */
   const simplifySelection = ({state, dispatch}) => {
     let cur = state.selection,
       selection = null;
@@ -20397,13 +20397,13 @@
       return skipAtomic(target, targetPos, forward);
     });
   /**
-    Delete the selection, or, for cursor selections, the character
-    before the cursor.
-    */
+      Delete the selection, or, for cursor selections, the character
+      before the cursor.
+      */
   const deleteCharBackward = view => deleteByChar(view, false);
   /**
-    Delete the selection or the character after the cursor.
-    */
+      Delete the selection or the character after the cursor.
+      */
   const deleteCharForward = view => deleteByChar(view, true);
   const deleteByGroup = (target, forward) =>
     deleteBy(target, start => {
@@ -20426,39 +20426,39 @@
       return skipAtomic(target, pos, forward);
     });
   /**
-    Delete the selection or backward until the end of the next
-    [group](https://codemirror.net/6/docs/ref/#view.EditorView.moveByGroup), only skipping groups of
-    whitespace when they consist of a single space.
-    */
+      Delete the selection or backward until the end of the next
+      [group](https://codemirror.net/6/docs/ref/#view.EditorView.moveByGroup), only skipping groups of
+      whitespace when they consist of a single space.
+      */
   const deleteGroupBackward = target => deleteByGroup(target, false);
   /**
-    Delete the selection or forward until the end of the next group.
-    */
+      Delete the selection or forward until the end of the next group.
+      */
   const deleteGroupForward = target => deleteByGroup(target, true);
   /**
-    Delete the selection, or, if it is a cursor selection, delete to
-    the end of the line. If the cursor is directly at the end of the
-    line, delete the line break after it.
-    */
+      Delete the selection, or, if it is a cursor selection, delete to
+      the end of the line. If the cursor is directly at the end of the
+      line, delete the line break after it.
+      */
   const deleteToLineEnd = view =>
     deleteBy(view, pos => {
       let lineEnd = view.lineBlockAt(pos).to;
       return skipAtomic(view, pos < lineEnd ? lineEnd : Math.min(view.state.doc.length, pos + 1), true);
     });
   /**
-    Delete the selection, or, if it is a cursor selection, delete to
-    the start of the line. If the cursor is directly at the start of the
-    line, delete the line break before it.
-    */
+      Delete the selection, or, if it is a cursor selection, delete to
+      the start of the line. If the cursor is directly at the start of the
+      line, delete the line break before it.
+      */
   const deleteToLineStart = view =>
     deleteBy(view, pos => {
       let lineStart = view.lineBlockAt(pos).from;
       return skipAtomic(view, pos > lineStart ? lineStart : Math.max(0, pos - 1), false);
     });
   /**
-    Replace each selection range with a line break, leaving the cursor
-    on the line before the break.
-    */
+      Replace each selection range with a line break, leaving the cursor
+      on the line before the break.
+      */
   const splitLine = ({state, dispatch}) => {
     if (state.readOnly) return false;
     let changes = state.changeByRange(range => {
@@ -20471,8 +20471,8 @@
     return true;
   };
   /**
-    Flip the characters before and after the cursor(s).
-    */
+      Flip the characters before and after the cursor(s).
+      */
   const transposeChars = ({state, dispatch}) => {
     if (state.readOnly) return false;
     let changes = state.changeByRange(range => {
@@ -20542,12 +20542,12 @@
     return true;
   }
   /**
-    Move the selected lines up one line.
-    */
+      Move the selected lines up one line.
+      */
   const moveLineUp = ({state, dispatch}) => moveLine(state, dispatch, false);
   /**
-    Move the selected lines down one line.
-    */
+      Move the selected lines down one line.
+      */
   const moveLineDown = ({state, dispatch}) => moveLine(state, dispatch, true);
   function copyLine(state, dispatch, forward) {
     if (state.readOnly) return false;
@@ -20560,16 +20560,16 @@
     return true;
   }
   /**
-    Create a copy of the selected lines. Keep the selection in the top copy.
-    */
+      Create a copy of the selected lines. Keep the selection in the top copy.
+      */
   const copyLineUp = ({state, dispatch}) => copyLine(state, dispatch, false);
   /**
-    Create a copy of the selected lines. Keep the selection in the bottom copy.
-    */
+      Create a copy of the selected lines. Keep the selection in the bottom copy.
+      */
   const copyLineDown = ({state, dispatch}) => copyLine(state, dispatch, true);
   /**
-    Delete selected lines.
-    */
+      Delete selected lines.
+      */
   const deleteLine = view => {
     if (view.state.readOnly) return false;
     let {state} = view,
@@ -20603,16 +20603,16 @@
     return null;
   }
   /**
-    Replace the selection with a newline and indent the newly created
-    line(s). If the current line consists only of whitespace, this
-    will also delete that whitespace. When the cursor is between
-    matching brackets, an additional newline will be inserted after
-    the cursor.
-    */
+      Replace the selection with a newline and indent the newly created
+      line(s). If the current line consists only of whitespace, this
+      will also delete that whitespace. When the cursor is between
+      matching brackets, an additional newline will be inserted after
+      the cursor.
+      */
   const insertNewlineAndIndent = /*@__PURE__*/ newlineAndIndent(false);
   /**
-    Create a blank, indented line below the current line.
-    */
+      Create a blank, indented line below the current line.
+      */
   const insertBlankLine = /*@__PURE__*/ newlineAndIndent(true);
   function newlineAndIndent(atEof) {
     return ({state, dispatch}) => {
@@ -20659,10 +20659,10 @@
     });
   }
   /**
-    Auto-indent the selected lines. This uses the [indentation service
-    facet](https://codemirror.net/6/docs/ref/#language.indentService) as source for auto-indent
-    information.
-    */
+      Auto-indent the selected lines. This uses the [indentation service
+      facet](https://codemirror.net/6/docs/ref/#language.indentService) as source for auto-indent
+      information.
+      */
   const indentSelection = ({state, dispatch}) => {
     if (state.readOnly) return false;
     let updated = Object.create(null);
@@ -20687,9 +20687,9 @@
     return true;
   };
   /**
-    Add a [unit](https://codemirror.net/6/docs/ref/#language.indentUnit) of indentation to all selected
-    lines.
-    */
+      Add a [unit](https://codemirror.net/6/docs/ref/#language.indentUnit) of indentation to all selected
+      lines.
+      */
   const indentMore = ({state, dispatch}) => {
     if (state.readOnly) return false;
     dispatch(
@@ -20703,9 +20703,9 @@
     return true;
   };
   /**
-    Remove a [unit](https://codemirror.net/6/docs/ref/#language.indentUnit) of indentation from all
-    selected lines.
-    */
+      Remove a [unit](https://codemirror.net/6/docs/ref/#language.indentUnit) of indentation from all
+      selected lines.
+      */
   const indentLess = ({state, dispatch}) => {
     if (state.readOnly) return false;
     dispatch(
@@ -20726,24 +20726,24 @@
     return true;
   };
   /**
-    Array of key bindings containing the Emacs-style bindings that are
-    available on macOS by default.
-
-     - Ctrl-b: [`cursorCharLeft`](https://codemirror.net/6/docs/ref/#commands.cursorCharLeft) ([`selectCharLeft`](https://codemirror.net/6/docs/ref/#commands.selectCharLeft) with Shift)
-     - Ctrl-f: [`cursorCharRight`](https://codemirror.net/6/docs/ref/#commands.cursorCharRight) ([`selectCharRight`](https://codemirror.net/6/docs/ref/#commands.selectCharRight) with Shift)
-     - Ctrl-p: [`cursorLineUp`](https://codemirror.net/6/docs/ref/#commands.cursorLineUp) ([`selectLineUp`](https://codemirror.net/6/docs/ref/#commands.selectLineUp) with Shift)
-     - Ctrl-n: [`cursorLineDown`](https://codemirror.net/6/docs/ref/#commands.cursorLineDown) ([`selectLineDown`](https://codemirror.net/6/docs/ref/#commands.selectLineDown) with Shift)
-     - Ctrl-a: [`cursorLineStart`](https://codemirror.net/6/docs/ref/#commands.cursorLineStart) ([`selectLineStart`](https://codemirror.net/6/docs/ref/#commands.selectLineStart) with Shift)
-     - Ctrl-e: [`cursorLineEnd`](https://codemirror.net/6/docs/ref/#commands.cursorLineEnd) ([`selectLineEnd`](https://codemirror.net/6/docs/ref/#commands.selectLineEnd) with Shift)
-     - Ctrl-d: [`deleteCharForward`](https://codemirror.net/6/docs/ref/#commands.deleteCharForward)
-     - Ctrl-h: [`deleteCharBackward`](https://codemirror.net/6/docs/ref/#commands.deleteCharBackward)
-     - Ctrl-k: [`deleteToLineEnd`](https://codemirror.net/6/docs/ref/#commands.deleteToLineEnd)
-     - Ctrl-Alt-h: [`deleteGroupBackward`](https://codemirror.net/6/docs/ref/#commands.deleteGroupBackward)
-     - Ctrl-o: [`splitLine`](https://codemirror.net/6/docs/ref/#commands.splitLine)
-     - Ctrl-t: [`transposeChars`](https://codemirror.net/6/docs/ref/#commands.transposeChars)
-     - Ctrl-v: [`cursorPageDown`](https://codemirror.net/6/docs/ref/#commands.cursorPageDown)
-     - Alt-v: [`cursorPageUp`](https://codemirror.net/6/docs/ref/#commands.cursorPageUp)
-    */
+      Array of key bindings containing the Emacs-style bindings that are
+      available on macOS by default.
+  
+       - Ctrl-b: [`cursorCharLeft`](https://codemirror.net/6/docs/ref/#commands.cursorCharLeft) ([`selectCharLeft`](https://codemirror.net/6/docs/ref/#commands.selectCharLeft) with Shift)
+       - Ctrl-f: [`cursorCharRight`](https://codemirror.net/6/docs/ref/#commands.cursorCharRight) ([`selectCharRight`](https://codemirror.net/6/docs/ref/#commands.selectCharRight) with Shift)
+       - Ctrl-p: [`cursorLineUp`](https://codemirror.net/6/docs/ref/#commands.cursorLineUp) ([`selectLineUp`](https://codemirror.net/6/docs/ref/#commands.selectLineUp) with Shift)
+       - Ctrl-n: [`cursorLineDown`](https://codemirror.net/6/docs/ref/#commands.cursorLineDown) ([`selectLineDown`](https://codemirror.net/6/docs/ref/#commands.selectLineDown) with Shift)
+       - Ctrl-a: [`cursorLineStart`](https://codemirror.net/6/docs/ref/#commands.cursorLineStart) ([`selectLineStart`](https://codemirror.net/6/docs/ref/#commands.selectLineStart) with Shift)
+       - Ctrl-e: [`cursorLineEnd`](https://codemirror.net/6/docs/ref/#commands.cursorLineEnd) ([`selectLineEnd`](https://codemirror.net/6/docs/ref/#commands.selectLineEnd) with Shift)
+       - Ctrl-d: [`deleteCharForward`](https://codemirror.net/6/docs/ref/#commands.deleteCharForward)
+       - Ctrl-h: [`deleteCharBackward`](https://codemirror.net/6/docs/ref/#commands.deleteCharBackward)
+       - Ctrl-k: [`deleteToLineEnd`](https://codemirror.net/6/docs/ref/#commands.deleteToLineEnd)
+       - Ctrl-Alt-h: [`deleteGroupBackward`](https://codemirror.net/6/docs/ref/#commands.deleteGroupBackward)
+       - Ctrl-o: [`splitLine`](https://codemirror.net/6/docs/ref/#commands.splitLine)
+       - Ctrl-t: [`transposeChars`](https://codemirror.net/6/docs/ref/#commands.transposeChars)
+       - Ctrl-v: [`cursorPageDown`](https://codemirror.net/6/docs/ref/#commands.cursorPageDown)
+       - Alt-v: [`cursorPageUp`](https://codemirror.net/6/docs/ref/#commands.cursorPageUp)
+      */
   const emacsStyleKeymap = [
     {key: 'Ctrl-b', run: cursorCharLeft, shift: selectCharLeft, preventDefault: true},
     {key: 'Ctrl-f', run: cursorCharRight, shift: selectCharRight},
@@ -20760,38 +20760,38 @@
     {key: 'Ctrl-v', run: cursorPageDown},
   ];
   /**
-    An array of key bindings closely sticking to platform-standard or
-    widely used bindings. (This includes the bindings from
-    [`emacsStyleKeymap`](https://codemirror.net/6/docs/ref/#commands.emacsStyleKeymap), with their `key`
-    property changed to `mac`.)
-
-     - ArrowLeft: [`cursorCharLeft`](https://codemirror.net/6/docs/ref/#commands.cursorCharLeft) ([`selectCharLeft`](https://codemirror.net/6/docs/ref/#commands.selectCharLeft) with Shift)
-     - ArrowRight: [`cursorCharRight`](https://codemirror.net/6/docs/ref/#commands.cursorCharRight) ([`selectCharRight`](https://codemirror.net/6/docs/ref/#commands.selectCharRight) with Shift)
-     - Ctrl-ArrowLeft (Alt-ArrowLeft on macOS): [`cursorGroupLeft`](https://codemirror.net/6/docs/ref/#commands.cursorGroupLeft) ([`selectGroupLeft`](https://codemirror.net/6/docs/ref/#commands.selectGroupLeft) with Shift)
-     - Ctrl-ArrowRight (Alt-ArrowRight on macOS): [`cursorGroupRight`](https://codemirror.net/6/docs/ref/#commands.cursorGroupRight) ([`selectGroupRight`](https://codemirror.net/6/docs/ref/#commands.selectGroupRight) with Shift)
-     - Cmd-ArrowLeft (on macOS): [`cursorLineStart`](https://codemirror.net/6/docs/ref/#commands.cursorLineStart) ([`selectLineStart`](https://codemirror.net/6/docs/ref/#commands.selectLineStart) with Shift)
-     - Cmd-ArrowRight (on macOS): [`cursorLineEnd`](https://codemirror.net/6/docs/ref/#commands.cursorLineEnd) ([`selectLineEnd`](https://codemirror.net/6/docs/ref/#commands.selectLineEnd) with Shift)
-     - ArrowUp: [`cursorLineUp`](https://codemirror.net/6/docs/ref/#commands.cursorLineUp) ([`selectLineUp`](https://codemirror.net/6/docs/ref/#commands.selectLineUp) with Shift)
-     - ArrowDown: [`cursorLineDown`](https://codemirror.net/6/docs/ref/#commands.cursorLineDown) ([`selectLineDown`](https://codemirror.net/6/docs/ref/#commands.selectLineDown) with Shift)
-     - Cmd-ArrowUp (on macOS): [`cursorDocStart`](https://codemirror.net/6/docs/ref/#commands.cursorDocStart) ([`selectDocStart`](https://codemirror.net/6/docs/ref/#commands.selectDocStart) with Shift)
-     - Cmd-ArrowDown (on macOS): [`cursorDocEnd`](https://codemirror.net/6/docs/ref/#commands.cursorDocEnd) ([`selectDocEnd`](https://codemirror.net/6/docs/ref/#commands.selectDocEnd) with Shift)
-     - Ctrl-ArrowUp (on macOS): [`cursorPageUp`](https://codemirror.net/6/docs/ref/#commands.cursorPageUp) ([`selectPageUp`](https://codemirror.net/6/docs/ref/#commands.selectPageUp) with Shift)
-     - Ctrl-ArrowDown (on macOS): [`cursorPageDown`](https://codemirror.net/6/docs/ref/#commands.cursorPageDown) ([`selectPageDown`](https://codemirror.net/6/docs/ref/#commands.selectPageDown) with Shift)
-     - PageUp: [`cursorPageUp`](https://codemirror.net/6/docs/ref/#commands.cursorPageUp) ([`selectPageUp`](https://codemirror.net/6/docs/ref/#commands.selectPageUp) with Shift)
-     - PageDown: [`cursorPageDown`](https://codemirror.net/6/docs/ref/#commands.cursorPageDown) ([`selectPageDown`](https://codemirror.net/6/docs/ref/#commands.selectPageDown) with Shift)
-     - Home: [`cursorLineBoundaryBackward`](https://codemirror.net/6/docs/ref/#commands.cursorLineBoundaryBackward) ([`selectLineBoundaryBackward`](https://codemirror.net/6/docs/ref/#commands.selectLineBoundaryBackward) with Shift)
-     - End: [`cursorLineBoundaryForward`](https://codemirror.net/6/docs/ref/#commands.cursorLineBoundaryForward) ([`selectLineBoundaryForward`](https://codemirror.net/6/docs/ref/#commands.selectLineBoundaryForward) with Shift)
-     - Ctrl-Home (Cmd-Home on macOS): [`cursorDocStart`](https://codemirror.net/6/docs/ref/#commands.cursorDocStart) ([`selectDocStart`](https://codemirror.net/6/docs/ref/#commands.selectDocStart) with Shift)
-     - Ctrl-End (Cmd-Home on macOS): [`cursorDocEnd`](https://codemirror.net/6/docs/ref/#commands.cursorDocEnd) ([`selectDocEnd`](https://codemirror.net/6/docs/ref/#commands.selectDocEnd) with Shift)
-     - Enter: [`insertNewlineAndIndent`](https://codemirror.net/6/docs/ref/#commands.insertNewlineAndIndent)
-     - Ctrl-a (Cmd-a on macOS): [`selectAll`](https://codemirror.net/6/docs/ref/#commands.selectAll)
-     - Backspace: [`deleteCharBackward`](https://codemirror.net/6/docs/ref/#commands.deleteCharBackward)
-     - Delete: [`deleteCharForward`](https://codemirror.net/6/docs/ref/#commands.deleteCharForward)
-     - Ctrl-Backspace (Alt-Backspace on macOS): [`deleteGroupBackward`](https://codemirror.net/6/docs/ref/#commands.deleteGroupBackward)
-     - Ctrl-Delete (Alt-Delete on macOS): [`deleteGroupForward`](https://codemirror.net/6/docs/ref/#commands.deleteGroupForward)
-     - Cmd-Backspace (macOS): [`deleteToLineStart`](https://codemirror.net/6/docs/ref/#commands.deleteToLineStart).
-     - Cmd-Delete (macOS): [`deleteToLineEnd`](https://codemirror.net/6/docs/ref/#commands.deleteToLineEnd).
-    */
+      An array of key bindings closely sticking to platform-standard or
+      widely used bindings. (This includes the bindings from
+      [`emacsStyleKeymap`](https://codemirror.net/6/docs/ref/#commands.emacsStyleKeymap), with their `key`
+      property changed to `mac`.)
+  
+       - ArrowLeft: [`cursorCharLeft`](https://codemirror.net/6/docs/ref/#commands.cursorCharLeft) ([`selectCharLeft`](https://codemirror.net/6/docs/ref/#commands.selectCharLeft) with Shift)
+       - ArrowRight: [`cursorCharRight`](https://codemirror.net/6/docs/ref/#commands.cursorCharRight) ([`selectCharRight`](https://codemirror.net/6/docs/ref/#commands.selectCharRight) with Shift)
+       - Ctrl-ArrowLeft (Alt-ArrowLeft on macOS): [`cursorGroupLeft`](https://codemirror.net/6/docs/ref/#commands.cursorGroupLeft) ([`selectGroupLeft`](https://codemirror.net/6/docs/ref/#commands.selectGroupLeft) with Shift)
+       - Ctrl-ArrowRight (Alt-ArrowRight on macOS): [`cursorGroupRight`](https://codemirror.net/6/docs/ref/#commands.cursorGroupRight) ([`selectGroupRight`](https://codemirror.net/6/docs/ref/#commands.selectGroupRight) with Shift)
+       - Cmd-ArrowLeft (on macOS): [`cursorLineStart`](https://codemirror.net/6/docs/ref/#commands.cursorLineStart) ([`selectLineStart`](https://codemirror.net/6/docs/ref/#commands.selectLineStart) with Shift)
+       - Cmd-ArrowRight (on macOS): [`cursorLineEnd`](https://codemirror.net/6/docs/ref/#commands.cursorLineEnd) ([`selectLineEnd`](https://codemirror.net/6/docs/ref/#commands.selectLineEnd) with Shift)
+       - ArrowUp: [`cursorLineUp`](https://codemirror.net/6/docs/ref/#commands.cursorLineUp) ([`selectLineUp`](https://codemirror.net/6/docs/ref/#commands.selectLineUp) with Shift)
+       - ArrowDown: [`cursorLineDown`](https://codemirror.net/6/docs/ref/#commands.cursorLineDown) ([`selectLineDown`](https://codemirror.net/6/docs/ref/#commands.selectLineDown) with Shift)
+       - Cmd-ArrowUp (on macOS): [`cursorDocStart`](https://codemirror.net/6/docs/ref/#commands.cursorDocStart) ([`selectDocStart`](https://codemirror.net/6/docs/ref/#commands.selectDocStart) with Shift)
+       - Cmd-ArrowDown (on macOS): [`cursorDocEnd`](https://codemirror.net/6/docs/ref/#commands.cursorDocEnd) ([`selectDocEnd`](https://codemirror.net/6/docs/ref/#commands.selectDocEnd) with Shift)
+       - Ctrl-ArrowUp (on macOS): [`cursorPageUp`](https://codemirror.net/6/docs/ref/#commands.cursorPageUp) ([`selectPageUp`](https://codemirror.net/6/docs/ref/#commands.selectPageUp) with Shift)
+       - Ctrl-ArrowDown (on macOS): [`cursorPageDown`](https://codemirror.net/6/docs/ref/#commands.cursorPageDown) ([`selectPageDown`](https://codemirror.net/6/docs/ref/#commands.selectPageDown) with Shift)
+       - PageUp: [`cursorPageUp`](https://codemirror.net/6/docs/ref/#commands.cursorPageUp) ([`selectPageUp`](https://codemirror.net/6/docs/ref/#commands.selectPageUp) with Shift)
+       - PageDown: [`cursorPageDown`](https://codemirror.net/6/docs/ref/#commands.cursorPageDown) ([`selectPageDown`](https://codemirror.net/6/docs/ref/#commands.selectPageDown) with Shift)
+       - Home: [`cursorLineBoundaryBackward`](https://codemirror.net/6/docs/ref/#commands.cursorLineBoundaryBackward) ([`selectLineBoundaryBackward`](https://codemirror.net/6/docs/ref/#commands.selectLineBoundaryBackward) with Shift)
+       - End: [`cursorLineBoundaryForward`](https://codemirror.net/6/docs/ref/#commands.cursorLineBoundaryForward) ([`selectLineBoundaryForward`](https://codemirror.net/6/docs/ref/#commands.selectLineBoundaryForward) with Shift)
+       - Ctrl-Home (Cmd-Home on macOS): [`cursorDocStart`](https://codemirror.net/6/docs/ref/#commands.cursorDocStart) ([`selectDocStart`](https://codemirror.net/6/docs/ref/#commands.selectDocStart) with Shift)
+       - Ctrl-End (Cmd-Home on macOS): [`cursorDocEnd`](https://codemirror.net/6/docs/ref/#commands.cursorDocEnd) ([`selectDocEnd`](https://codemirror.net/6/docs/ref/#commands.selectDocEnd) with Shift)
+       - Enter: [`insertNewlineAndIndent`](https://codemirror.net/6/docs/ref/#commands.insertNewlineAndIndent)
+       - Ctrl-a (Cmd-a on macOS): [`selectAll`](https://codemirror.net/6/docs/ref/#commands.selectAll)
+       - Backspace: [`deleteCharBackward`](https://codemirror.net/6/docs/ref/#commands.deleteCharBackward)
+       - Delete: [`deleteCharForward`](https://codemirror.net/6/docs/ref/#commands.deleteCharForward)
+       - Ctrl-Backspace (Alt-Backspace on macOS): [`deleteGroupBackward`](https://codemirror.net/6/docs/ref/#commands.deleteGroupBackward)
+       - Ctrl-Delete (Alt-Delete on macOS): [`deleteGroupForward`](https://codemirror.net/6/docs/ref/#commands.deleteGroupForward)
+       - Cmd-Backspace (macOS): [`deleteToLineStart`](https://codemirror.net/6/docs/ref/#commands.deleteToLineStart).
+       - Cmd-Delete (macOS): [`deleteToLineEnd`](https://codemirror.net/6/docs/ref/#commands.deleteToLineEnd).
+      */
   const standardKeymap = /*@__PURE__*/ [
     {key: 'ArrowLeft', run: cursorCharLeft, shift: selectCharLeft, preventDefault: true},
     {key: 'Mod-ArrowLeft', mac: 'Alt-ArrowLeft', run: cursorGroupLeft, shift: selectGroupLeft},
@@ -20821,25 +20821,25 @@
     {mac: 'Mod-Delete', run: deleteToLineEnd},
   ].concat(/*@__PURE__*/ emacsStyleKeymap.map(b => ({mac: b.key, run: b.run, shift: b.shift})));
   /**
-    The default keymap. Includes all bindings from
-    [`standardKeymap`](https://codemirror.net/6/docs/ref/#commands.standardKeymap) plus the following:
-
-    - Alt-ArrowLeft (Ctrl-ArrowLeft on macOS): [`cursorSyntaxLeft`](https://codemirror.net/6/docs/ref/#commands.cursorSyntaxLeft) ([`selectSyntaxLeft`](https://codemirror.net/6/docs/ref/#commands.selectSyntaxLeft) with Shift)
-    - Alt-ArrowRight (Ctrl-ArrowRight on macOS): [`cursorSyntaxRight`](https://codemirror.net/6/docs/ref/#commands.cursorSyntaxRight) ([`selectSyntaxRight`](https://codemirror.net/6/docs/ref/#commands.selectSyntaxRight) with Shift)
-    - Alt-ArrowUp: [`moveLineUp`](https://codemirror.net/6/docs/ref/#commands.moveLineUp)
-    - Alt-ArrowDown: [`moveLineDown`](https://codemirror.net/6/docs/ref/#commands.moveLineDown)
-    - Shift-Alt-ArrowUp: [`copyLineUp`](https://codemirror.net/6/docs/ref/#commands.copyLineUp)
-    - Shift-Alt-ArrowDown: [`copyLineDown`](https://codemirror.net/6/docs/ref/#commands.copyLineDown)
-    - Escape: [`simplifySelection`](https://codemirror.net/6/docs/ref/#commands.simplifySelection)
-    - Ctrl-Enter (Comd-Enter on macOS): [`insertBlankLine`](https://codemirror.net/6/docs/ref/#commands.insertBlankLine)
-    - Alt-l (Ctrl-l on macOS): [`selectLine`](https://codemirror.net/6/docs/ref/#commands.selectLine)
-    - Ctrl-i (Cmd-i on macOS): [`selectParentSyntax`](https://codemirror.net/6/docs/ref/#commands.selectParentSyntax)
-    - Ctrl-[ (Cmd-[ on macOS): [`indentLess`](https://codemirror.net/6/docs/ref/#commands.indentLess)
-    - Ctrl-] (Cmd-] on macOS): [`indentMore`](https://codemirror.net/6/docs/ref/#commands.indentMore)
-    - Ctrl-Alt-\\ (Cmd-Alt-\\ on macOS): [`indentSelection`](https://codemirror.net/6/docs/ref/#commands.indentSelection)
-    - Shift-Ctrl-k (Shift-Cmd-k on macOS): [`deleteLine`](https://codemirror.net/6/docs/ref/#commands.deleteLine)
-    - Shift-Ctrl-\\ (Shift-Cmd-\\ on macOS): [`cursorMatchingBracket`](https://codemirror.net/6/docs/ref/#commands.cursorMatchingBracket)
-    */
+      The default keymap. Includes all bindings from
+      [`standardKeymap`](https://codemirror.net/6/docs/ref/#commands.standardKeymap) plus the following:
+  
+      - Alt-ArrowLeft (Ctrl-ArrowLeft on macOS): [`cursorSyntaxLeft`](https://codemirror.net/6/docs/ref/#commands.cursorSyntaxLeft) ([`selectSyntaxLeft`](https://codemirror.net/6/docs/ref/#commands.selectSyntaxLeft) with Shift)
+      - Alt-ArrowRight (Ctrl-ArrowRight on macOS): [`cursorSyntaxRight`](https://codemirror.net/6/docs/ref/#commands.cursorSyntaxRight) ([`selectSyntaxRight`](https://codemirror.net/6/docs/ref/#commands.selectSyntaxRight) with Shift)
+      - Alt-ArrowUp: [`moveLineUp`](https://codemirror.net/6/docs/ref/#commands.moveLineUp)
+      - Alt-ArrowDown: [`moveLineDown`](https://codemirror.net/6/docs/ref/#commands.moveLineDown)
+      - Shift-Alt-ArrowUp: [`copyLineUp`](https://codemirror.net/6/docs/ref/#commands.copyLineUp)
+      - Shift-Alt-ArrowDown: [`copyLineDown`](https://codemirror.net/6/docs/ref/#commands.copyLineDown)
+      - Escape: [`simplifySelection`](https://codemirror.net/6/docs/ref/#commands.simplifySelection)
+      - Ctrl-Enter (Comd-Enter on macOS): [`insertBlankLine`](https://codemirror.net/6/docs/ref/#commands.insertBlankLine)
+      - Alt-l (Ctrl-l on macOS): [`selectLine`](https://codemirror.net/6/docs/ref/#commands.selectLine)
+      - Ctrl-i (Cmd-i on macOS): [`selectParentSyntax`](https://codemirror.net/6/docs/ref/#commands.selectParentSyntax)
+      - Ctrl-[ (Cmd-[ on macOS): [`indentLess`](https://codemirror.net/6/docs/ref/#commands.indentLess)
+      - Ctrl-] (Cmd-] on macOS): [`indentMore`](https://codemirror.net/6/docs/ref/#commands.indentMore)
+      - Ctrl-Alt-\\ (Cmd-Alt-\\ on macOS): [`indentSelection`](https://codemirror.net/6/docs/ref/#commands.indentSelection)
+      - Shift-Ctrl-k (Shift-Cmd-k on macOS): [`deleteLine`](https://codemirror.net/6/docs/ref/#commands.deleteLine)
+      - Shift-Ctrl-\\ (Shift-Cmd-\\ on macOS): [`cursorMatchingBracket`](https://codemirror.net/6/docs/ref/#commands.cursorMatchingBracket)
+      */
   const defaultKeymap = /*@__PURE__*/ [
     {key: 'Alt-ArrowLeft', mac: 'Ctrl-ArrowLeft', run: cursorSyntaxLeft, shift: selectSyntaxLeft},
     {key: 'Alt-ArrowRight', mac: 'Ctrl-ArrowRight', run: cursorSyntaxRight, shift: selectSyntaxRight},
@@ -20896,12 +20896,12 @@
     },
   });
   /**
-    Extension to enable bracket-closing behavior. When a closeable
-    bracket is typed, its closing bracket is immediately inserted
-    after the cursor. When closing a bracket directly in front of a
-    closing bracket inserted by the extension, the cursor moves over
-    that bracket.
-    */
+      Extension to enable bracket-closing behavior. When a closeable
+      bracket is typed, its closing bracket is immediately inserted
+      after the cursor. When closing a bracket directly in front of a
+      closing bracket inserted by the extension, the cursor moves over
+      that bracket.
+      */
   function closeBrackets() {
     return [inputHandler, bracketState];
   }
@@ -20931,9 +20931,9 @@
     return true;
   });
   /**
-    Command that implements deleting a pair of matching brackets when
-    the cursor is between them.
-    */
+      Command that implements deleting a pair of matching brackets when
+      the cursor is between them.
+      */
   const deleteBracketPair = ({state, dispatch}) => {
     if (state.readOnly) return false;
     let conf = config$1(state, state.selection.main.head);
@@ -20957,21 +20957,21 @@
     return !dont;
   };
   /**
-    Close-brackets related key bindings. Binds Backspace to
-    [`deleteBracketPair`](https://codemirror.net/6/docs/ref/#closebrackets.deleteBracketPair).
-    */
+      Close-brackets related key bindings. Binds Backspace to
+      [`deleteBracketPair`](https://codemirror.net/6/docs/ref/#closebrackets.deleteBracketPair).
+      */
   const closeBracketsKeymap = [{key: 'Backspace', run: deleteBracketPair}];
   /**
-    Implements the extension's behavior on text insertion. If the
-    given string counts as a bracket in the language around the
-    selection, and replacing the selection with it requires custom
-    behavior (inserting a closing version or skipping past a
-    previously-closed bracket), this function returns a transaction
-    representing that custom behavior. (You only need this if you want
-    to programmatically insert bracketsâ€”the
-    [`closeBrackets`](https://codemirror.net/6/docs/ref/#closebrackets.closeBrackets) extension will
-    take care of running this for user input.)
-    */
+      Implements the extension's behavior on text insertion. If the
+      given string counts as a bracket in the language around the
+      selection, and replacing the selection with it requires custom
+      behavior (inserting a closing version or skipping past a
+      previously-closed bracket), this function returns a transaction
+      representing that custom behavior. (You only need this if you want
+      to programmatically insert bracketsâ€”the
+      [`closeBrackets`](https://codemirror.net/6/docs/ref/#closebrackets.closeBrackets) extension will
+      take care of running this for user input.)
+      */
   function insertBracket(state, bracket) {
     let conf = config$1(state, state.selection.main.head);
     let tokens = conf.brackets || defaults.brackets;
@@ -21132,10 +21132,10 @@
     },
   });
   /**
-    Get the active panel created by the given constructor, if any.
-    This can be useful when you need access to your panels' DOM
-    structure.
-    */
+      Get the active panel created by the given constructor, if any.
+      This can be useful when you need access to your panels' DOM
+      structure.
+      */
   function getPanel(view, panel) {
     let plugin = view.plugin(panelPlugin);
     let index = plugin ? plugin.specs.indexOf(panel) : -1;
@@ -21299,10 +21299,10 @@
     },
   });
   /**
-    Opening a panel is done by providing a constructor function for
-    the panel through this facet. (The panel is closed again when its
-    constructor is no longer provided.) Values of `null` are ignored.
-    */
+      Opening a panel is done by providing a constructor function for
+      the panel through this facet. (The panel is closed again when its
+      constructor is no longer provided.) Values of `null` are ignored.
+      */
   const showPanel = /*@__PURE__*/ Facet.define({
     enables: [panelPlugin, baseTheme$4],
   });
@@ -21340,33 +21340,33 @@
 
   const basicNormalize = typeof String.prototype.normalize == 'function' ? x => x.normalize('NFKD') : x => x;
   /**
-    A search cursor provides an iterator over text matches in a
-    document.
-    */
+      A search cursor provides an iterator over text matches in a
+      document.
+      */
   class SearchCursor {
     /**
-        Create a text cursor. The query is the search string, `from` to
-        `to` provides the region to search.
-        
-        When `normalize` is given, it will be called, on both the query
-        string and the content it is matched against, before comparing.
-        You can, for example, create a case-insensitive search by
-        passing `s => s.toLowerCase()`.
-        
-        Text is always normalized with
-        [`.normalize("NFKD")`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/normalize)
-        (when supported).
-        */
+          Create a text cursor. The query is the search string, `from` to
+          `to` provides the region to search.
+          
+          When `normalize` is given, it will be called, on both the query
+          string and the content it is matched against, before comparing.
+          You can, for example, create a case-insensitive search by
+          passing `s => s.toLowerCase()`.
+          
+          Text is always normalized with
+          [`.normalize("NFKD")`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/normalize)
+          (when supported).
+          */
     constructor(text, query, from = 0, to = text.length, normalize) {
       /**
-            The current match (only holds a meaningful value after
-            [`next`](https://codemirror.net/6/docs/ref/#search.SearchCursor.next) has been called and when
-            `done` is false).
-            */
+              The current match (only holds a meaningful value after
+              [`next`](https://codemirror.net/6/docs/ref/#search.SearchCursor.next) has been called and when
+              `done` is false).
+              */
       this.value = {from: 0, to: 0};
       /**
-            Whether the end of the iterated region has been reached.
-            */
+              Whether the end of the iterated region has been reached.
+              */
       this.done = false;
       this.matches = [];
       this.buffer = '';
@@ -21387,20 +21387,20 @@
       return codePointAt(this.buffer, this.bufferPos);
     }
     /**
-        Look for the next match. Updates the iterator's
-        [`value`](https://codemirror.net/6/docs/ref/#search.SearchCursor.value) and
-        [`done`](https://codemirror.net/6/docs/ref/#search.SearchCursor.done) properties. Should be called
-        at least once before using the cursor.
-        */
+          Look for the next match. Updates the iterator's
+          [`value`](https://codemirror.net/6/docs/ref/#search.SearchCursor.value) and
+          [`done`](https://codemirror.net/6/docs/ref/#search.SearchCursor.done) properties. Should be called
+          at least once before using the cursor.
+          */
     next() {
       while (this.matches.length) this.matches.pop();
       return this.nextOverlapping();
     }
     /**
-        The `next` method will ignore matches that partially overlap a
-        previous match. This method behaves like `next`, but includes
-        such matches.
-        */
+          The `next` method will ignore matches that partially overlap a
+          previous match. This method behaves like `next`, but includes
+          such matches.
+          */
     nextOverlapping() {
       for (;;) {
         let next = this.peek();
@@ -21457,29 +21457,29 @@
   const empty = {from: -1, to: -1, match: /*@__PURE__*/ /.*/.exec('')};
   const baseFlags = 'gm' + (/x/.unicode == null ? '' : 'u');
   /**
-    This class is similar to [`SearchCursor`](https://codemirror.net/6/docs/ref/#search.SearchCursor)
-    but searches for a regular expression pattern instead of a plain
-    string.
-    */
+      This class is similar to [`SearchCursor`](https://codemirror.net/6/docs/ref/#search.SearchCursor)
+      but searches for a regular expression pattern instead of a plain
+      string.
+      */
   class RegExpCursor {
     /**
-        Create a cursor that will search the given range in the given
-        document. `query` should be the raw pattern (as you'd pass it to
-        `new RegExp`).
-        */
+          Create a cursor that will search the given range in the given
+          document. `query` should be the raw pattern (as you'd pass it to
+          `new RegExp`).
+          */
     constructor(text, query, options, from = 0, to = text.length) {
       this.to = to;
       this.curLine = '';
       /**
-            Set to `true` when the cursor has reached the end of the search
-            range.
-            */
+              Set to `true` when the cursor has reached the end of the search
+              range.
+              */
       this.done = false;
       /**
-            Will contain an object with the extent of the match and the
-            match object when [`next`](https://codemirror.net/6/docs/ref/#search.RegExpCursor.next)
-            sucessfully finds a match.
-            */
+              Will contain an object with the extent of the match and the
+              match object when [`next`](https://codemirror.net/6/docs/ref/#search.RegExpCursor.next)
+              sucessfully finds a match.
+              */
       this.value = empty;
       if (/\\[sWDnr]|\n|\r|\[\^/.test(query)) return new MultilineRegExpCursor(text, query, options, from, to);
       this.re = new RegExp(
@@ -21509,8 +21509,8 @@
       else this.getLine(0);
     }
     /**
-        Move to the next match, if there is one.
-        */
+          Move to the next match, if there is one.
+          */
     next() {
       for (let off = this.matchPos - this.curLineStart; ; ) {
         this.re.lastIndex = off;
@@ -21690,17 +21690,17 @@
     provide: f => showPanel.from(f, val => (val ? createLineDialog : null)),
   });
   /**
-    Command that shows a dialog asking the user for a line number, and
-    when a valid position is provided, moves the cursor to that line.
-
-    Supports line numbers, relative line offsets prefixed with `+` or
-    `-`, document percentages suffixed with `%`, and an optional
-    column position by adding `:` and a second number after the line
-    number.
-
-    The dialog can be styled with the `panel.gotoLine` theme
-    selector.
-    */
+      Command that shows a dialog asking the user for a line number, and
+      when a valid position is provided, moves the cursor to that line.
+  
+      Supports line numbers, relative line offsets prefixed with `+` or
+      `-`, document percentages suffixed with `%`, and an optional
+      column position by adding `:` and a second number after the line
+      number.
+  
+      The dialog can be styled with the `panel.gotoLine` theme
+      selector.
+      */
   const gotoLine = view => {
     let panel = getPanel(view, createLineDialog);
     if (!panel) {
@@ -21736,11 +21736,11 @@
     },
   });
   /**
-    This extension highlights text that matches the selection. It uses
-    the `"cm-selectionMatch"` class for the highlighting. When
-    `highlightWordAroundCursor` is enabled, the word at the cursor
-    itself will be highlighted with `"cm-selectionMatch-main"`.
-    */
+      This extension highlights text that matches the selection. It uses
+      the `"cm-selectionMatch"` class for the highlighting. When
+      `highlightWordAroundCursor` is enabled, the word at the cursor
+      itself will be highlighted with `"cm-selectionMatch-main"`.
+      */
   function highlightSelectionMatches(options) {
     let ext = [defaultTheme, matchHighlighter];
     if (options) ext.push(highlightConfig.of(options));
@@ -21860,9 +21860,9 @@
     }
   }
   /**
-    Select next occurrence of the current selection.
-    Expand selection to the word when selection range is empty.
-    */
+      Select next occurrence of the current selection.
+      Expand selection to the word when selection range is empty.
+      */
   const selectNextOccurrence = ({state, dispatch}) => {
     let {ranges} = state.selection;
     if (ranges.some(sel => sel.from === sel.to)) return selectWord({state, dispatch});
@@ -21896,12 +21896,12 @@
     },
   });
   /**
-    A search query. Part of the editor's search state.
-    */
+      A search query. Part of the editor's search state.
+      */
   class SearchQuery {
     /**
-        Create a query object.
-        */
+          Create a query object.
+          */
     constructor(config) {
       this.search = config.search;
       this.caseSensitive = !!config.caseSensitive;
@@ -21913,8 +21913,8 @@
       );
     }
     /**
-        Compare this query to another query.
-        */
+          Compare this query to another query.
+          */
     eq(other) {
       return (
         this.search == other.search &&
@@ -21924,8 +21924,8 @@
       );
     }
     /**
-        @internal
-        */
+          @internal
+          */
     create() {
       return this.regexp ? new RegExpQuery(this) : new StringQuery(this);
     }
@@ -22035,12 +22035,12 @@
     }
   }
   /**
-    A state effect that updates the current search query. Note that
-    this only has an effect if the search state has been initialized
-    (by including [`search`](https://codemirror.net/6/docs/ref/#search.search) in your configuration or
-    by running [`openSearchPanel`](https://codemirror.net/6/docs/ref/#search.openSearchPanel) at least
-    once).
-    */
+      A state effect that updates the current search query. Note that
+      this only has an effect if the search state has been initialized
+      (by including [`search`](https://codemirror.net/6/docs/ref/#search.search) in your configuration or
+      by running [`openSearchPanel`](https://codemirror.net/6/docs/ref/#search.openSearchPanel) at least
+      once).
+      */
   const setSearchQuery = /*@__PURE__*/ StateEffect.define();
   const togglePanel$1 = /*@__PURE__*/ StateEffect.define();
   const searchState = /*@__PURE__*/ StateField.define({
@@ -22107,11 +22107,11 @@
     };
   }
   /**
-    Open the search panel if it isn't already open, and move the
-    selection to the first match after the current main selection.
-    Will wrap around to the start of the document when it reaches the
-    end.
-    */
+      Open the search panel if it isn't already open, and move the
+      selection to the first match after the current main selection.
+      Will wrap around to the start of the document when it reaches the
+      end.
+      */
   const findNext = /*@__PURE__*/ searchCommand((view, {query}) => {
     let {from, to} = view.state.selection.main;
     let next = query.nextMatch(view.state.doc, from, to);
@@ -22125,10 +22125,10 @@
     return true;
   });
   /**
-    Move the selection to the previous instance of the search query,
-    before the current main selection. Will wrap past the start
-    of the document to start searching at the end again.
-    */
+      Move the selection to the previous instance of the search query,
+      before the current main selection. Will wrap past the start
+      of the document to start searching at the end again.
+      */
   const findPrevious = /*@__PURE__*/ searchCommand((view, {query}) => {
     let {state} = view,
       {from, to} = state.selection.main;
@@ -22143,8 +22143,8 @@
     return true;
   });
   /**
-    Select all instances of the search query.
-    */
+      Select all instances of the search query.
+      */
   const selectMatches = /*@__PURE__*/ searchCommand((view, {query}) => {
     let ranges = query.matchAll(view.state.doc, 1000);
     if (!ranges || !ranges.length) return false;
@@ -22155,8 +22155,8 @@
     return true;
   });
   /**
-    Select all instances of the currently selected text.
-    */
+      Select all instances of the currently selected text.
+      */
   const selectSelectionMatches = ({state, dispatch}) => {
     let sel = state.selection;
     if (sel.ranges.length > 1 || sel.main.empty) return false;
@@ -22177,8 +22177,8 @@
     return true;
   };
   /**
-    Replace the current match of the search query.
-    */
+      Replace the current match of the search query.
+      */
   const replaceNext = /*@__PURE__*/ searchCommand((view, {query}) => {
     let {state} = view,
       {from, to} = state.selection.main;
@@ -22207,9 +22207,9 @@
     return true;
   });
   /**
-    Replace all instances of the search query with the given
-    replacement.
-    */
+      Replace all instances of the search query with the given
+      replacement.
+      */
   const replaceAll = /*@__PURE__*/ searchCommand((view, {query}) => {
     if (view.state.readOnly) return false;
     let changes = query.matchAll(view.state.doc, 1e9).map(match => {
@@ -22237,8 +22237,8 @@
     return fallback && !selText ? fallback : new SearchQuery({search: selText.replace(/\n/g, '\\n'), caseSensitive});
   }
   /**
-    Make sure the search panel is open and focused.
-    */
+      Make sure the search panel is open and focused.
+      */
   const openSearchPanel = view => {
     let state = view.state.field(searchState, false);
     if (state && state.panel) {
@@ -22264,8 +22264,8 @@
     return true;
   };
   /**
-    Close the search panel.
-    */
+      Close the search panel.
+      */
   const closeSearchPanel = view => {
     let state = view.state.field(searchState, false);
     if (!state || !state.panel) return false;
@@ -22275,14 +22275,14 @@
     return true;
   };
   /**
-    Default search-related key bindings.
-
-     - Mod-f: [`openSearchPanel`](https://codemirror.net/6/docs/ref/#search.openSearchPanel)
-     - F3, Mod-g: [`findNext`](https://codemirror.net/6/docs/ref/#search.findNext)
-     - Shift-F3, Shift-Mod-g: [`findPrevious`](https://codemirror.net/6/docs/ref/#search.findPrevious)
-     - Alt-g: [`gotoLine`](https://codemirror.net/6/docs/ref/#search.gotoLine)
-     - Mod-d: [`selectNextOccurrence`](https://codemirror.net/6/docs/ref/#search.selectNextOccurrence)
-    */
+      Default search-related key bindings.
+  
+       - Mod-f: [`openSearchPanel`](https://codemirror.net/6/docs/ref/#search.openSearchPanel)
+       - F3, Mod-g: [`findNext`](https://codemirror.net/6/docs/ref/#search.findNext)
+       - Shift-F3, Shift-Mod-g: [`findPrevious`](https://codemirror.net/6/docs/ref/#search.findPrevious)
+       - Alt-g: [`gotoLine`](https://codemirror.net/6/docs/ref/#search.gotoLine)
+       - Mod-d: [`selectNextOccurrence`](https://codemirror.net/6/docs/ref/#search.selectNextOccurrence)
+      */
   const searchKeymap = [
     {key: 'Mod-f', run: openSearchPanel, scope: 'editor search-panel'},
     {key: 'F3', run: findNext, shift: findPrevious, scope: 'editor search-panel', preventDefault: true},
@@ -22788,8 +22788,8 @@
   });
   const noOffset = {x: 0, y: 0};
   /**
-    Behavior by which an extension can provide a tooltip to be shown.
-    */
+      Behavior by which an extension can provide a tooltip to be shown.
+      */
   const showTooltip = /*@__PURE__*/ Facet.define({
     enables: [tooltipPlugin, baseTheme$2],
   });
@@ -22955,18 +22955,18 @@
     return false;
   }
   /**
-    Enable a hover tooltip, which shows up when the pointer hovers
-    over ranges of text. The callback is called when the mouse hovers
-    over the document text. It should, if there is a tooltip
-    associated with position `pos` return the tooltip description
-    (either directly or in a promise). The `side` argument indicates
-    on which side of the position the pointer isâ€”it will be -1 if the
-    pointer is before the position, 1 if after the position.
-
-    Note that all hover tooltips are hosted within a single tooltip
-    container element. This allows multiple tooltips over the same
-    range to be "merged" together without overlapping.
-    */
+      Enable a hover tooltip, which shows up when the pointer hovers
+      over ranges of text. The callback is called when the mouse hovers
+      over the document text. It should, if there is a tooltip
+      associated with position `pos` return the tooltip description
+      (either directly or in a promise). The `side` argument indicates
+      on which side of the position the pointer isâ€”it will be -1 if the
+      pointer is before the position, 1 if after the position.
+  
+      Note that all hover tooltips are hosted within a single tooltip
+      container element. This allows multiple tooltips over the same
+      range to be "merged" together without overlapping.
+      */
   function hoverTooltip(source, options = {}) {
     let setHover = StateEffect.define();
     let hoverState = StateField.define({
@@ -23000,8 +23000,8 @@
     ];
   }
   /**
-    Get the active tooltip view for a given tooltip, if available.
-    */
+      Get the active tooltip view for a given tooltip, if available.
+      */
   function getTooltip(view, tooltip) {
     let plugin = view.plugin(tooltipPlugin);
     if (!plugin) return null;
@@ -23011,43 +23011,43 @@
   const closeHoverTooltipEffect = /*@__PURE__*/ StateEffect.define();
 
   /**
-    An instance of this is passed to completion source functions.
-    */
+      An instance of this is passed to completion source functions.
+      */
   class CompletionContext {
     /**
-        Create a new completion context. (Mostly useful for testing
-        completion sourcesâ€”in the editor, the extension will create
-        these for you.)
-        */
+          Create a new completion context. (Mostly useful for testing
+          completion sourcesâ€”in the editor, the extension will create
+          these for you.)
+          */
     constructor(
       /**
-        The editor state that the completion happens in.
-        */
+          The editor state that the completion happens in.
+          */
       state,
       /**
-        The position at which the completion is happening.
-        */
+          The position at which the completion is happening.
+          */
       pos,
       /**
-        Indicates whether completion was activated explicitly, or
-        implicitly by typing. The usual way to respond to this is to
-        only return completions when either there is part of a
-        completable entity before the cursor, or `explicit` is true.
-        */
+          Indicates whether completion was activated explicitly, or
+          implicitly by typing. The usual way to respond to this is to
+          only return completions when either there is part of a
+          completable entity before the cursor, or `explicit` is true.
+          */
       explicit
     ) {
       this.state = state;
       this.pos = pos;
       this.explicit = explicit;
       /**
-            @internal
-            */
+              @internal
+              */
       this.abortListeners = [];
     }
     /**
-        Get the extent, content, and (if there is a token) type of the
-        token before `this.pos`.
-        */
+          Get the extent, content, and (if there is a token) type of the
+          token before `this.pos`.
+          */
     tokenBefore(types) {
       let token = syntaxTree(this.state).resolveInner(this.pos, -1);
       while (token && types.indexOf(token.name) < 0) token = token.parent;
@@ -23056,9 +23056,9 @@
         : null;
     }
     /**
-        Get the match of the given expression directly before the
-        cursor.
-        */
+          Get the match of the given expression directly before the
+          cursor.
+          */
     matchBefore(expr) {
       let line = this.state.doc.lineAt(this.pos);
       let start = Math.max(line.from, this.pos - 250);
@@ -23067,17 +23067,17 @@
       return found < 0 ? null : {from: start + found, to: this.pos, text: str.slice(found)};
     }
     /**
-        Yields true when the query has been aborted. Can be useful in
-        asynchronous queries to avoid doing work that will be ignored.
-        */
+          Yields true when the query has been aborted. Can be useful in
+          asynchronous queries to avoid doing work that will be ignored.
+          */
     get aborted() {
       return this.abortListeners == null;
     }
     /**
-        Allows you to register abort handlers, which will be called when
-        the query is
-        [aborted](https://codemirror.net/6/docs/ref/#autocomplete.CompletionContext.aborted).
-        */
+          Allows you to register abort handlers, which will be called when
+          the query is
+          [aborted](https://codemirror.net/6/docs/ref/#autocomplete.CompletionContext.aborted).
+          */
     addEventListener(type, listener) {
       if (type == 'abort' && this.abortListeners) this.abortListeners.push(listener);
     }
@@ -23099,9 +23099,9 @@
     return [new RegExp('^' + source), new RegExp(source)];
   }
   /**
-    Given a a fixed array of options, return an autocompleter that
-    completes them.
-    */
+      Given a a fixed array of options, return an autocompleter that
+      completes them.
+      */
   function completeFromList(list) {
     let options = list.map(o => (typeof o == 'string' ? {label: o} : o));
     let [span, match] = options.every(o => /^\w+$/.test(o.label)) ? [/\w*$/, /\w+$/] : prefixMatch(options);
@@ -23134,9 +23134,9 @@
     );
   }
   /**
-    This annotation is added to transactions that are produced by
-    picking a completion.
-    */
+      This annotation is added to transactions that are produced by
+      picking a completion.
+      */
   const pickedCompletion = /*@__PURE__*/ Annotation.define();
   function applyCompletion(view, option) {
     let apply = option.completion.apply || option.completion.label;
@@ -23813,9 +23813,9 @@
 
   const CompletionInteractMargin = 75;
   /**
-    Returns a command that moves the completion selection forward or
-    backward by the given amount.
-    */
+      Returns a command that moves the completion selection forward or
+      backward by the given amount.
+      */
   function moveCompletionSelection(forward, by = 'option') {
     return view => {
       let cState = view.state.field(completionState, false);
@@ -23833,8 +23833,8 @@
     };
   }
   /**
-    Accept the current completion.
-    */
+      Accept the current completion.
+      */
   const acceptCompletion = view => {
     let cState = view.state.field(completionState, false);
     if (view.state.readOnly || !cState || !cState.open || Date.now() - cState.open.timestamp < CompletionInteractMargin)
@@ -23843,8 +23843,8 @@
     return true;
   };
   /**
-    Explicitly start autocompletion.
-    */
+      Explicitly start autocompletion.
+      */
   const startCompletion = view => {
     let cState = view.state.field(completionState, false);
     if (!cState) return false;
@@ -23852,8 +23852,8 @@
     return true;
   };
   /**
-    Close the currently active completion.
-    */
+      Close the currently active completion.
+      */
   const closeCompletion = view => {
     let cState = view.state.field(completionState, false);
     if (!cState || !cState.active.some(a => a.state != 0 /* Inactive */)) return false;
@@ -24124,22 +24124,22 @@
   });
 
   /**
-    Returns an extension that enables autocompletion.
-    */
+      Returns an extension that enables autocompletion.
+      */
   function autocompletion(config = {}) {
     return [completionState, completionConfig.of(config), completionPlugin, completionKeymapExt, baseTheme$1];
   }
   /**
-    Basic keybindings for autocompletion.
-
-     - Ctrl-Space: [`startCompletion`](https://codemirror.net/6/docs/ref/#autocomplete.startCompletion)
-     - Escape: [`closeCompletion`](https://codemirror.net/6/docs/ref/#autocomplete.closeCompletion)
-     - ArrowDown: [`moveCompletionSelection`](https://codemirror.net/6/docs/ref/#autocomplete.moveCompletionSelection)`(true)`
-     - ArrowUp: [`moveCompletionSelection`](https://codemirror.net/6/docs/ref/#autocomplete.moveCompletionSelection)`(false)`
-     - PageDown: [`moveCompletionSelection`](https://codemirror.net/6/docs/ref/#autocomplete.moveCompletionSelection)`(true, "page")`
-     - PageDown: [`moveCompletionSelection`](https://codemirror.net/6/docs/ref/#autocomplete.moveCompletionSelection)`(true, "page")`
-     - Enter: [`acceptCompletion`](https://codemirror.net/6/docs/ref/#autocomplete.acceptCompletion)
-    */
+      Basic keybindings for autocompletion.
+  
+       - Ctrl-Space: [`startCompletion`](https://codemirror.net/6/docs/ref/#autocomplete.startCompletion)
+       - Escape: [`closeCompletion`](https://codemirror.net/6/docs/ref/#autocomplete.closeCompletion)
+       - ArrowDown: [`moveCompletionSelection`](https://codemirror.net/6/docs/ref/#autocomplete.moveCompletionSelection)`(true)`
+       - ArrowUp: [`moveCompletionSelection`](https://codemirror.net/6/docs/ref/#autocomplete.moveCompletionSelection)`(false)`
+       - PageDown: [`moveCompletionSelection`](https://codemirror.net/6/docs/ref/#autocomplete.moveCompletionSelection)`(true, "page")`
+       - PageDown: [`moveCompletionSelection`](https://codemirror.net/6/docs/ref/#autocomplete.moveCompletionSelection)`(true, "page")`
+       - Enter: [`acceptCompletion`](https://codemirror.net/6/docs/ref/#autocomplete.acceptCompletion)
+      */
   const completionKeymap = [
     {key: 'Ctrl-Space', run: startCompletion},
     {key: 'Escape', run: closeCompletion},
@@ -24156,9 +24156,9 @@
   );
 
   /**
-    Comment or uncomment the current selection. Will use line comments
-    if available, otherwise falling back to block comments.
-    */
+      Comment or uncomment the current selection. Will use line comments
+      if available, otherwise falling back to block comments.
+      */
   const toggleComment = target => {
     let config = getConfig(target.state);
     return config.line ? toggleLineComment(target) : config.block ? toggleBlockCommentByLine(target) : false;
@@ -24173,33 +24173,33 @@
     };
   }
   /**
-    Comment or uncomment the current selection using line comments.
-    The line comment syntax is taken from the
-    [`commentTokens`](https://codemirror.net/6/docs/ref/#comment.CommentTokens) [language
-    data](https://codemirror.net/6/docs/ref/#state.EditorState.languageDataAt).
-    */
+      Comment or uncomment the current selection using line comments.
+      The line comment syntax is taken from the
+      [`commentTokens`](https://codemirror.net/6/docs/ref/#comment.CommentTokens) [language
+      data](https://codemirror.net/6/docs/ref/#state.EditorState.languageDataAt).
+      */
   const toggleLineComment = /*@__PURE__*/ command(changeLineComment, 0 /* Toggle */);
   /**
-    Comment or uncomment the current selection using block comments.
-    The block comment syntax is taken from the
-    [`commentTokens`](https://codemirror.net/6/docs/ref/#comment.CommentTokens) [language
-    data](https://codemirror.net/6/docs/ref/#state.EditorState.languageDataAt).
-    */
+      Comment or uncomment the current selection using block comments.
+      The block comment syntax is taken from the
+      [`commentTokens`](https://codemirror.net/6/docs/ref/#comment.CommentTokens) [language
+      data](https://codemirror.net/6/docs/ref/#state.EditorState.languageDataAt).
+      */
   const toggleBlockComment = /*@__PURE__*/ command(changeBlockComment, 0 /* Toggle */);
   /**
-    Comment or uncomment the lines around the current selection using
-    block comments.
-    */
+      Comment or uncomment the lines around the current selection using
+      block comments.
+      */
   const toggleBlockCommentByLine = /*@__PURE__*/ command(
     (o, s) => changeBlockComment(o, s, selectedLineRanges(s)),
     0 /* Toggle */
   );
   /**
-    Default key bindings for this package.
-
-     - Ctrl-/ (Cmd-/ on macOS): [`toggleComment`](https://codemirror.net/6/docs/ref/#comment.toggleComment).
-     - Shift-Alt-a: [`toggleBlockComment`](https://codemirror.net/6/docs/ref/#comment.toggleBlockComment).
-    */
+      Default key bindings for this package.
+  
+       - Ctrl-/ (Cmd-/ on macOS): [`toggleComment`](https://codemirror.net/6/docs/ref/#comment.toggleComment).
+       - Shift-Alt-a: [`toggleBlockComment`](https://codemirror.net/6/docs/ref/#comment.toggleBlockComment).
+      */
   const commentKeymap = [
     {key: 'Mod-/', run: toggleComment},
     {key: 'Alt-A', run: toggleBlockComment},
@@ -24210,9 +24210,9 @@
   }
   const SearchMargin = 50;
   /**
-    Determines if the given range is block-commented in the given
-    state.
-    */
+      Determines if the given range is block-commented in the given
+      state.
+      */
   function findBlockComment(state, {open, close}, from, to) {
     let textBefore = state.sliceDoc(from - SearchMargin, from);
     let textAfter = state.sliceDoc(to, to + SearchMargin);
@@ -24410,12 +24410,12 @@
     };
   }
   /**
-    Create an extension that enables rectangular selections. By
-    default, it will react to left mouse drag with the Alt key held
-    down. When such a selection occurs, the text within the rectangle
-    that was dragged over will be selected, as one selection
-    [range](https://codemirror.net/6/docs/ref/#state.SelectionRange) per line.
-    */
+      Create an extension that enables rectangular selections. By
+      default, it will react to left mouse drag with the Alt key held
+      down. When such a selection occurs, the text within the rectangle
+      that was dragged over will be selected, as one selection
+      [range](https://codemirror.net/6/docs/ref/#state.SelectionRange) per line.
+      */
   function rectangularSelection(options) {
     let filter =
       (options === null || options === void 0 ? void 0 : options.eventFilter) || (e => e.altKey && e.button == 0);
@@ -24431,12 +24431,12 @@
   };
   const showCrosshair = {style: 'cursor: crosshair'};
   /**
-    Returns an extension that turns the pointer cursor into a
-    crosshair when a given modifier key, defaulting to Alt, is held
-    down. Can serve as a visual hint that rectangular selection is
-    going to happen when paired with
-    [`rectangularSelection`](https://codemirror.net/6/docs/ref/#rectangular-selection.rectangularSelection).
-    */
+      Returns an extension that turns the pointer cursor into a
+      crosshair when a given modifier key, defaulting to Alt, is held
+      down. Can serve as a visual hint that rectangular selection is
+      going to happen when paired with
+      [`rectangularSelection`](https://codemirror.net/6/docs/ref/#rectangular-selection.rectangularSelection).
+      */
   function crosshairCursor(options = {}) {
     let [code, getter] = keys[options.key || 'Alt'];
     let plugin = ViewPlugin.fromClass(
@@ -24474,59 +24474,59 @@
 
   let nextTagID = 0;
   /**
-    Highlighting tags are markers that denote a highlighting category.
-    They are [associated](https://codemirror.net/6/docs/ref/#highlight.styleTags) with parts of a syntax
-    tree by a language mode, and then mapped to an actual CSS style by
-    a [highlight style](https://codemirror.net/6/docs/ref/#highlight.HighlightStyle).
-
-    Because syntax tree node types and highlight styles have to be
-    able to talk the same language, CodeMirror uses a mostly _closed_
-    [vocabulary](https://codemirror.net/6/docs/ref/#highlight.tags) of syntax tags (as opposed to
-    traditional open string-based systems, which make it hard for
-    highlighting themes to cover all the tokens produced by the
-    various languages).
-
-    It _is_ possible to [define](https://codemirror.net/6/docs/ref/#highlight.Tag^define) your own
-    highlighting tags for system-internal use (where you control both
-    the language package and the highlighter), but such tags will not
-    be picked up by regular highlighters (though you can derive them
-    from standard tags to allow highlighters to fall back to those).
-    */
+      Highlighting tags are markers that denote a highlighting category.
+      They are [associated](https://codemirror.net/6/docs/ref/#highlight.styleTags) with parts of a syntax
+      tree by a language mode, and then mapped to an actual CSS style by
+      a [highlight style](https://codemirror.net/6/docs/ref/#highlight.HighlightStyle).
+  
+      Because syntax tree node types and highlight styles have to be
+      able to talk the same language, CodeMirror uses a mostly _closed_
+      [vocabulary](https://codemirror.net/6/docs/ref/#highlight.tags) of syntax tags (as opposed to
+      traditional open string-based systems, which make it hard for
+      highlighting themes to cover all the tokens produced by the
+      various languages).
+  
+      It _is_ possible to [define](https://codemirror.net/6/docs/ref/#highlight.Tag^define) your own
+      highlighting tags for system-internal use (where you control both
+      the language package and the highlighter), but such tags will not
+      be picked up by regular highlighters (though you can derive them
+      from standard tags to allow highlighters to fall back to those).
+      */
   class Tag {
     /**
-        @internal
-        */
+          @internal
+          */
     constructor(
       /**
-        The set of tags that match this tag, starting with this one
-        itself, sorted in order of decreasing specificity. @internal
-        */
+          The set of tags that match this tag, starting with this one
+          itself, sorted in order of decreasing specificity. @internal
+          */
       set,
       /**
-        The base unmodified tag that this one is based on, if it's
-        modified @internal
-        */
+          The base unmodified tag that this one is based on, if it's
+          modified @internal
+          */
       base,
       /**
-        The modifiers applied to this.base @internal
-        */
+          The modifiers applied to this.base @internal
+          */
       modified
     ) {
       this.set = set;
       this.base = base;
       this.modified = modified;
       /**
-            @internal
-            */
+              @internal
+              */
       this.id = nextTagID++;
     }
     /**
-        Define a new tag. If `parent` is given, the tag is treated as a
-        sub-tag of that parent, and [highlight
-        styles](https://codemirror.net/6/docs/ref/#highlight.HighlightStyle) that don't mention this tag
-        will try to fall back to the parent tag (or grandparent tag,
-        etc).
-        */
+          Define a new tag. If `parent` is given, the tag is treated as a
+          sub-tag of that parent, and [highlight
+          styles](https://codemirror.net/6/docs/ref/#highlight.HighlightStyle) that don't mention this tag
+          will try to fall back to the parent tag (or grandparent tag,
+          etc).
+          */
     static define(parent) {
       if (parent === null || parent === void 0 ? void 0 : parent.base)
         throw new Error('Can not derive from a modified tag');
@@ -24536,17 +24536,17 @@
       return tag;
     }
     /**
-        Define a tag _modifier_, which is a function that, given a tag,
-        will return a tag that is a subtag of the original. Applying the
-        same modifier to a twice tag will return the same value (`m1(t1)
-        == m1(t1)`) and applying multiple modifiers will, regardless or
-        order, produce the same tag (`m1(m2(t1)) == m2(m1(t1))`).
-        
-        When multiple modifiers are applied to a given base tag, each
-        smaller set of modifiers is registered as a parent, so that for
-        example `m1(m2(m3(t1)))` is a subtype of `m1(m2(t1))`,
-        `m1(m3(t1)`, and so on.
-        */
+          Define a tag _modifier_, which is a function that, given a tag,
+          will return a tag that is a subtag of the original. Applying the
+          same modifier to a twice tag will return the same value (`m1(t1)
+          == m1(t1)`) and applying multiple modifiers will, regardless or
+          order, produce the same tag (`m1(m2(t1)) == m2(m1(t1))`).
+          
+          When multiple modifiers are applied to a given base tag, each
+          smaller set of modifiers is registered as a parent, so that for
+          example `m1(m2(m3(t1)))` is a subtype of `m1(m2(t1))`,
+          `m1(m3(t1)`, and so on.
+          */
     static defineModifier() {
       let mod = new Modifier();
       return tag => {
@@ -24587,57 +24587,57 @@
     return result;
   }
   /**
-    This function is used to add a set of tags to a language syntax
-    via
-    [`LRParser.configure`](https://lezer.codemirror.net/docs/ref#lr.LRParser.configure).
-
-    The argument object maps node selectors to [highlighting
-    tags](https://codemirror.net/6/docs/ref/#highlight.Tag) or arrays of tags.
-
-    Node selectors may hold one or more (space-separated) node paths.
-    Such a path can be a [node
-    name](https://lezer.codemirror.net/docs/ref#common.NodeType.name),
-    or multiple node names (or `*` wildcards) separated by slash
-    characters, as in `"Block/Declaration/VariableName"`. Such a path
-    matches the final node but only if its direct parent nodes are the
-    other nodes mentioned. A `*` in such a path matches any parent,
-    but only a single levelâ€”wildcards that match multiple parents
-    aren't supported, both for efficiency reasons and because Lezer
-    trees make it rather hard to reason about what they would match.)
-
-    A path can be ended with `/...` to indicate that the tag assigned
-    to the node should also apply to all child nodes, even if they
-    match their own style (by default, only the innermost style is
-    used).
-
-    When a path ends in `!`, as in `Attribute!`, no further matching
-    happens for the node's child nodes, and the entire node gets the
-    given style.
-
-    In this notation, node names that contain `/`, `!`, `*`, or `...`
-    must be quoted as JSON strings.
-
-    For example:
-
-    ```javascript
-    parser.withProps(
-      styleTags({
-        // Style Number and BigNumber nodes
-        "Number BigNumber": tags.number,
-        // Style Escape nodes whose parent is String
-        "String/Escape": tags.escape,
-        // Style anything inside Attributes nodes
-        "Attributes!": tags.meta,
-        // Add a style to all content inside Italic nodes
-        "Italic/...": tags.emphasis,
-        // Style InvalidString nodes as both `string` and `invalid`
-        "InvalidString": [tags.string, tags.invalid],
-        // Style the node named "/" as punctuation
-        '"/"': tags.punctuation
-      })
-    )
-    ```
-    */
+      This function is used to add a set of tags to a language syntax
+      via
+      [`LRParser.configure`](https://lezer.codemirror.net/docs/ref#lr.LRParser.configure).
+  
+      The argument object maps node selectors to [highlighting
+      tags](https://codemirror.net/6/docs/ref/#highlight.Tag) or arrays of tags.
+  
+      Node selectors may hold one or more (space-separated) node paths.
+      Such a path can be a [node
+      name](https://lezer.codemirror.net/docs/ref#common.NodeType.name),
+      or multiple node names (or `*` wildcards) separated by slash
+      characters, as in `"Block/Declaration/VariableName"`. Such a path
+      matches the final node but only if its direct parent nodes are the
+      other nodes mentioned. A `*` in such a path matches any parent,
+      but only a single levelâ€”wildcards that match multiple parents
+      aren't supported, both for efficiency reasons and because Lezer
+      trees make it rather hard to reason about what they would match.)
+  
+      A path can be ended with `/...` to indicate that the tag assigned
+      to the node should also apply to all child nodes, even if they
+      match their own style (by default, only the innermost style is
+      used).
+  
+      When a path ends in `!`, as in `Attribute!`, no further matching
+      happens for the node's child nodes, and the entire node gets the
+      given style.
+  
+      In this notation, node names that contain `/`, `!`, `*`, or `...`
+      must be quoted as JSON strings.
+  
+      For example:
+  
+      ```javascript
+      parser.withProps(
+        styleTags({
+          // Style Number and BigNumber nodes
+          "Number BigNumber": tags.number,
+          // Style Escape nodes whose parent is String
+          "String/Escape": tags.escape,
+          // Style anything inside Attributes nodes
+          "Attributes!": tags.meta,
+          // Add a style to all content inside Italic nodes
+          "Italic/...": tags.emphasis,
+          // Style InvalidString nodes as both `string` and `invalid`
+          "InvalidString": [tags.string, tags.invalid],
+          // Style the node named "/" as punctuation
+          '"/"': tags.punctuation
+        })
+      )
+      ```
+      */
   function styleTags(spec) {
     let byName = Object.create(null);
     for (let prop in spec) {
@@ -24709,9 +24709,9 @@
     }
   }
   /**
-    A highlight style associates CSS styles with higlighting
-    [tags](https://codemirror.net/6/docs/ref/#highlight.Tag).
-    */
+      A highlight style associates CSS styles with higlighting
+      [tags](https://codemirror.net/6/docs/ref/#highlight.Tag).
+      */
   class HighlightStyle {
     constructor(spec, options) {
       this.map = Object.create(null);
@@ -24743,9 +24743,9 @@
       this.fallback = ext.concat(fallbackHighlightStyle.of(this));
     }
     /**
-        Returns the CSS class associated with the given tag, if any.
-        This method is bound to the instance by the constructor.
-        */
+          Returns the CSS class associated with the given tag, if any.
+          This method is bound to the instance by the constructor.
+          */
     match(tag, scope) {
       if (this.scope && scope != this.scope) return null;
       for (let t of tag.set) {
@@ -24758,10 +24758,10 @@
       return (this.map[tag.id] = this.all);
     }
     /**
-        Combines an array of highlight styles into a single match
-        function that returns all of the classes assigned by the styles
-        for a given tag.
-        */
+          Combines an array of highlight styles into a single match
+          function that returns all of the classes assigned by the styles
+          for a given tag.
+          */
     static combinedMatch(styles) {
       if (styles.length == 1) return styles[0].match;
       let cache = styles.some(s => s.scope) ? undefined : Object.create(null);
@@ -24778,30 +24778,30 @@
       };
     }
     /**
-        Create a highlighter style that associates the given styles to
-        the given tags. The spec must be objects that hold a style tag
-        or array of tags in their `tag` property, and either a single
-        `class` property providing a static CSS class (for highlighters
-        like [`classHighlightStyle`](https://codemirror.net/6/docs/ref/#highlight.classHighlightStyle)
-        that rely on external styling), or a
-        [`style-mod`](https://github.com/marijnh/style-mod#documentation)-style
-        set of CSS properties (which define the styling for those tags).
-        
-        The CSS rules created for a highlighter will be emitted in the
-        order of the spec's properties. That means that for elements that
-        have multiple tags associated with them, styles defined further
-        down in the list will have a higher CSS precedence than styles
-        defined earlier.
-        */
+          Create a highlighter style that associates the given styles to
+          the given tags. The spec must be objects that hold a style tag
+          or array of tags in their `tag` property, and either a single
+          `class` property providing a static CSS class (for highlighters
+          like [`classHighlightStyle`](https://codemirror.net/6/docs/ref/#highlight.classHighlightStyle)
+          that rely on external styling), or a
+          [`style-mod`](https://github.com/marijnh/style-mod#documentation)-style
+          set of CSS properties (which define the styling for those tags).
+          
+          The CSS rules created for a highlighter will be emitted in the
+          order of the spec's properties. That means that for elements that
+          have multiple tags associated with them, styles defined further
+          down in the list will have a higher CSS precedence than styles
+          defined earlier.
+          */
     static define(specs, options) {
       return new HighlightStyle(specs, options || {});
     }
     /**
-        Returns the CSS classes (if any) that the highlight styles
-        active in the given state would assign to the given a style
-        [tag](https://codemirror.net/6/docs/ref/#highlight.Tag) and (optional) language
-        [scope](https://codemirror.net/6/docs/ref/#highlight.HighlightStyle^define^options.scope).
-        */
+          Returns the CSS classes (if any) that the highlight styles
+          active in the given state would assign to the given a style
+          [tag](https://codemirror.net/6/docs/ref/#highlight.Tag) and (optional) language
+          [scope](https://codemirror.net/6/docs/ref/#highlight.HighlightStyle^define^options.scope).
+          */
     static get(state, tag, scope) {
       let style = getHighlightStyle(state);
       return style && style(tag, scope || NodeType.none);
@@ -24956,395 +24956,395 @@
     bracket = /*@__PURE__*/ t(punctuation),
     meta = /*@__PURE__*/ t();
   /**
-    The default set of highlighting [tags](https://codemirror.net/6/docs/ref/#highlight.Tag^define) used
-    by regular language packages and themes.
-
-    This collection is heavily biased towards programming languages,
-    and necessarily incomplete. A full ontology of syntactic
-    constructs would fill a stack of books, and be impractical to
-    write themes for. So try to make do with this set. If all else
-    fails, [open an
-    issue](https://github.com/codemirror/codemirror.next) to propose a
-    new tag, or [define](https://codemirror.net/6/docs/ref/#highlight.Tag^define) a local custom tag for
-    your use case.
-
-    Note that it is not obligatory to always attach the most specific
-    tag possible to an elementâ€”if your grammar can't easily
-    distinguish a certain type of element (such as a local variable),
-    it is okay to style it as its more general variant (a variable).
-
-    For tags that extend some parent tag, the documentation links to
-    the parent.
-    */
+      The default set of highlighting [tags](https://codemirror.net/6/docs/ref/#highlight.Tag^define) used
+      by regular language packages and themes.
+  
+      This collection is heavily biased towards programming languages,
+      and necessarily incomplete. A full ontology of syntactic
+      constructs would fill a stack of books, and be impractical to
+      write themes for. So try to make do with this set. If all else
+      fails, [open an
+      issue](https://github.com/codemirror/codemirror.next) to propose a
+      new tag, or [define](https://codemirror.net/6/docs/ref/#highlight.Tag^define) a local custom tag for
+      your use case.
+  
+      Note that it is not obligatory to always attach the most specific
+      tag possible to an elementâ€”if your grammar can't easily
+      distinguish a certain type of element (such as a local variable),
+      it is okay to style it as its more general variant (a variable).
+  
+      For tags that extend some parent tag, the documentation links to
+      the parent.
+      */
   const tags = {
     /**
-        A comment.
-        */
+          A comment.
+          */
     comment,
     /**
-        A line [comment](https://codemirror.net/6/docs/ref/#highlight.tags.comment).
-        */
+          A line [comment](https://codemirror.net/6/docs/ref/#highlight.tags.comment).
+          */
     lineComment: /*@__PURE__*/ t(comment),
     /**
-        A block [comment](https://codemirror.net/6/docs/ref/#highlight.tags.comment).
-        */
+          A block [comment](https://codemirror.net/6/docs/ref/#highlight.tags.comment).
+          */
     blockComment: /*@__PURE__*/ t(comment),
     /**
-        A documentation [comment](https://codemirror.net/6/docs/ref/#highlight.tags.comment).
-        */
+          A documentation [comment](https://codemirror.net/6/docs/ref/#highlight.tags.comment).
+          */
     docComment: /*@__PURE__*/ t(comment),
     /**
-        Any kind of identifier.
-        */
+          Any kind of identifier.
+          */
     name,
     /**
-        The [name](https://codemirror.net/6/docs/ref/#highlight.tags.name) of a variable.
-        */
+          The [name](https://codemirror.net/6/docs/ref/#highlight.tags.name) of a variable.
+          */
     variableName: /*@__PURE__*/ t(name),
     /**
-        A type [name](https://codemirror.net/6/docs/ref/#highlight.tags.name).
-        */
+          A type [name](https://codemirror.net/6/docs/ref/#highlight.tags.name).
+          */
     typeName: typeName,
     /**
-        A tag name (subtag of [`typeName`](https://codemirror.net/6/docs/ref/#highlight.tags.typeName)).
-        */
+          A tag name (subtag of [`typeName`](https://codemirror.net/6/docs/ref/#highlight.tags.typeName)).
+          */
     tagName: /*@__PURE__*/ t(typeName),
     /**
-        A property or field [name](https://codemirror.net/6/docs/ref/#highlight.tags.name).
-        */
+          A property or field [name](https://codemirror.net/6/docs/ref/#highlight.tags.name).
+          */
     propertyName: propertyName,
     /**
-        An attribute name (subtag of [`propertyName`](https://codemirror.net/6/docs/ref/#highlight.tags.propertyName)).
-        */
+          An attribute name (subtag of [`propertyName`](https://codemirror.net/6/docs/ref/#highlight.tags.propertyName)).
+          */
     attributeName: /*@__PURE__*/ t(propertyName),
     /**
-        The [name](https://codemirror.net/6/docs/ref/#highlight.tags.name) of a class.
-        */
+          The [name](https://codemirror.net/6/docs/ref/#highlight.tags.name) of a class.
+          */
     className: /*@__PURE__*/ t(name),
     /**
-        A label [name](https://codemirror.net/6/docs/ref/#highlight.tags.name).
-        */
+          A label [name](https://codemirror.net/6/docs/ref/#highlight.tags.name).
+          */
     labelName: /*@__PURE__*/ t(name),
     /**
-        A namespace [name](https://codemirror.net/6/docs/ref/#highlight.tags.name).
-        */
+          A namespace [name](https://codemirror.net/6/docs/ref/#highlight.tags.name).
+          */
     namespace: /*@__PURE__*/ t(name),
     /**
-        The [name](https://codemirror.net/6/docs/ref/#highlight.tags.name) of a macro.
-        */
+          The [name](https://codemirror.net/6/docs/ref/#highlight.tags.name) of a macro.
+          */
     macroName: /*@__PURE__*/ t(name),
     /**
-        A literal value.
-        */
+          A literal value.
+          */
     literal,
     /**
-        A string [literal](https://codemirror.net/6/docs/ref/#highlight.tags.literal).
-        */
+          A string [literal](https://codemirror.net/6/docs/ref/#highlight.tags.literal).
+          */
     string,
     /**
-        A documentation [string](https://codemirror.net/6/docs/ref/#highlight.tags.string).
-        */
+          A documentation [string](https://codemirror.net/6/docs/ref/#highlight.tags.string).
+          */
     docString: /*@__PURE__*/ t(string),
     /**
-        A character literal (subtag of [string](https://codemirror.net/6/docs/ref/#highlight.tags.string)).
-        */
+          A character literal (subtag of [string](https://codemirror.net/6/docs/ref/#highlight.tags.string)).
+          */
     character: /*@__PURE__*/ t(string),
     /**
-        An attribute value (subtag of [string](https://codemirror.net/6/docs/ref/#highlight.tags.string)).
-        */
+          An attribute value (subtag of [string](https://codemirror.net/6/docs/ref/#highlight.tags.string)).
+          */
     attributeValue: /*@__PURE__*/ t(string),
     /**
-        A number [literal](https://codemirror.net/6/docs/ref/#highlight.tags.literal).
-        */
+          A number [literal](https://codemirror.net/6/docs/ref/#highlight.tags.literal).
+          */
     number,
     /**
-        An integer [number](https://codemirror.net/6/docs/ref/#highlight.tags.number) literal.
-        */
+          An integer [number](https://codemirror.net/6/docs/ref/#highlight.tags.number) literal.
+          */
     integer: /*@__PURE__*/ t(number),
     /**
-        A floating-point [number](https://codemirror.net/6/docs/ref/#highlight.tags.number) literal.
-        */
+          A floating-point [number](https://codemirror.net/6/docs/ref/#highlight.tags.number) literal.
+          */
     float: /*@__PURE__*/ t(number),
     /**
-        A boolean [literal](https://codemirror.net/6/docs/ref/#highlight.tags.literal).
-        */
+          A boolean [literal](https://codemirror.net/6/docs/ref/#highlight.tags.literal).
+          */
     bool: /*@__PURE__*/ t(literal),
     /**
-        Regular expression [literal](https://codemirror.net/6/docs/ref/#highlight.tags.literal).
-        */
+          Regular expression [literal](https://codemirror.net/6/docs/ref/#highlight.tags.literal).
+          */
     regexp: /*@__PURE__*/ t(literal),
     /**
-        An escape [literal](https://codemirror.net/6/docs/ref/#highlight.tags.literal), for example a
-        backslash escape in a string.
-        */
+          An escape [literal](https://codemirror.net/6/docs/ref/#highlight.tags.literal), for example a
+          backslash escape in a string.
+          */
     escape: /*@__PURE__*/ t(literal),
     /**
-        A color [literal](https://codemirror.net/6/docs/ref/#highlight.tags.literal).
-        */
+          A color [literal](https://codemirror.net/6/docs/ref/#highlight.tags.literal).
+          */
     color: /*@__PURE__*/ t(literal),
     /**
-        A URL [literal](https://codemirror.net/6/docs/ref/#highlight.tags.literal).
-        */
+          A URL [literal](https://codemirror.net/6/docs/ref/#highlight.tags.literal).
+          */
     url: /*@__PURE__*/ t(literal),
     /**
-        A language keyword.
-        */
+          A language keyword.
+          */
     keyword,
     /**
-        The [keyword](https://codemirror.net/6/docs/ref/#highlight.tags.keyword) for the self or this
-        object.
-        */
+          The [keyword](https://codemirror.net/6/docs/ref/#highlight.tags.keyword) for the self or this
+          object.
+          */
     self: /*@__PURE__*/ t(keyword),
     /**
-        The [keyword](https://codemirror.net/6/docs/ref/#highlight.tags.keyword) for null.
-        */
+          The [keyword](https://codemirror.net/6/docs/ref/#highlight.tags.keyword) for null.
+          */
     null: /*@__PURE__*/ t(keyword),
     /**
-        A [keyword](https://codemirror.net/6/docs/ref/#highlight.tags.keyword) denoting some atomic value.
-        */
+          A [keyword](https://codemirror.net/6/docs/ref/#highlight.tags.keyword) denoting some atomic value.
+          */
     atom: /*@__PURE__*/ t(keyword),
     /**
-        A [keyword](https://codemirror.net/6/docs/ref/#highlight.tags.keyword) that represents a unit.
-        */
+          A [keyword](https://codemirror.net/6/docs/ref/#highlight.tags.keyword) that represents a unit.
+          */
     unit: /*@__PURE__*/ t(keyword),
     /**
-        A modifier [keyword](https://codemirror.net/6/docs/ref/#highlight.tags.keyword).
-        */
+          A modifier [keyword](https://codemirror.net/6/docs/ref/#highlight.tags.keyword).
+          */
     modifier: /*@__PURE__*/ t(keyword),
     /**
-        A [keyword](https://codemirror.net/6/docs/ref/#highlight.tags.keyword) that acts as an operator.
-        */
+          A [keyword](https://codemirror.net/6/docs/ref/#highlight.tags.keyword) that acts as an operator.
+          */
     operatorKeyword: /*@__PURE__*/ t(keyword),
     /**
-        A control-flow related [keyword](https://codemirror.net/6/docs/ref/#highlight.tags.keyword).
-        */
+          A control-flow related [keyword](https://codemirror.net/6/docs/ref/#highlight.tags.keyword).
+          */
     controlKeyword: /*@__PURE__*/ t(keyword),
     /**
-        A [keyword](https://codemirror.net/6/docs/ref/#highlight.tags.keyword) that defines something.
-        */
+          A [keyword](https://codemirror.net/6/docs/ref/#highlight.tags.keyword) that defines something.
+          */
     definitionKeyword: /*@__PURE__*/ t(keyword),
     /**
-        A [keyword](https://codemirror.net/6/docs/ref/#highlight.tags.keyword) related to defining or
-        interfacing with modules.
-        */
+          A [keyword](https://codemirror.net/6/docs/ref/#highlight.tags.keyword) related to defining or
+          interfacing with modules.
+          */
     moduleKeyword: /*@__PURE__*/ t(keyword),
     /**
-        An operator.
-        */
+          An operator.
+          */
     operator,
     /**
-        An [operator](https://codemirror.net/6/docs/ref/#highlight.tags.operator) that defines something.
-        */
+          An [operator](https://codemirror.net/6/docs/ref/#highlight.tags.operator) that defines something.
+          */
     derefOperator: /*@__PURE__*/ t(operator),
     /**
-        Arithmetic-related [operator](https://codemirror.net/6/docs/ref/#highlight.tags.operator).
-        */
+          Arithmetic-related [operator](https://codemirror.net/6/docs/ref/#highlight.tags.operator).
+          */
     arithmeticOperator: /*@__PURE__*/ t(operator),
     /**
-        Logical [operator](https://codemirror.net/6/docs/ref/#highlight.tags.operator).
-        */
+          Logical [operator](https://codemirror.net/6/docs/ref/#highlight.tags.operator).
+          */
     logicOperator: /*@__PURE__*/ t(operator),
     /**
-        Bit [operator](https://codemirror.net/6/docs/ref/#highlight.tags.operator).
-        */
+          Bit [operator](https://codemirror.net/6/docs/ref/#highlight.tags.operator).
+          */
     bitwiseOperator: /*@__PURE__*/ t(operator),
     /**
-        Comparison [operator](https://codemirror.net/6/docs/ref/#highlight.tags.operator).
-        */
+          Comparison [operator](https://codemirror.net/6/docs/ref/#highlight.tags.operator).
+          */
     compareOperator: /*@__PURE__*/ t(operator),
     /**
-        [Operator](https://codemirror.net/6/docs/ref/#highlight.tags.operator) that updates its operand.
-        */
+          [Operator](https://codemirror.net/6/docs/ref/#highlight.tags.operator) that updates its operand.
+          */
     updateOperator: /*@__PURE__*/ t(operator),
     /**
-        [Operator](https://codemirror.net/6/docs/ref/#highlight.tags.operator) that defines something.
-        */
+          [Operator](https://codemirror.net/6/docs/ref/#highlight.tags.operator) that defines something.
+          */
     definitionOperator: /*@__PURE__*/ t(operator),
     /**
-        Type-related [operator](https://codemirror.net/6/docs/ref/#highlight.tags.operator).
-        */
+          Type-related [operator](https://codemirror.net/6/docs/ref/#highlight.tags.operator).
+          */
     typeOperator: /*@__PURE__*/ t(operator),
     /**
-        Control-flow [operator](https://codemirror.net/6/docs/ref/#highlight.tags.operator).
-        */
+          Control-flow [operator](https://codemirror.net/6/docs/ref/#highlight.tags.operator).
+          */
     controlOperator: /*@__PURE__*/ t(operator),
     /**
-        Program or markup punctuation.
-        */
+          Program or markup punctuation.
+          */
     punctuation,
     /**
-        [Punctuation](https://codemirror.net/6/docs/ref/#highlight.tags.punctuation) that separates
-        things.
-        */
+          [Punctuation](https://codemirror.net/6/docs/ref/#highlight.tags.punctuation) that separates
+          things.
+          */
     separator: /*@__PURE__*/ t(punctuation),
     /**
-        Bracket-style [punctuation](https://codemirror.net/6/docs/ref/#highlight.tags.punctuation).
-        */
+          Bracket-style [punctuation](https://codemirror.net/6/docs/ref/#highlight.tags.punctuation).
+          */
     bracket,
     /**
-        Angle [brackets](https://codemirror.net/6/docs/ref/#highlight.tags.bracket) (usually `<` and `>`
-        tokens).
-        */
+          Angle [brackets](https://codemirror.net/6/docs/ref/#highlight.tags.bracket) (usually `<` and `>`
+          tokens).
+          */
     angleBracket: /*@__PURE__*/ t(bracket),
     /**
-        Square [brackets](https://codemirror.net/6/docs/ref/#highlight.tags.bracket) (usually `[` and `]`
-        tokens).
-        */
+          Square [brackets](https://codemirror.net/6/docs/ref/#highlight.tags.bracket) (usually `[` and `]`
+          tokens).
+          */
     squareBracket: /*@__PURE__*/ t(bracket),
     /**
-        Parentheses (usually `(` and `)` tokens). Subtag of
-        [bracket](https://codemirror.net/6/docs/ref/#highlight.tags.bracket).
-        */
+          Parentheses (usually `(` and `)` tokens). Subtag of
+          [bracket](https://codemirror.net/6/docs/ref/#highlight.tags.bracket).
+          */
     paren: /*@__PURE__*/ t(bracket),
     /**
-        Braces (usually `{` and `}` tokens). Subtag of
-        [bracket](https://codemirror.net/6/docs/ref/#highlight.tags.bracket).
-        */
+          Braces (usually `{` and `}` tokens). Subtag of
+          [bracket](https://codemirror.net/6/docs/ref/#highlight.tags.bracket).
+          */
     brace: /*@__PURE__*/ t(bracket),
     /**
-        Content, for example plain text in XML or markup documents.
-        */
+          Content, for example plain text in XML or markup documents.
+          */
     content,
     /**
-        [Content](https://codemirror.net/6/docs/ref/#highlight.tags.content) that represents a heading.
-        */
+          [Content](https://codemirror.net/6/docs/ref/#highlight.tags.content) that represents a heading.
+          */
     heading,
     /**
-        A level 1 [heading](https://codemirror.net/6/docs/ref/#highlight.tags.heading).
-        */
+          A level 1 [heading](https://codemirror.net/6/docs/ref/#highlight.tags.heading).
+          */
     heading1: /*@__PURE__*/ t(heading),
     /**
-        A level 2 [heading](https://codemirror.net/6/docs/ref/#highlight.tags.heading).
-        */
+          A level 2 [heading](https://codemirror.net/6/docs/ref/#highlight.tags.heading).
+          */
     heading2: /*@__PURE__*/ t(heading),
     /**
-        A level 3 [heading](https://codemirror.net/6/docs/ref/#highlight.tags.heading).
-        */
+          A level 3 [heading](https://codemirror.net/6/docs/ref/#highlight.tags.heading).
+          */
     heading3: /*@__PURE__*/ t(heading),
     /**
-        A level 4 [heading](https://codemirror.net/6/docs/ref/#highlight.tags.heading).
-        */
+          A level 4 [heading](https://codemirror.net/6/docs/ref/#highlight.tags.heading).
+          */
     heading4: /*@__PURE__*/ t(heading),
     /**
-        A level 5 [heading](https://codemirror.net/6/docs/ref/#highlight.tags.heading).
-        */
+          A level 5 [heading](https://codemirror.net/6/docs/ref/#highlight.tags.heading).
+          */
     heading5: /*@__PURE__*/ t(heading),
     /**
-        A level 6 [heading](https://codemirror.net/6/docs/ref/#highlight.tags.heading).
-        */
+          A level 6 [heading](https://codemirror.net/6/docs/ref/#highlight.tags.heading).
+          */
     heading6: /*@__PURE__*/ t(heading),
     /**
-        A prose separator (such as a horizontal rule).
-        */
+          A prose separator (such as a horizontal rule).
+          */
     contentSeparator: /*@__PURE__*/ t(content),
     /**
-        [Content](https://codemirror.net/6/docs/ref/#highlight.tags.content) that represents a list.
-        */
+          [Content](https://codemirror.net/6/docs/ref/#highlight.tags.content) that represents a list.
+          */
     list: /*@__PURE__*/ t(content),
     /**
-        [Content](https://codemirror.net/6/docs/ref/#highlight.tags.content) that represents a quote.
-        */
+          [Content](https://codemirror.net/6/docs/ref/#highlight.tags.content) that represents a quote.
+          */
     quote: /*@__PURE__*/ t(content),
     /**
-        [Content](https://codemirror.net/6/docs/ref/#highlight.tags.content) that is emphasized.
-        */
+          [Content](https://codemirror.net/6/docs/ref/#highlight.tags.content) that is emphasized.
+          */
     emphasis: /*@__PURE__*/ t(content),
     /**
-        [Content](https://codemirror.net/6/docs/ref/#highlight.tags.content) that is styled strong.
-        */
+          [Content](https://codemirror.net/6/docs/ref/#highlight.tags.content) that is styled strong.
+          */
     strong: /*@__PURE__*/ t(content),
     /**
-        [Content](https://codemirror.net/6/docs/ref/#highlight.tags.content) that is part of a link.
-        */
+          [Content](https://codemirror.net/6/docs/ref/#highlight.tags.content) that is part of a link.
+          */
     link: /*@__PURE__*/ t(content),
     /**
-        [Content](https://codemirror.net/6/docs/ref/#highlight.tags.content) that is styled as code or
-        monospace.
-        */
+          [Content](https://codemirror.net/6/docs/ref/#highlight.tags.content) that is styled as code or
+          monospace.
+          */
     monospace: /*@__PURE__*/ t(content),
     /**
-        [Content](https://codemirror.net/6/docs/ref/#highlight.tags.content) that has a strike-through
-        style.
-        */
+          [Content](https://codemirror.net/6/docs/ref/#highlight.tags.content) that has a strike-through
+          style.
+          */
     strikethrough: /*@__PURE__*/ t(content),
     /**
-        Inserted text in a change-tracking format.
-        */
+          Inserted text in a change-tracking format.
+          */
     inserted: /*@__PURE__*/ t(),
     /**
-        Deleted text.
-        */
+          Deleted text.
+          */
     deleted: /*@__PURE__*/ t(),
     /**
-        Changed text.
-        */
+          Changed text.
+          */
     changed: /*@__PURE__*/ t(),
     /**
-        An invalid or unsyntactic element.
-        */
+          An invalid or unsyntactic element.
+          */
     invalid: /*@__PURE__*/ t(),
     /**
-        Metadata or meta-instruction.
-        */
+          Metadata or meta-instruction.
+          */
     meta,
     /**
-        [Metadata](https://codemirror.net/6/docs/ref/#highlight.tags.meta) that applies to the entire
-        document.
-        */
+          [Metadata](https://codemirror.net/6/docs/ref/#highlight.tags.meta) that applies to the entire
+          document.
+          */
     documentMeta: /*@__PURE__*/ t(meta),
     /**
-        [Metadata](https://codemirror.net/6/docs/ref/#highlight.tags.meta) that annotates or adds
-        attributes to a given syntactic element.
-        */
+          [Metadata](https://codemirror.net/6/docs/ref/#highlight.tags.meta) that annotates or adds
+          attributes to a given syntactic element.
+          */
     annotation: /*@__PURE__*/ t(meta),
     /**
-        Processing instruction or preprocessor directive. Subtag of
-        [meta](https://codemirror.net/6/docs/ref/#highlight.tags.meta).
-        */
+          Processing instruction or preprocessor directive. Subtag of
+          [meta](https://codemirror.net/6/docs/ref/#highlight.tags.meta).
+          */
     processingInstruction: /*@__PURE__*/ t(meta),
     /**
-        [Modifier](https://codemirror.net/6/docs/ref/#highlight.Tag^defineModifier) that indicates that a
-        given element is being defined. Expected to be used with the
-        various [name](https://codemirror.net/6/docs/ref/#highlight.tags.name) tags.
-        */
+          [Modifier](https://codemirror.net/6/docs/ref/#highlight.Tag^defineModifier) that indicates that a
+          given element is being defined. Expected to be used with the
+          various [name](https://codemirror.net/6/docs/ref/#highlight.tags.name) tags.
+          */
     definition: /*@__PURE__*/ Tag.defineModifier(),
     /**
-        [Modifier](https://codemirror.net/6/docs/ref/#highlight.Tag^defineModifier) that indicates that
-        something is constant. Mostly expected to be used with
-        [variable names](https://codemirror.net/6/docs/ref/#highlight.tags.variableName).
-        */
+          [Modifier](https://codemirror.net/6/docs/ref/#highlight.Tag^defineModifier) that indicates that
+          something is constant. Mostly expected to be used with
+          [variable names](https://codemirror.net/6/docs/ref/#highlight.tags.variableName).
+          */
     constant: /*@__PURE__*/ Tag.defineModifier(),
     /**
-        [Modifier](https://codemirror.net/6/docs/ref/#highlight.Tag^defineModifier) used to indicate that
-        a [variable](https://codemirror.net/6/docs/ref/#highlight.tags.variableName) or [property
-        name](https://codemirror.net/6/docs/ref/#highlight.tags.propertyName) is being called or defined
-        as a function.
-        */
+          [Modifier](https://codemirror.net/6/docs/ref/#highlight.Tag^defineModifier) used to indicate that
+          a [variable](https://codemirror.net/6/docs/ref/#highlight.tags.variableName) or [property
+          name](https://codemirror.net/6/docs/ref/#highlight.tags.propertyName) is being called or defined
+          as a function.
+          */
     function: /*@__PURE__*/ Tag.defineModifier(),
     /**
-        [Modifier](https://codemirror.net/6/docs/ref/#highlight.Tag^defineModifier) that can be applied to
-        [names](https://codemirror.net/6/docs/ref/#highlight.tags.name) to indicate that they belong to
-        the language's standard environment.
-        */
+          [Modifier](https://codemirror.net/6/docs/ref/#highlight.Tag^defineModifier) that can be applied to
+          [names](https://codemirror.net/6/docs/ref/#highlight.tags.name) to indicate that they belong to
+          the language's standard environment.
+          */
     standard: /*@__PURE__*/ Tag.defineModifier(),
     /**
-        [Modifier](https://codemirror.net/6/docs/ref/#highlight.Tag^defineModifier) that indicates a given
-        [names](https://codemirror.net/6/docs/ref/#highlight.tags.name) is local to some scope.
-        */
+          [Modifier](https://codemirror.net/6/docs/ref/#highlight.Tag^defineModifier) that indicates a given
+          [names](https://codemirror.net/6/docs/ref/#highlight.tags.name) is local to some scope.
+          */
     local: /*@__PURE__*/ Tag.defineModifier(),
     /**
-        A generic variant [modifier](https://codemirror.net/6/docs/ref/#highlight.Tag^defineModifier) that
-        can be used to tag language-specific alternative variants of
-        some common tag. It is recommended for themes to define special
-        forms of at least the [string](https://codemirror.net/6/docs/ref/#highlight.tags.string) and
-        [variable name](https://codemirror.net/6/docs/ref/#highlight.tags.variableName) tags, since those
-        come up a lot.
-        */
+          A generic variant [modifier](https://codemirror.net/6/docs/ref/#highlight.Tag^defineModifier) that
+          can be used to tag language-specific alternative variants of
+          some common tag. It is recommended for themes to define special
+          forms of at least the [string](https://codemirror.net/6/docs/ref/#highlight.tags.string) and
+          [variable name](https://codemirror.net/6/docs/ref/#highlight.tags.variableName) tags, since those
+          come up a lot.
+          */
     special: /*@__PURE__*/ Tag.defineModifier(),
   };
   /**
-    A default highlight style (works well with light themes).
-    */
+      A default highlight style (works well with light themes).
+      */
   const defaultHighlightStyle = /*@__PURE__*/ HighlightStyle.define([
     {tag: tags.link, textDecoration: 'underline'},
     {tag: tags.heading, textDecoration: 'underline', fontWeight: 'bold'},
@@ -25367,53 +25367,53 @@
     {tag: tags.invalid, color: '#f00'},
   ]);
   /**
-    This is a highlight style that adds stable, predictable classes to
-    tokens, for styling with external CSS.
-
-    These tags are mapped to their name prefixed with `"cmt-"` (for
-    example `"cmt-comment"`):
-
-    * [`link`](https://codemirror.net/6/docs/ref/#highlight.tags.link)
-    * [`heading`](https://codemirror.net/6/docs/ref/#highlight.tags.heading)
-    * [`emphasis`](https://codemirror.net/6/docs/ref/#highlight.tags.emphasis)
-    * [`strong`](https://codemirror.net/6/docs/ref/#highlight.tags.strong)
-    * [`keyword`](https://codemirror.net/6/docs/ref/#highlight.tags.keyword)
-    * [`atom`](https://codemirror.net/6/docs/ref/#highlight.tags.atom)
-    * [`bool`](https://codemirror.net/6/docs/ref/#highlight.tags.bool)
-    * [`url`](https://codemirror.net/6/docs/ref/#highlight.tags.url)
-    * [`labelName`](https://codemirror.net/6/docs/ref/#highlight.tags.labelName)
-    * [`inserted`](https://codemirror.net/6/docs/ref/#highlight.tags.inserted)
-    * [`deleted`](https://codemirror.net/6/docs/ref/#highlight.tags.deleted)
-    * [`literal`](https://codemirror.net/6/docs/ref/#highlight.tags.literal)
-    * [`string`](https://codemirror.net/6/docs/ref/#highlight.tags.string)
-    * [`number`](https://codemirror.net/6/docs/ref/#highlight.tags.number)
-    * [`variableName`](https://codemirror.net/6/docs/ref/#highlight.tags.variableName)
-    * [`typeName`](https://codemirror.net/6/docs/ref/#highlight.tags.typeName)
-    * [`namespace`](https://codemirror.net/6/docs/ref/#highlight.tags.namespace)
-    * [`className`](https://codemirror.net/6/docs/ref/#highlight.tags.className)
-    * [`macroName`](https://codemirror.net/6/docs/ref/#highlight.tags.macroName)
-    * [`propertyName`](https://codemirror.net/6/docs/ref/#highlight.tags.propertyName)
-    * [`operator`](https://codemirror.net/6/docs/ref/#highlight.tags.operator)
-    * [`comment`](https://codemirror.net/6/docs/ref/#highlight.tags.comment)
-    * [`meta`](https://codemirror.net/6/docs/ref/#highlight.tags.meta)
-    * [`punctuation`](https://codemirror.net/6/docs/ref/#highlight.tags.puncutation)
-    * [`invalid`](https://codemirror.net/6/docs/ref/#highlight.tags.invalid)
-
-    In addition, these mappings are provided:
-
-    * [`regexp`](https://codemirror.net/6/docs/ref/#highlight.tags.regexp),
-      [`escape`](https://codemirror.net/6/docs/ref/#highlight.tags.escape), and
-      [`special`](https://codemirror.net/6/docs/ref/#highlight.tags.special)[`(string)`](https://codemirror.net/6/docs/ref/#highlight.tags.string)
-      are mapped to `"cmt-string2"`
-    * [`special`](https://codemirror.net/6/docs/ref/#highlight.tags.special)[`(variableName)`](https://codemirror.net/6/docs/ref/#highlight.tags.variableName)
-      to `"cmt-variableName2"`
-    * [`local`](https://codemirror.net/6/docs/ref/#highlight.tags.local)[`(variableName)`](https://codemirror.net/6/docs/ref/#highlight.tags.variableName)
-      to `"cmt-variableName cmt-local"`
-    * [`definition`](https://codemirror.net/6/docs/ref/#highlight.tags.definition)[`(variableName)`](https://codemirror.net/6/docs/ref/#highlight.tags.variableName)
-      to `"cmt-variableName cmt-definition"`
-    * [`definition`](https://codemirror.net/6/docs/ref/#highlight.tags.definition)[`(propertyName)`](https://codemirror.net/6/docs/ref/#highlight.tags.propertyName)
-      to `"cmt-propertyName cmt-definition"`
-    */
+      This is a highlight style that adds stable, predictable classes to
+      tokens, for styling with external CSS.
+  
+      These tags are mapped to their name prefixed with `"cmt-"` (for
+      example `"cmt-comment"`):
+  
+      * [`link`](https://codemirror.net/6/docs/ref/#highlight.tags.link)
+      * [`heading`](https://codemirror.net/6/docs/ref/#highlight.tags.heading)
+      * [`emphasis`](https://codemirror.net/6/docs/ref/#highlight.tags.emphasis)
+      * [`strong`](https://codemirror.net/6/docs/ref/#highlight.tags.strong)
+      * [`keyword`](https://codemirror.net/6/docs/ref/#highlight.tags.keyword)
+      * [`atom`](https://codemirror.net/6/docs/ref/#highlight.tags.atom)
+      * [`bool`](https://codemirror.net/6/docs/ref/#highlight.tags.bool)
+      * [`url`](https://codemirror.net/6/docs/ref/#highlight.tags.url)
+      * [`labelName`](https://codemirror.net/6/docs/ref/#highlight.tags.labelName)
+      * [`inserted`](https://codemirror.net/6/docs/ref/#highlight.tags.inserted)
+      * [`deleted`](https://codemirror.net/6/docs/ref/#highlight.tags.deleted)
+      * [`literal`](https://codemirror.net/6/docs/ref/#highlight.tags.literal)
+      * [`string`](https://codemirror.net/6/docs/ref/#highlight.tags.string)
+      * [`number`](https://codemirror.net/6/docs/ref/#highlight.tags.number)
+      * [`variableName`](https://codemirror.net/6/docs/ref/#highlight.tags.variableName)
+      * [`typeName`](https://codemirror.net/6/docs/ref/#highlight.tags.typeName)
+      * [`namespace`](https://codemirror.net/6/docs/ref/#highlight.tags.namespace)
+      * [`className`](https://codemirror.net/6/docs/ref/#highlight.tags.className)
+      * [`macroName`](https://codemirror.net/6/docs/ref/#highlight.tags.macroName)
+      * [`propertyName`](https://codemirror.net/6/docs/ref/#highlight.tags.propertyName)
+      * [`operator`](https://codemirror.net/6/docs/ref/#highlight.tags.operator)
+      * [`comment`](https://codemirror.net/6/docs/ref/#highlight.tags.comment)
+      * [`meta`](https://codemirror.net/6/docs/ref/#highlight.tags.meta)
+      * [`punctuation`](https://codemirror.net/6/docs/ref/#highlight.tags.puncutation)
+      * [`invalid`](https://codemirror.net/6/docs/ref/#highlight.tags.invalid)
+  
+      In addition, these mappings are provided:
+  
+      * [`regexp`](https://codemirror.net/6/docs/ref/#highlight.tags.regexp),
+        [`escape`](https://codemirror.net/6/docs/ref/#highlight.tags.escape), and
+        [`special`](https://codemirror.net/6/docs/ref/#highlight.tags.special)[`(string)`](https://codemirror.net/6/docs/ref/#highlight.tags.string)
+        are mapped to `"cmt-string2"`
+      * [`special`](https://codemirror.net/6/docs/ref/#highlight.tags.special)[`(variableName)`](https://codemirror.net/6/docs/ref/#highlight.tags.variableName)
+        to `"cmt-variableName2"`
+      * [`local`](https://codemirror.net/6/docs/ref/#highlight.tags.local)[`(variableName)`](https://codemirror.net/6/docs/ref/#highlight.tags.variableName)
+        to `"cmt-variableName cmt-local"`
+      * [`definition`](https://codemirror.net/6/docs/ref/#highlight.tags.definition)[`(variableName)`](https://codemirror.net/6/docs/ref/#highlight.tags.variableName)
+        to `"cmt-variableName cmt-definition"`
+      * [`definition`](https://codemirror.net/6/docs/ref/#highlight.tags.definition)[`(propertyName)`](https://codemirror.net/6/docs/ref/#highlight.tags.propertyName)
+        to `"cmt-propertyName cmt-definition"`
+      */
   /*@__PURE__*/ HighlightStyle.define([
     {tag: tags.link, class: 'cmt-link'},
     {tag: tags.heading, class: 'cmt-heading'},
@@ -25506,9 +25506,9 @@
         );
   }
   /**
-    The state effect that updates the set of active diagnostics. Can
-    be useful when writing an extension that needs to track these.
-    */
+      The state effect that updates the set of active diagnostics. Can
+      be useful when writing an extension that needs to track these.
+      */
   const setDiagnosticsEffect = /*@__PURE__*/ StateEffect.define();
   const togglePanel = /*@__PURE__*/ StateEffect.define();
   const movePanelSelection = /*@__PURE__*/ StateEffect.define();
@@ -25570,8 +25570,8 @@
     );
   }
   /**
-    Command to open and focus the lint panel.
-    */
+      Command to open and focus the lint panel.
+      */
   const openLintPanel = view => {
     let field = view.state.field(lintState, false);
     if (!field || !field.panel) view.dispatch({effects: maybeEnableLint(view.state, [togglePanel.of(true)])});
@@ -25580,8 +25580,8 @@
     return true;
   };
   /**
-    Command to close the lint panel, when open.
-    */
+      Command to close the lint panel, when open.
+      */
   const closeLintPanel = view => {
     let field = view.state.field(lintState, false);
     if (!field || !field.panel) return false;
@@ -25589,8 +25589,8 @@
     return true;
   };
   /**
-    Move the selection to the next diagnostic.
-    */
+      Move the selection to the next diagnostic.
+      */
   const nextDiagnostic = view => {
     let field = view.state.field(lintState, false);
     if (!field) return false;
@@ -25604,11 +25604,11 @@
     return true;
   };
   /**
-    A set of default key bindings for the lint functionality.
-
-    - Ctrl-Shift-m (Cmd-Shift-m on macOS): [`openLintPanel`](https://codemirror.net/6/docs/ref/#lint.openLintPanel)
-    - F8: [`nextDiagnostic`](https://codemirror.net/6/docs/ref/#lint.nextDiagnostic)
-    */
+      A set of default key bindings for the lint functionality.
+  
+      - Ctrl-Shift-m (Cmd-Shift-m on macOS): [`openLintPanel`](https://codemirror.net/6/docs/ref/#lint.openLintPanel)
+      - F8: [`nextDiagnostic`](https://codemirror.net/6/docs/ref/#lint.nextDiagnostic)
+      */
   const lintKeymap = [
     {key: 'Mod-Shift-m', run: openLintPanel},
     {key: 'F8', run: nextDiagnostic},
@@ -25955,43 +25955,43 @@
   });
 
   /**
-    This is an extension value that just pulls together a whole lot of
-    extensions that you might want in a basic editor. It is meant as a
-    convenient helper to quickly set up CodeMirror without installing
-    and importing a lot of packages.
-
-    Specifically, it includes...
-
-     - [the default command bindings](https://codemirror.net/6/docs/ref/#commands.defaultKeymap)
-     - [line numbers](https://codemirror.net/6/docs/ref/#gutter.lineNumbers)
-     - [special character highlighting](https://codemirror.net/6/docs/ref/#view.highlightSpecialChars)
-     - [the undo history](https://codemirror.net/6/docs/ref/#history.history)
-     - [a fold gutter](https://codemirror.net/6/docs/ref/#fold.foldGutter)
-     - [custom selection drawing](https://codemirror.net/6/docs/ref/#view.drawSelection)
-     - [drop cursor](https://codemirror.net/6/docs/ref/#view.dropCursor)
-     - [multiple selections](https://codemirror.net/6/docs/ref/#state.EditorState^allowMultipleSelections)
-     - [reindentation on input](https://codemirror.net/6/docs/ref/#language.indentOnInput)
-     - [the default highlight style](https://codemirror.net/6/docs/ref/#highlight.defaultHighlightStyle) (as fallback)
-     - [bracket matching](https://codemirror.net/6/docs/ref/#matchbrackets.bracketMatching)
-     - [bracket closing](https://codemirror.net/6/docs/ref/#closebrackets.closeBrackets)
-     - [autocompletion](https://codemirror.net/6/docs/ref/#autocomplete.autocompletion)
-     - [rectangular selection](https://codemirror.net/6/docs/ref/#rectangular-selection.rectangularSelection) and [crosshair cursor](https://codemirror.net/6/docs/ref/#rectangular-selection.crosshairCursor)
-     - [active line highlighting](https://codemirror.net/6/docs/ref/#view.highlightActiveLine)
-     - [active line gutter highlighting](https://codemirror.net/6/docs/ref/#gutter.highlightActiveLineGutter)
-     - [selection match highlighting](https://codemirror.net/6/docs/ref/#search.highlightSelectionMatches)
-     - [search](https://codemirror.net/6/docs/ref/#search.searchKeymap)
-     - [commenting](https://codemirror.net/6/docs/ref/#comment.commentKeymap)
-     - [linting](https://codemirror.net/6/docs/ref/#lint.lintKeymap)
-
-    (You'll probably want to add some language package to your setup
-    too.)
-
-    This package does not allow customization. The idea is that, once
-    you decide you want to configure your editor more precisely, you
-    take this package's source (which is just a bunch of imports and
-    an array literal), copy it into your own code, and adjust it as
-    desired.
-    */
+      This is an extension value that just pulls together a whole lot of
+      extensions that you might want in a basic editor. It is meant as a
+      convenient helper to quickly set up CodeMirror without installing
+      and importing a lot of packages.
+  
+      Specifically, it includes...
+  
+       - [the default command bindings](https://codemirror.net/6/docs/ref/#commands.defaultKeymap)
+       - [line numbers](https://codemirror.net/6/docs/ref/#gutter.lineNumbers)
+       - [special character highlighting](https://codemirror.net/6/docs/ref/#view.highlightSpecialChars)
+       - [the undo history](https://codemirror.net/6/docs/ref/#history.history)
+       - [a fold gutter](https://codemirror.net/6/docs/ref/#fold.foldGutter)
+       - [custom selection drawing](https://codemirror.net/6/docs/ref/#view.drawSelection)
+       - [drop cursor](https://codemirror.net/6/docs/ref/#view.dropCursor)
+       - [multiple selections](https://codemirror.net/6/docs/ref/#state.EditorState^allowMultipleSelections)
+       - [reindentation on input](https://codemirror.net/6/docs/ref/#language.indentOnInput)
+       - [the default highlight style](https://codemirror.net/6/docs/ref/#highlight.defaultHighlightStyle) (as fallback)
+       - [bracket matching](https://codemirror.net/6/docs/ref/#matchbrackets.bracketMatching)
+       - [bracket closing](https://codemirror.net/6/docs/ref/#closebrackets.closeBrackets)
+       - [autocompletion](https://codemirror.net/6/docs/ref/#autocomplete.autocompletion)
+       - [rectangular selection](https://codemirror.net/6/docs/ref/#rectangular-selection.rectangularSelection) and [crosshair cursor](https://codemirror.net/6/docs/ref/#rectangular-selection.crosshairCursor)
+       - [active line highlighting](https://codemirror.net/6/docs/ref/#view.highlightActiveLine)
+       - [active line gutter highlighting](https://codemirror.net/6/docs/ref/#gutter.highlightActiveLineGutter)
+       - [selection match highlighting](https://codemirror.net/6/docs/ref/#search.highlightSelectionMatches)
+       - [search](https://codemirror.net/6/docs/ref/#search.searchKeymap)
+       - [commenting](https://codemirror.net/6/docs/ref/#comment.commentKeymap)
+       - [linting](https://codemirror.net/6/docs/ref/#lint.lintKeymap)
+  
+      (You'll probably want to add some language package to your setup
+      too.)
+  
+      This package does not allow customization. The idea is that, once
+      you decide you want to configure your editor more precisely, you
+      take this package's source (which is just a bunch of imports and
+      an array literal), copy it into your own code, and adjust it as
+      desired.
+      */
   const basicSetup = [
     /*@__PURE__*/ lineNumbers(),
     /*@__PURE__*/ highlightActiveLineGutter(),
@@ -27853,10 +27853,10 @@
     return base + context.unit;
   }
   /**
-    A language provider based on the [Lezer Python
-    parser](https://github.com/lezer-parser/python), extended with
-    highlighting and indentation information.
-    */
+      A language provider based on the [Lezer Python
+      parser](https://github.com/lezer-parser/python), extended with
+      highlighting and indentation information.
+      */
   const pythonLanguage = /*@__PURE__*/ LRLanguage.define({
     parser: /*@__PURE__*/ parser.configure({
       props: [
@@ -27939,8 +27939,8 @@
     },
   });
   /**
-    Python language support.
-    */
+      Python language support.
+      */
   function python() {
     return new LanguageSupport(pythonLanguage);
   }
@@ -27963,8 +27963,8 @@
     selection = '#3E4451',
     cursor = '#528bff';
   /**
-    The editor theme styles for One Dark.
-    */
+      The editor theme styles for One Dark.
+      */
   const oneDarkTheme = /*@__PURE__*/ EditorView.theme(
     {
       '&': {
@@ -28029,8 +28029,8 @@
     {dark: true}
   );
   /**
-    The highlighting style for code in the One Dark theme.
-    */
+      The highlighting style for code in the One Dark theme.
+      */
   /*@__PURE__*/ HighlightStyle.define([
     {tag: tags.keyword, color: violet},
     {tag: [tags.name, tags.deleted, tags.character, tags.propertyName, tags.macroName], color: coral},
@@ -28414,21 +28414,21 @@
   }
 
   /*
-    These were taken from main.js because some of our components call
-    runAfterRuntimeInitialized immediately when we are creating the custom
-    element, this was causing tests to fail since runAfterRuntimeInitialized
-    expects the runtime to have been loaded before being called.
-
-    This function is now called from within the `runtime.initialize`. Once
-    the runtime finished initializing, then we will create the custom elements
-    so they are rendered in the page and we will always have a runtime available.
-
-    Ideally, this would live under utils.js, but importing all the components in
-    the utils.js file was causing jest to fail with weird errors such as:
-    "ReferenceError: Cannot access 'BaseEvalElement' before initialization" coming
-    from the PyScript class.
-
-    */
+      These were taken from main.js because some of our components call
+      runAfterRuntimeInitialized immediately when we are creating the custom
+      element, this was causing tests to fail since runAfterRuntimeInitialized
+      expects the runtime to have been loaded before being called.
+  
+      This function is now called from within the `runtime.initialize`. Once
+      the runtime finished initializing, then we will create the custom elements
+      so they are rendered in the page and we will always have a runtime available.
+  
+      Ideally, this would live under utils.js, but importing all the components in
+      the utils.js file was causing jest to fail with weird errors such as:
+      "ReferenceError: Cannot access 'BaseEvalElement' before initialization" coming
+      from the PyScript class.
+  
+      */
   function createCustomElements() {
     /* eslint-disable @typescript-eslint/no-unused-vars */
     customElements.define('py-repl', PyRepl);
@@ -28467,22 +28467,22 @@
     }
   });
   /*
-    Runtime class is a super class that all different runtimes must respect
-    and adhere to.
-
-    Currently, the only runtime available is Pyodide as indicated by the
-    `RuntimeInterpreter` type above. This serves as a Union of types of
-    different runtimes/interpreters which will be added in near future.
-
-    The class has abstract methods available which each runtime is supposed
-    to implement.
-
-    Methods available handle loading of the interpreter, initialization,
-    running code, loading and installation of packages, loading from files etc.
-
-    For an example implementation, refer to the `PyodideRuntime` class
-    in `pyodide.ts`
-    */
+      Runtime class is a super class that all different runtimes must respect
+      and adhere to.
+  
+      Currently, the only runtime available is Pyodide as indicated by the
+      `RuntimeInterpreter` type above. This serves as a Union of types of
+      different runtimes/interpreters which will be added in near future.
+  
+      The class has abstract methods available which each runtime is supposed
+      to implement.
+  
+      Methods available handle loading of the interpreter, initialization,
+      running code, loading and installation of packages, loading from files etc.
+  
+      For an example implementation, refer to the `PyodideRuntime` class
+      in `pyodide.ts`
+      */
   class Runtime extends Object {
     /**
      * initializes the page which involves loading of runtime,
@@ -28598,27 +28598,32 @@
     }
     async installPackage(package_name) {
       if (package_name.length > 0) {
-        logger$2.info(`micropip install ${package_name.toString()}`);
         const micropip = this.globals.get('micropip');
-        await micropip.install(package_name);
+        const num_pip_pkgs = 4;
+        const pip_packages = package_name.splice(-num_pip_pkgs, num_pip_pkgs);
+        logger$2.info(`micropip install ${package_name.toString()}`);
+        const keep_going = true;
+        const deps = false;
+        await this.loadPackage(package_name);
+        await micropip.install(pip_packages, keep_going, deps);
         micropip.destroy();
       }
     }
     async loadFromFile(path) {
       const filename = getLastPath(path);
       await this.run(`
-                from pyodide.http import pyfetch
-                from js import console
-
-                try:
-                    response = await pyfetch("${path}")
-                except Exception as err:
-                    console.warn("PyScript: Access to local files (using 'paths:' in py-env) is not available when directly opening a HTML file; you must use a webserver to serve the additional files. See https://github.com/pyscript/pyscript/issues/257#issuecomment-1119595062 on starting a simple webserver with Python.")
-                    raise(err)
-                content = await response.bytes()
-                with open("${filename}", "wb") as f:
-                    f.write(content)
-            `);
+                  from pyodide.http import pyfetch
+                  from js import console
+  
+                  try:
+                      response = await pyfetch("${path}")
+                  except Exception as err:
+                      console.warn("PyScript: Access to local files (using 'paths:' in py-env) is not available when directly opening a HTML file; you must use a webserver to serve the additional files. See https://github.com/pyscript/pyscript/issues/257#issuecomment-1119595062 on starting a simple webserver with Python.")
+                      raise(err)
+                  content = await response.bytes()
+                  with open("${filename}", "wb") as f:
+                      f.write(content)
+              `);
     }
   }
 
