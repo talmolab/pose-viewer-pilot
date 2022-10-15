@@ -28602,7 +28602,7 @@
         // TODO (LM): Sorting pip vs pyodide packages is currently hard-coded.
         const num_pip_pkgs = 4;
         const pip_packages = package_name.splice(-num_pip_pkgs, num_pip_pkgs);
-        logger$2.info(`micropip install ${package_name.toString()}`);
+        logger$2.info(`micropip install ${pip_packages.toString()}`);
         const keep_going = true; // Create list of all impure python wheels
         const deps = false; // Do not require package's dependencies
         await this.loadPackage(package_name);
