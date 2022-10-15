@@ -28598,9 +28598,14 @@
     }
     async installPackage(package_name) {
       if (package_name.length > 0) {
-        logger$2.info(`micropip install ${package_name.toString()}`);
         const micropip = this.globals.get('micropip');
-        await micropip.install(package_name);
+        const num_pip_pkgs = 4;
+        const pip_packages = package_name.splice(-num_pip_pkgs, num_pip_pkgs);
+        logger$2.info(`micropip install ${package_name.toString()}`);
+        const keep_going = true;
+        const deps = false;
+        await this.loadPackage(package_name);
+        await micropip.install(pip_packages, keep_going, deps);
         micropip.destroy();
       }
     }
