@@ -28599,12 +28599,17 @@
     async installPackage(package_name) {
       if (package_name.length > 0) {
         const micropip = this.globals.get('micropip');
+        // TODO (LM): Sorting pip vs pyodide packages is currently hard-coded.
         const num_pip_pkgs = 4;
         const pip_packages = package_name.splice(-num_pip_pkgs, num_pip_pkgs);
         logger$2.info(`micropip install ${package_name.toString()}`);
-        const keep_going = true;
-        const deps = false;
+        const keep_going = true; // Create list of all impure python wheels
+        const deps = false; // Do not require package's dependencies
         await this.loadPackage(package_name);
+        // TODO (LM): Currently manually installing all package's dependencies because
+        // because micropip tries to pip install packages even if we have already loaded
+        // them from pyodide (the pyodide packages don't cause errors, but the pip
+        // packages do)
         await micropip.install(pip_packages, keep_going, deps);
         micropip.destroy();
       }
