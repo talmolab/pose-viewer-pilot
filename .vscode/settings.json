@@ -1,0 +1,16 @@
+{
+    "python.formatting.provider": "black",
+    "editor.formatOnSave": true,
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "prettier.tabWidth": 2,
+    "prettier.singleQuote": true,
+    "prettier.bracketSpacing": false,
+    "prettier.bracketSameLine": false,
+    "prettier.semi": true,
+    "prettier.singleAttributePerLine": false,
+    "prettier.printWidth": 120,
+    "prettier.arrowParens": "avoid",
+    "prettier.endOfLine": "lf",
+}
